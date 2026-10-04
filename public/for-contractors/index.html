@@ -417,6 +417,7 @@ td.num,th.num{text-align:right}
 <div class="field"><label class="consent"><input type="checkbox" id="consent" name="consent" required><span>I agree to be contacted by AL Elite Financing about my request at the email and phone number provided, including by phone call, text message or email, which may use automated technology. Consent is not a condition of any purchase or service. Message and data rates may apply. Reply STOP to opt out of texts. I have read the <a href="/privacy/">Privacy Policy</a> and <a href="/terms/">Terms of Use</a>.</span></label><span class="error">Please tick the consent box so we're allowed to reply to you.</span></div>
 <div class="form-foot"><button class="btn btn-primary" type="submit" id="submitBtn">Send my request</button><span class="secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>Sent over an encrypted connection. We never sell your information.</span></div>
 <p class="hint" style="font-size:.82rem;color:var(--muted)">Submitting this form does not pull your credit and is not a loan application. You'll choose whether to proceed with any lender.</p>
+<p class="callout" id="formError" hidden tabindex="-1" style="border-left-color:var(--err)"><strong>We couldn't send that.</strong> Please try again in a moment, or call us on <a href="tel:+1-888-968-0079">(888) 968-0079</a>.</p>
 </form>
 <div class="success" id="formSuccess" hidden role="status"><h3>Request received</h3><p>Thanks, <span id="successName">there</span>. One of our team will reply within one business day using the contact method you chose. Nothing has been shared with a lender yet, and your credit has not been checked.</p></div>
 </div></section>
@@ -599,10 +600,20 @@ td.num,th.num{text-align:right}
       [[name,!name.value.trim()],[email,!validEmail(email.value.trim())],[state,!state.value],[consent,!consent.checked]].forEach(function(p){setInvalid(p[0],p[1]);if(p[1]){bad=true;first=first||p[0];}});
       if(bad){first.focus();return;}
       var data=Object.fromEntries(new FormData(form).entries());
+      delete data.website;
+      data.consent=consent.checked?'Yes - agreed to be contacted (TCPA consent text shown on form)':'No';
       data.submitted_at=new Date().toISOString();data.page=location.href;
-      // PRODUCTION: POST `data` to the form handler / CRM, validate server-side, store consent text + timestamp with the lead.
+      data._subject='New AL Elite lead: '+(data.role||'')+' - '+(data.project||data.need||'');
+      data._template='table';data._captcha='false';data._replyto=data.email;data._honey='';
       var sb=document.getElementById('submitBtn');sb.disabled=true;sb.textContent='Sending...';
-      setTimeout(function(){document.getElementById('successName').textContent=name.value.trim().split(' ')[0]||'there';form.hidden=true;var s=document.getElementById('formSuccess');s.hidden=false;s.setAttribute('tabindex','-1');s.focus();},500);
+      var errBox=document.getElementById('formError');
+      fetch('https://formsubmit.co/ajax/manmeetsingh0177@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+        .then(function(r){return r.json().then(function(j){return {ok:r.ok&&String(j.success)!=='false',j:j};});})
+        .then(function(res){
+          if(!res.ok)throw new Error(res.j&&res.j.message||'send failed');
+          document.getElementById('successName').textContent=name.value.trim().split(' ')[0]||'there';form.hidden=true;var s=document.getElementById('formSuccess');s.hidden=false;s.setAttribute('tabindex','-1');s.focus();
+        })
+        .catch(function(){sb.disabled=false;sb.textContent='Send my request';if(errBox){errBox.hidden=false;errBox.focus();}});
     });
     ['fname','femail','fstate','consent'].forEach(function(id){var el=document.getElementById(id);el.addEventListener('input',function(){setInvalid(el,false);});el.addEventListener('change',function(){setInvalid(el,false);});});
   }

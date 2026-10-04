@@ -18,4 +18,4 @@ rm -rf public && cp -r dist-prod public
 - Add phone, email, hours; real author and reviewer names.
 - City pages: verified local cost ranges, state licensing rules, claim deadlines, rebates.
 - Legal pages are outlines for counsel; they are `noindex`.
-- Wire the lead form: `common.py` → `SCRIPT` has the marked `POST` point.
+- Lead form: posts to FormSubmit (`https://formsubmit.co/ajax/<inbox>`), set in `gen/common.py` (`SCRIPT`) and `gen/home-index.html`. Change the inbox there and rebuild. The first submission to a new inbox triggers a one-time activation email.
