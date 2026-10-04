@@ -226,6 +226,7 @@ def header(b, d):
 <li><a href="{L('/contractor-business-loans/')}">Business loans</a></li>
 <li><a href="{L('/tools/roof-financing-calculator/')}">Calculators</a></li>
 <li><a href="{L('/locations/')}">Locations</a></li>
+<li><a href="{L('/lender-network/')}">Partners</a></li>
 <li><a href="{L('/about/')}">About</a></li>
 <li><a class="btn btn-primary" href="#contact">Check your options</a></li>
 </ul></nav></div></header>"""
@@ -241,7 +242,7 @@ def footer(b, d):
 <div><h4>Contractors</h4><ul>
 <li><a href="{L('/for-contractors/')}">Offer customer financing</a></li><li><a href="{L('/contractor-business-loans/')}">Contractor business loans</a></li><li><a href="{L('/contractor-business-loans/equipment-financing/')}">Equipment financing</a></li><li><a href="{L('/contractor-business-loans/invoice-factoring/')}">Invoice factoring</a></li><li><a href="{L('/tools/equipment-loan-calculator/')}">Equipment loan calculator</a></li><li><a href="{L('/blog/')}">Blog</a></li></ul></div>
 <div><h4>Company</h4><ul>
-<li><a href="{L('/about/')}">About AL Elite</a></li><li><a href="{L('/how-we-make-money/')}">How we make money</a></li><li><a href="{L('/lender-network/')}">Our lender network</a></li><li><a href="{L('/locations/')}">Locations</a></li><li><a href="#contact">Contact</a></li><li><a href="{L('/privacy/')}">Privacy policy</a></li></ul></div>
+<li><a href="{L('/about/')}">About AL Elite</a></li><li><a href="{L('/how-we-make-money/')}">How we make money</a></li><li><a href="{L('/lender-network/')}">Our financial partners</a></li><li><a href="{L('/locations/')}">Locations</a></li><li><a href="#contact">Contact</a></li><li><a href="{L('/privacy/')}">Privacy policy</a></li></ul></div>
 </div>
 <div class="disclosures">
 <p><strong>Important disclosures.</strong> AL Elite Financing is not a lender, bank or credit union and does not make credit decisions, set rates or fund loans. We operate a lead-matching marketplace that connects consumers and businesses with third-party lenders. Lenders may compensate us for introductions. Any loan offer, APR, fee, term or approval is determined solely by the lender and is subject to their credit approval and underwriting. Not all applicants will qualify. Loan products and lender availability vary by state.</p>
