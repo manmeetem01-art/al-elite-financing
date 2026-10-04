@@ -242,3 +242,11 @@ footer .about{margin-top:16px;max-width:44ch}
 .disclosures strong{color:#fff;font-weight:600}
 .legal-row{margin-top:24px;display:flex;flex-wrap:wrap;gap:12px 24px;justify-content:space-between;font-size:.8rem}
 .legal-row ul{display:flex;flex-wrap:wrap;gap:18px}
+
+nav.primary a.btn-primary{color:var(--on-navy)}
+nav.primary a.btn-primary:hover{color:var(--on-navy);background:var(--navy-2)}
+.brand img.brand-logo{height:60px;width:auto;display:block}
+.brand .brand-name,.brand .brand-sub{display:none}
+footer .brand img.brand-logo{height:64px;background:#fff;border-radius:6px;padding:6px 10px}
+.topbar a{color:var(--on-navy);text-decoration:none;font-weight:600}
+.topbar a:hover{text-decoration:underline}

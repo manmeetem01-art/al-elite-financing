@@ -4,6 +4,7 @@ import json, re, html, math, os
 DOMAIN = "https://www.alelitefinancing.com"
 REVIEWED = "October 2026"
 BASE_CSS = open(os.path.join(os.path.dirname(__file__), "base.css")).read()
+LOGO_IMG = '<img class="brand-logo" src="' + open(os.path.join(os.path.dirname(__file__), "logo_data.txt")).read() + '" alt="AL Elite Financing" width="146" height="106">'
 
 EXTRA_CSS = """
 /* Inner-page additions */
@@ -171,9 +172,9 @@ def brand_svg(fill="#0b2545"):
 def header(b, d):
     L = lambda p: link(b, p, d)
     return f"""<a class="skip" href="#main">Skip to content</a>
-<div class="topbar"><div class="wrap"><span><strong>AL Elite is a matching service, not a lender.</strong> We connect you with lenders. Rates and approval decisions come from them.</span><span>Serving homeowners and contractors across the United States</span></div></div>
+<div class="topbar"><div class="wrap"><span><strong>AL Elite is a matching service, not a lender.</strong> We connect you with lenders. Rates and approval decisions come from them.</span><span>Call <a href="tel:+1-888-968-0079">(888) 968-0079</a></span></div></div>
 <header class="site"><div class="wrap">
-<a class="brand" href="{L('/')}" aria-label="AL Elite Financing home">{brand_svg()}<span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
+<a class="brand" href="{L('/')}" aria-label="AL Elite Financing home">{LOGO_IMG}<span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
 <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="primaryNav">Menu <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 <nav class="primary" id="primaryNav" aria-label="Primary"><ul>
 <li><a href="{L('/home-improvement-financing/')}">Homeowners</a></li>
@@ -189,8 +190,8 @@ def footer(b, d):
     L = lambda p: link(b, p, d)
     return f"""<footer><div class="wrap">
 <div class="cols">
-<div><a class="brand" href="{L('/')}" aria-label="AL Elite Financing home">{brand_svg('#13335c')}<span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
-<p class="about">A financing marketplace for home improvement. We match homeowners with consumer lenders and contractors with business lenders across the United States.</p></div>
+<div><a class="brand" href="{L('/')}" aria-label="AL Elite Financing home">{LOGO_IMG}<span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
+<p class="about">A financing marketplace for home improvement. We match homeowners with consumer lenders and contractors with business lenders across the United States.</p><p class="about" style="margin-top:10px"><a href="tel:+1-888-968-0079">(888) 968-0079</a></p></div>
 <div><h4>Homeowners</h4><ul>
 <li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/plumbing-financing/')}">Plumbing financing</a></li><li><a href="{L('/solar-financing/')}">Solar financing</a></li><li><a href="{L('/home-improvement-financing/')}">All home improvement financing</a></li><li><a href="{L('/tools/roof-financing-calculator/')}">Roof financing calculator</a></li></ul></div>
 <div><h4>Contractors</h4><ul>
@@ -224,7 +225,7 @@ def contact_section(b, d, role="homeowner", project=None, need=None, heading=Non
 <div class="wrap">
 <div class="contact-aside">
 <div class="stack"><p class="eyebrow">Get in touch</p><h2 id="contact-h">{heading}</h2><p class="lede">{lede}</p></div>
-<div class="block"><span class="k">Phone</span><span class="placeholder">[Add business phone number]</span></div>
+<div class="block"><span class="k">Phone</span><span><a href="tel:+1-888-968-0079">(888) 968-0079</a></span></div>
 <div class="block"><span class="k">Email</span><span class="placeholder">[Add contact email address]</span></div>
 <div class="block"><span class="k">Hours</span><span class="placeholder">[Add business hours and time zone]</span></div>
 <div class="block"><span class="k">What we won't ask for here</span><span>Social Security numbers, bank account numbers or card details. Lenders collect those securely at application, never through this form.</span></div>
@@ -299,7 +300,7 @@ def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_scr
     meta = trim_meta(meta)
     d = depth_of(path)
     url = DOMAIN + path
-    graph = [{"@type": "Organization", "@id": ORG_ID, "name": "AL Elite Financing", "url": DOMAIN + "/", "logo": DOMAIN + "/logo.png"}] + schema_nodes
+    graph = [{"@type": "Organization", "@id": ORG_ID, "name": "AL Elite Financing", "url": DOMAIN + "/", "logo": DOMAIN + "/logo.png", "telephone": "+1-888-968-0079", "contactPoint": {"@type": "ContactPoint", "telephone": "+1-888-968-0079", "contactType": "customer service", "areaServed": "US", "availableLanguage": "English"}}] + schema_nodes
     ld = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False, indent=1)
     robots = "noindex, follow" if noindex else "index, follow, max-snippet:-1, max-image-preview:large"
     return f"""<!DOCTYPE html>

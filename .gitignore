@@ -7,3 +7,5 @@ deploy*.command
 deploy*.log
 vercel-deploy.log
 *.zip
+run-deploy*/
+vercel_deploy.py

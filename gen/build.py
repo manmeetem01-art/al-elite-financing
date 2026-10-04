@@ -11,7 +11,7 @@ from articles import ARTICLES, blog_hub
 from trust import TRUST_PAGES
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
-HOME_SRC = open(os.path.join(ROOT, "index.html") if os.path.exists(os.path.join(ROOT, "index.html")) else os.path.join(os.path.dirname(__file__), "home-index.html")).read()
+HOME_SRC = open(os.path.join(ROOT, "index.html")).read()
 
 def rewrite_links(html_text, depth):
     """Artifact mode: turn root-relative hrefs into relative file paths."""
