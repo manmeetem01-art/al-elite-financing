@@ -1,0 +1,9 @@
+dist-prod/
+dist-artifact/
+__pycache__/
+.vercel/
+deploy.sh
+deploy*.command
+deploy*.log
+vercel-deploy.log
+*.zip
