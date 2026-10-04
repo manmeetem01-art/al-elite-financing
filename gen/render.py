@@ -47,6 +47,7 @@ def service_page(b, p):
 {side_extra}
 <div class="box"><h3>Good to know</h3><p style="font-size:.92rem;color:var(--ink-2)">AL Elite is paid by lenders and partner contractors, never by you. Read <a href="{L('/how-we-make-money/')}">how we make money</a>.</p></div>
 </aside></div></section>
+{reviews_section(b, d, p.get('role','homeowner'))}
 {contact_section(b, d, role=p.get('role','homeowner'), project=p.get('project'), need=p.get('need'))}"""
     schema = [
         {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
@@ -70,6 +71,7 @@ def hub_page(b, p):
 <section><div class="wrap"><div class="sec-head"><p class="eyebrow">{esc(p.get('cards_eyebrow','Pages in this section'))}</p><h2>{esc(p['cards_h2'])}</h2></div><div class="grid-cards">{cards}</div></div></section>
 <section><div class="wrap layout"><article class="prose">{p.get('prose','')}{('<h2 id=faq>Frequently asked questions</h2>' + faq_html(faqs)) if faqs else ''}</article>
 <aside class="side"><div class="box"><h3>Related pages</h3><ul>{''.join(f"<li><a href='{L(rp)}'>{esc(rn)}</a></li>" for rn, rp in p.get('related', []))}</ul></div></aside></div></section>
+{reviews_section(b, d, p.get('role','homeowner'))}
 {contact_section(b, d, role=p.get('role','homeowner'), project=p.get('project'), need=p.get('need'))}"""
     schema = [
         {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},

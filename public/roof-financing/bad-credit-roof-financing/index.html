@@ -344,6 +344,22 @@ td.num,th.num{text-align:right}
 .sitemap-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:28px}
 .sitemap-cols ul{list-style:none;margin:0;padding:0;display:grid;gap:8px}
 .sitemap-cols h3{font-family:var(--body);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+
+.reviews{background:var(--surface)}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.review{display:grid;gap:12px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;align-content:start;position:relative}
+.review .stars{display:flex;gap:3px;color:var(--gold)}
+.review .stars svg{width:18px;height:18px}
+.review blockquote{margin:0;font-size:1.02rem;color:var(--ink);line-height:1.55}
+.review .who{display:flex;gap:12px;align-items:center;font-size:.9rem;color:var(--ink-2)}
+.review .avatar{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--display);flex:none}
+.review .who strong{display:block;color:var(--ink)}
+.review .sample{justify-self:start;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--err);border:1px solid var(--err);border-radius:3px;padding:2px 6px;background:#fff}
+.review-summary{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;margin-bottom:28px}
+.review-summary .big{font-family:var(--display);font-size:2.4rem;color:var(--navy);font-weight:600;line-height:1}
+.review-summary .meta{font-size:.9rem;color:var(--muted)}
+.review-sources{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;font-size:.88rem;color:var(--muted)}
+.review-sources a{color:var(--navy)}
 </style>
 </head>
 <body>
@@ -382,6 +398,14 @@ td.num,th.num{text-align:right}
 
 <div class="box"><h3>Good to know</h3><p style="font-size:.92rem;color:var(--ink-2)">AL Elite is paid by lenders and partner contractors, never by you. Read <a href="/how-we-make-money/">how we make money</a>.</p></div>
 </aside></div></section>
+<section class="reviews" aria-labelledby="reviews-h">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">What customers say</p><h2 id="reviews-h">Reviews from homeowners and contractors</h2><p class="lede">Every review here is from a real customer, published with their permission and in their own words. We don't edit them and we don't pay for them.</p></div>
+<div class="review-summary"><span class="big"><span class="placeholder">[4.x]</span><span style="font-size:1.2rem;color:var(--muted)"> / 5</span></span><span class="meta">from <span class="placeholder">[n]</span> verified reviews on <span class="placeholder">[Google / Trustpilot / BBB]</span></span></div>
+<div class="review-grid"><figure class="review"><span class="sample">Sample, replace before launch</span><span class='stars' aria-label='5 out of 5 stars'><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg></span><blockquote>[Replace with a real homeowner review: what the project was, how fast the match came back, what they'd tell a neighbour.]</blockquote><figcaption class="who"><span class="avatar" aria-hidden="true">A</span><span><strong>A.B., Homeowner</strong>Roof replacement, Texas</span></figcaption></figure><figure class="review"><span class="sample">Sample, replace before launch</span><span class='stars' aria-label='5 out of 5 stars'><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg></span><blockquote>[Replace with a real homeowner review. Keep it in the customer's own words; do not edit for marketing.]</blockquote><figcaption class="who"><span class="avatar" aria-hidden="true">C</span><span><strong>C.D., Homeowner</strong>HVAC replacement, Florida</span></figcaption></figure><figure class="review"><span class="sample">Sample, replace before launch</span><span class='stars' aria-label='5 out of 5 stars'><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg><svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg></span><blockquote>[Replace with a real partner-contractor review: close rate, how customers reacted to a monthly figure, funding timing.]</blockquote><figcaption class="who"><span class="avatar" aria-hidden="true">E</span><span><strong>E.F., Partner contractor</strong>Roofing company, Colorado</span></figcaption></figure></div>
+<p class="review-sources">Read all reviews on <a href="#" rel="noopener">Google</a>, <a href="#" rel="noopener">Trustpilot</a> and the <a href="#" rel="noopener">Better Business Bureau</a>. <span class="placeholder">[Link each to the real profile; remove any you don't have.]</span></p>
+<div class="verify" style="margin-top:22px"><strong>Before publishing this section:</strong> replace the three sample cards with real reviews (name or initials, city or state, trade, exact text, star rating, date, source and written permission). Then add AggregateRating and Review schema in <code>gen/common.py</code> using only the real figures. Do not publish fabricated or paraphrased reviews; the FTC's endorsement rules and Google's review policies both apply.</div>
+</div></section>
 <section class="contact" id="contact" aria-labelledby="contact-h">
 <div class="wrap">
 <div class="contact-aside">

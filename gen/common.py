@@ -83,6 +83,50 @@ td.num,th.num{text-align:right}
 .sitemap-cols h3{font-family:var(--body);font-size:.8rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
 """
 
+
+REVIEW_CSS = """
+.reviews{background:var(--surface)}
+.review-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.review{display:grid;gap:12px;padding:24px;border:1px solid var(--line);border-radius:var(--radius);background:#fff;align-content:start;position:relative}
+.review .stars{display:flex;gap:3px;color:var(--gold)}
+.review .stars svg{width:18px;height:18px}
+.review blockquote{margin:0;font-size:1.02rem;color:var(--ink);line-height:1.55}
+.review .who{display:flex;gap:12px;align-items:center;font-size:.9rem;color:var(--ink-2)}
+.review .avatar{width:40px;height:40px;border-radius:50%;background:var(--navy);color:#fff;display:grid;place-items:center;font-weight:700;font-family:var(--display);flex:none}
+.review .who strong{display:block;color:var(--ink)}
+.review .sample{justify-self:start;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--err);border:1px solid var(--err);border-radius:3px;padding:2px 6px;background:#fff}
+.review-summary{display:flex;flex-wrap:wrap;gap:18px 32px;align-items:center;margin-bottom:28px}
+.review-summary .big{font-family:var(--display);font-size:2.4rem;color:var(--navy);font-weight:600;line-height:1}
+.review-summary .meta{font-size:.9rem;color:var(--muted)}
+.review-sources{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px;font-size:.88rem;color:var(--muted)}
+.review-sources a{color:var(--navy)}
+"""
+
+def stars(n=5):
+    s = "<svg viewBox='0 0 24 24' fill='currentColor' aria-hidden='true'><path d='M12 2.5l2.9 6.1 6.7.8-4.9 4.6 1.3 6.6L12 17.3l-6 3.3 1.3-6.6L2.4 9.4l6.7-.8z'/></svg>"
+    return "<span class='stars' aria-label='" + str(n) + " out of 5 stars'>" + s * n + "</span>"
+
+# SAMPLE cards: visibly labelled, generic placeholders. Replace with real, permissioned reviews before launch.
+SAMPLE_REVIEWS = [
+    ("homeowner", "Roof replacement, Texas", "[Replace with a real homeowner review: what the project was, how fast the match came back, what they'd tell a neighbour.]", "A.B.", "Homeowner"),
+    ("homeowner", "HVAC replacement, Florida", "[Replace with a real homeowner review. Keep it in the customer's own words; do not edit for marketing.]", "C.D.", "Homeowner"),
+    ("contractor", "Roofing company, Colorado", "[Replace with a real partner-contractor review: close rate, how customers reacted to a monthly figure, funding timing.]", "E.F.", "Partner contractor"),
+]
+
+def reviews_section(b, d, audience="homeowner"):
+    L = lambda p: link(b, p, d)
+    cards = ""
+    for aud, ctx, text, initials, role in SAMPLE_REVIEWS:
+        cards += f"""<figure class="review"><span class="sample">Sample, replace before launch</span>{stars(5)}<blockquote>{text}</blockquote><figcaption class="who"><span class="avatar" aria-hidden="true">{initials[0]}</span><span><strong>{initials}, {role}</strong>{esc(ctx)}</span></figcaption></figure>"""
+    return f"""<section class="reviews" aria-labelledby="reviews-h">
+<div class="wrap">
+<div class="sec-head"><p class="eyebrow">What customers say</p><h2 id="reviews-h">Reviews from homeowners and contractors</h2><p class="lede">Every review here is from a real customer, published with their permission and in their own words. We don't edit them and we don't pay for them.</p></div>
+<div class="review-summary"><span class="big"><span class="placeholder">[4.x]</span><span style="font-size:1.2rem;color:var(--muted)"> / 5</span></span><span class="meta">from <span class="placeholder">[n]</span> verified reviews on <span class="placeholder">[Google / Trustpilot / BBB]</span></span></div>
+<div class="review-grid">{cards}</div>
+<p class="review-sources">Read all reviews on <a href="#" rel="noopener">Google</a>, <a href="#" rel="noopener">Trustpilot</a> and the <a href="#" rel="noopener">Better Business Bureau</a>. <span class="placeholder">[Link each to the real profile; remove any you don't have.]</span></p>
+<div class="verify" style="margin-top:22px"><strong>Before publishing this section:</strong> replace the three sample cards with real reviews (name or initials, city or state, trade, exact text, star rating, date, source and written permission). Then add AggregateRating and Review schema in <code>gen/common.py</code> using only the real figures. Do not publish fabricated or paraphrased reviews; the FTC's endorsement rules and Google's review policies both apply.</div>
+</div></section>"""
+
 # ---------------------------------------------------------------- link rewriting
 class Build:
     def __init__(self, mode):
@@ -333,7 +377,7 @@ def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_scr
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..60,500;8..60,600&family=Public+Sans:wght@400;500;600;700&display=swap">
-<style>{BASE_CSS}{EXTRA_CSS}</style>
+<style>{BASE_CSS}{EXTRA_CSS}{REVIEW_CSS}</style>
 </head>
 <body>
 {header(b, d)}
