@@ -4,7 +4,12 @@ import json, re, html, math, os
 DOMAIN = "https://www.alelitefinancing.com"
 REVIEWED = "October 2026"
 BASE_CSS = open(os.path.join(os.path.dirname(__file__), "base.css")).read()
-LOGO_IMG = '<img class="brand-logo" src="' + open(os.path.join(os.path.dirname(__file__), "logo_data.txt")).read() + '" alt="AL Elite Financing" width="146" height="106">'
+LOGO_IMG = '<img class="brand-logo" src="/logo.png" alt="AL Elite Financing" width="146" height="106">'
+# Date stamped into schema dateModified and sitemap lastmod. Update on every content release.
+MODIFIED = "2026-10-20"
+# Pre-launch notes (gold "verify" boxes and [bracketed] placeholders) are for the team, not visitors.
+# They are stripped from the production build. Set True to see them again while editing.
+SHOW_DRAFT_NOTES = False
 
 EXTRA_CSS = """
 /* Inner-page additions */
@@ -226,7 +231,6 @@ def header(b, d):
 <li><a href="{L('/contractor-business-loans/')}">Business loans</a></li>
 <li><a href="{L('/tools/roof-financing-calculator/')}">Calculators</a></li>
 <li><a href="{L('/locations/')}">Locations</a></li>
-<li><a href="{L('/lender-network/')}">Partners</a></li>
 <li><a href="{L('/about/')}">About</a></li>
 <li><a class="btn btn-primary" href="#contact">Check your options</a></li>
 </ul></nav></div></header>"""
@@ -242,12 +246,12 @@ def footer(b, d):
 <div><h4>Contractors</h4><ul>
 <li><a href="{L('/for-contractors/')}">Offer customer financing</a></li><li><a href="{L('/contractor-business-loans/')}">Contractor business loans</a></li><li><a href="{L('/contractor-business-loans/equipment-financing/')}">Equipment financing</a></li><li><a href="{L('/contractor-business-loans/invoice-factoring/')}">Invoice factoring</a></li><li><a href="{L('/tools/equipment-loan-calculator/')}">Equipment loan calculator</a></li><li><a href="{L('/blog/')}">Blog</a></li></ul></div>
 <div><h4>Company</h4><ul>
-<li><a href="{L('/about/')}">About AL Elite</a></li><li><a href="{L('/how-we-make-money/')}">How we make money</a></li><li><a href="{L('/lender-network/')}">Our financial partners</a></li><li><a href="{L('/locations/')}">Locations</a></li><li><a href="#contact">Contact</a></li><li><a href="{L('/privacy/')}">Privacy policy</a></li></ul></div>
+<li><a href="{L('/about/')}">About AL Elite</a></li><li><a href="{L('/how-we-make-money/')}">How we make money</a></li><li><a href="{L('/locations/')}">Locations</a></li><li><a href="#contact">Contact</a></li><li><a href="{L('/privacy/')}">Privacy policy</a></li></ul></div>
 </div>
 <div class="disclosures">
 <p><strong>Important disclosures.</strong> AL Elite Financing is not a lender, bank or credit union and does not make credit decisions, set rates or fund loans. We operate a lead-matching marketplace that connects consumers and businesses with third-party lenders. Lenders may compensate us for introductions. Any loan offer, APR, fee, term or approval is determined solely by the lender and is subject to their credit approval and underwriting. Not all applicants will qualify. Loan products and lender availability vary by state.</p>
-<p>Payment figures shown on this site are illustrations based on standard amortization and are not offers of credit. Your actual terms may differ. Nothing on this site is legal, tax or financial advice. <span class="placeholder">[Add any state-specific licensing or lead-generator disclosures required by counsel before launch.]</span></p>
-<p>Last reviewed: {REVIEWED}. <span class="placeholder">[Reviewed by: name, title and credentials of the finance professional responsible for this page.]</span></p>
+<p>Payment figures shown on this site are illustrations based on standard amortization and are not offers of credit. Your actual terms may differ. Nothing on this site is legal, tax or financial advice.</p>
+<p>Last reviewed: {REVIEWED}.</p>
 </div>
 <div class="legal-row"><span>&copy; 2026 AL Elite Financing. All rights reserved.</span>
 <ul><li><a href="{L('/privacy/')}">Privacy</a></li><li><a href="{L('/terms/')}">Terms</a></li><li><a href="{L('/accessibility/')}">Accessibility</a></li><li><a href="{L('/do-not-sell/')}">Do not sell or share my information</a></li></ul></div>
@@ -271,8 +275,6 @@ def contact_section(b, d, role="homeowner", project=None, need=None, heading=Non
 <div class="contact-aside">
 <div class="stack"><p class="eyebrow">Get in touch</p><h2 id="contact-h">{heading}</h2><p class="lede">{lede}</p></div>
 <div class="block"><span class="k">Phone</span><span><a href="tel:+1-888-968-0079">(888) 968-0079</a></span></div>
-<div class="block"><span class="k">Email</span><span class="placeholder">[Add contact email address]</span></div>
-<div class="block"><span class="k">Hours</span><span class="placeholder">[Add business hours and time zone]</span></div>
 <div class="block"><span class="k">What we won't ask for here</span><span>Social Security numbers, bank account numbers or card details. Lenders collect those securely at application, never through this form.</span></div>
 </div>
 <form class="lead" id="leadForm" novalidate>
@@ -352,8 +354,29 @@ def trim_meta(meta, limit=160):
     j = cut.rfind(", ")
     return (meta[:j] if j > 80 else cut.rstrip()) + "."
 
+def strip_draft(h):
+    """Remove team-only notes from visitor-facing HTML."""
+    if SHOW_DRAFT_NOTES:
+        return h
+    h = re.sub(r"<div class=['\"]verify['\"][^>]*>.*?</div>", "", h, flags=re.S)
+    h = re.sub(r"\s?<span class=['\"]placeholder['\"]>\[[^\]]*\]</span>", "", h)
+    h = re.sub(r"<div class=['\"]callout['\"]><strong>[^<]*</strong>\s*</div>", "", h)  # callouts left empty
+    h = re.sub(r"<p>\s*</p>|<li>\s*</li>", "", h)
+    return h
+
+def trim_title(title, limit=65):
+    """Google truncates around 60 characters; drop the brand suffix on long titles (Google shows the site name anyway)."""
+    if len(title) <= limit:
+        return title
+    for suf in (" | AL Elite Financing", " | AL Elite"):
+        if title.endswith(suf):
+            return title[: -len(suf)]
+    return title
+
 def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_script="", noindex=False):
     meta = trim_meta(meta)
+    title = trim_title(title)
+    body_html = strip_draft(body_html)
     d = depth_of(path)
     url = DOMAIN + path
     graph = [{"@type": "Organization", "@id": ORG_ID, "name": "AL Elite Financing", "url": DOMAIN + "/", "logo": DOMAIN + "/logo.png", "telephone": "+1-888-968-0079", "contactPoint": {"@type": "ContactPoint", "telephone": "+1-888-968-0079", "contactType": "customer service", "areaServed": "US", "availableLanguage": "English"}}] + schema_nodes
@@ -368,12 +391,17 @@ def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_scr
 <meta name="description" content="{esc(meta)}">
 <meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
+<link rel="icon" type="image/png" href="/logo.png">
+<link rel="apple-touch-icon" href="/logo.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AL Elite Financing">
 <meta property="og:title" content="{esc(og_title or title)}">
 <meta property="og:description" content="{esc(meta)}">
 <meta property="og:url" content="{url}">
 <meta property="og:image" content="{DOMAIN}/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -399,4 +427,6 @@ def crumbs_html(b, d, crumbs):
     return f"<nav class='crumbs' aria-label='Breadcrumb'><div class='wrap'><ol>{items}</ol></div></nav>"
 
 def byline():
-    return f"<p class='byline'><span>Written by <span class='placeholder'>[author name]</span></span><span>Reviewed by <span class='placeholder'>[finance reviewer, credentials]</span></span><span>Last reviewed {REVIEWED}</span></p>"
+    # Swap in real named author + reviewer (with /about/ bios) as soon as they're confirmed; that is the
+    # strongest E-E-A-T signal available to a finance site.
+    return f"<p class='byline'><span>By the AL Elite Financing editorial team</span><span>Last reviewed {REVIEWED}</span></p>"

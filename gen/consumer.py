@@ -352,7 +352,7 @@ WINDOWS = trade("window-financing", "Window replacement financing",
     [8000, 15000, 25000], ["Whole-house and partial replacement", "Dealer plan vs independent loan", "Rebate-aware"], tag_noun="window replacement")
 
 FOUNDATION = trade("foundation-repair-financing", "Foundation repair financing",
-    "Foundation repair financing: piers, slab repair and basement waterproofing", "Foundation Repair Financing | Piers, Slab & Basement Waterproofing Loans | AL Elite",
+    "Foundation repair financing: piers, slab repair and basement waterproofing", "Foundation Repair Financing | Piers, Slab & Waterproofing",
     "Foundation repair financing for piering, slab repair, crawl space work and basement waterproofing: why it can't wait, what drives the cost, example payments and lender requirements. AL Elite matches you with lenders.",
     "Foundation repair financing covers structural work such as piering, slab lifting, wall anchors, crawl space encapsulation and basement waterproofing. These are larger, non-optional projects, so personal loans and home equity products are the usual routes, with contractor financing available from many foundation specialists. AL Elite matches homeowners with lenders who fund structural repairs.",
     "Foundation repair",

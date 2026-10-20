@@ -1,6 +1,6 @@
 # AL Elite Financing — website
 
-Static site for alelitefinancing.com. 79 pages built from the SEO Page Map: homepage, trade financing pages, contractor pages, calculators, 20 city pages, blog and trust pages.
+Static site for alelitefinancing.com. 86 pages built from the SEO Page Map: homepage, trade financing pages, contractor pages, calculators, 20 city pages, blog and trust pages.
 
 ## Layout
 - `public/` — the built site Vercel serves (one `index.html` per URL folder, plus `sitemap.xml` and `robots.txt`).
@@ -11,7 +11,16 @@ Static site for alelitefinancing.com. 79 pages built from the SEO Page Map: home
 python3 gen/build.py
 rm -rf public && cp -r dist-prod public
 ```
-(`build.py` expects `index.html` one level above `gen/`; copy `gen/home-index.html` there first, or adjust `HOME_SRC`.)
+`build.py` reads the homepage from `gen/home-index.html` and copies static assets (`logo.png`, `og-image.jpg`) from `gen/static/`, so a rebuild never drops them. It prints a validation report (broken links, H1 count, JSON-LD, meta length); it should end with `problems: 0`.
+
+## Blog
+New posts live in `gen/articles_new_a.py` (homeowner) and `gen/articles_new_b.py` (contractor). Each post targets a keyword distinct from its money page, links to one money page and one related post, and is automatically listed in the "Related" box of its money page. Bump `MODIFIED` in `gen/common.py` on each release (feeds schema `dateModified` and sitemap `lastmod`).
+
+## Draft notes
+Gold "verify" boxes and `[bracketed]` placeholders are stripped from the production build. Set `SHOW_DRAFT_NOTES = True` in `gen/common.py` to see them while editing. Still outstanding: named author and reviewer, contact email and hours, state licensing/lead-generator disclosures, verified local content on city pages.
+
+## Removed pages
+`/lender-network/` was removed in October 2026 and 301-redirects to `/how-we-make-money/` (see `vercel.json`).
 
 ## Before launch (marked in gold blocks on the pages)
 - Replace `alelitefinancing.com` in `gen/common.py` (`DOMAIN`) if the production domain differs.

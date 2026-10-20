@@ -11,7 +11,7 @@ from articles import ARTICLES, blog_hub
 from trust import TRUST_PAGES
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
-HOME_SRC = open(os.path.join(ROOT, "index.html")).read()
+HOME_SRC = open(os.path.join(os.path.dirname(__file__), "home-index.html")).read()
 
 def rewrite_links(html_text, depth):
     """Artifact mode: turn root-relative hrefs into relative file paths."""
@@ -22,6 +22,20 @@ def rewrite_links(html_text, depth):
             return f'{attr}="{prefix}index.html{anchor}"'
         return f'{attr}="{prefix}{path.strip("/")}/index.html{anchor}"'
     return re.sub(r'(href)="(/[^"#:]*)(#[^"]*)?"', sub, html_text)
+
+def link_guides_to_money_pages():
+    """Hub-and-spoke: each money page lists the guides that point at it, so link equity flows both ways."""
+    targets = {p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES}
+    for a in ARTICLES:
+        page_dict = targets.get(a["money_page"][1])
+        if not page_dict:
+            continue
+        rel = page_dict.setdefault("related", [])
+        label = "Guide: " + strip_tags(a["h1"]).split(":")[0]
+        if a["path"] not in [r[1] for r in rel]:
+            rel.append((label, a["path"]))
+
+link_guides_to_money_pages()
 
 def build(mode, outdir):
     b = Build(mode)
@@ -58,9 +72,13 @@ def build(mode, outdir):
         open(fp, "w").write(html_text)
     # sitemap + robots for prod
     if mode == "prod":
-        urls = "".join(f"<url><loc>{DOMAIN}{p}</loc><lastmod>2026-10-04</lastmod></url>" for p in pages if p not in ("/privacy/", "/terms/", "/accessibility/", "/do-not-sell/"))
+        urls = "".join(f"<url><loc>{DOMAIN}{p}</loc><lastmod>{MODIFIED}</lastmod></url>" for p in pages if p not in ("/privacy/", "/terms/", "/accessibility/", "/do-not-sell/"))
         open(os.path.join(outdir, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
         open(os.path.join(outdir, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")
+        # static assets (logo, social image) live in gen/static so a rebuild never drops them
+        static = os.path.join(os.path.dirname(__file__), "static")
+        for fn in os.listdir(static):
+            shutil.copy(os.path.join(static, fn), os.path.join(outdir, fn))
     return pages
 
 if __name__ == "__main__":
@@ -79,12 +97,15 @@ if __name__ == "__main__":
             # allow the phrase inside "no 'guaranteed approval'" style warnings only when preceded by quote/negation context
             for mm in re.finditer(re.escape(w), low):
                 ctx = low[max(0, mm.start()-60):mm.end()+30]
+                if w == "guaranteed approval" and ('"guaranteed approval"' in ctx or "&quot;guaranteed approval&quot;" in ctx): continue
                 if w == "guaranteed approval" and any(k in ctx for k in ["never", "no '", "no \"", "not", "avoid", "won't", "don't", "promis", "claims", "language", "or '", "prohibit", "offers advertising"]):
+                    continue
+                if w == "seamless" and "gutter" in ctx:
                     continue
                 problems.append((path, "banned word", w, ctx.strip()))
         for m in re.finditer(r'href="(/[^"#]*)', h):
             t = m.group(1)
-            if t not in prod: problems.append((path, "broken link", t))
+            if t not in prod and not re.search(r"\.(png|jpg|svg|ico|xml|txt)$", t): problems.append((path, "broken link", t))
         if h.count("<h1") != 1: problems.append((path, "h1 count", h.count("<h1")))
         if len(re.search(r'<meta name="description" content="([^"]*)"', h).group(1)) > 175: problems.append((path, "meta too long"))
     for p in problems: print(p)

@@ -49,7 +49,7 @@ def service_page(b, p):
 </aside></div></section>
 {contact_section(b, d, role=p.get('role','homeowner'), project=p.get('project'), need=p.get('need'))}"""
     schema = [
-        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
         {"@type": "Service", "@id": url + "#service", "name": p.get("service_name", strip_tags(p["h1"])), "serviceType": p.get("service_type", "Financing matching"), "provider": {"@id": ORG_ID}, "areaServed": {"@type": "Country", "name": "United States"}, "description": strip_tags(p["answer"]), "url": url, "audience": {"@type": "Audience", "audienceType": p.get("audience", "Homeowners")}},
         breadcrumb_schema(p["crumbs"]),
     ]
@@ -72,7 +72,7 @@ def hub_page(b, p):
 <aside class="side"><div class="box"><h3>Related pages</h3><ul>{''.join(f"<li><a href='{L(rp)}'>{esc(rn)}</a></li>" for rn, rp in p.get('related', []))}</ul></div></aside></div></section>
 {contact_section(b, d, role=p.get('role','homeowner'), project=p.get('project'), need=p.get('need'))}"""
     schema = [
-        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
+        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": n, "url": DOMAIN + cp} for i, (tag, n, desc, cp) in enumerate(p["cards"])]},
         breadcrumb_schema(p["crumbs"]),
     ]
@@ -87,7 +87,7 @@ def plain_page(b, p):
 <section><div class="wrap layout"><article class="prose">{p['prose']}{('<h2 id=faq>Frequently asked questions</h2>' + faq_html(p['faqs'])) if p.get('faqs') else ''}</article>
 <aside class="side"><div class="box"><h3>Related pages</h3><ul>{''.join(f"<li><a href='{link(b, rp, d)}'>{esc(rn)}</a></li>" for rn, rp in p.get('related', []))}</ul></div></aside></div></section>
 {contact_section(b, d, role=p.get('role','homeowner')) if p.get('form', True) else ''}"""
-    schema = [{"@type": p.get("type", "WebPage"), "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US"}, breadcrumb_schema(p["crumbs"])]
+    schema = [{"@type": p.get("type", "WebPage"), "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US"}, breadcrumb_schema(p["crumbs"])]
     if p.get("faqs"): schema.append(faq_schema(p["faqs"], url))
     schema += p.get("extra_schema", [])
     return page(b, path, p["title"], p["meta"], body, schema, noindex=p.get("noindex", False))
@@ -106,8 +106,9 @@ def article_page(b, p):
 <aside class="side"><div class="box"><h3>Related</h3><ul>{''.join(f"<li><a href='{L(rp)}'>{esc(rn)}</a></li>" for rn, rp in p.get('related', []))}</ul></div></aside></div></section>
 {contact_section(b, d, role=p.get('role','homeowner'), project=p.get('project'), need=p.get('need'))}"""
     schema = [
-        {"@type": "Article", "@id": url + "#article", "headline": strip_tags(p["h1"]), "description": p["meta"], "url": url, "mainEntityOfPage": url, "datePublished": p.get("date", "2026-10-04"), "dateModified": "2026-10-04", "inLanguage": "en-US",
-         "author": {"@type": "Person", "name": "[Author name]", "url": DOMAIN + "/about/"}, "publisher": {"@id": ORG_ID}, "about": p.get("about", strip_tags(p["h1"])),
+        {"@type": "Article", "@id": url + "#article", "headline": strip_tags(p["h1"]), "description": p["meta"], "url": url, "mainEntityOfPage": url, "datePublished": p.get("date", "2026-10-04"), "dateModified": p.get("modified", MODIFIED), "inLanguage": "en-US",
+         "author": {"@type": "Organization", "name": "AL Elite Financing editorial team", "url": DOMAIN + "/about/"}, "publisher": {"@id": ORG_ID},
+         "image": DOMAIN + "/og-image.jpg", "about": p.get("about", strip_tags(p["h1"])),
          "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
         breadcrumb_schema(p["crumbs"]),
     ]
