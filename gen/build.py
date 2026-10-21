@@ -11,6 +11,7 @@ from articles import ARTICLES, blog_hub
 from trust import TRUST_PAGES
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
+from usmap import us_map_section, US_MAP_CSS
 HOME_SRC = open(os.path.join(os.path.dirname(__file__), "home-index.html")).read()
 
 def rewrite_links(html_text, depth):
@@ -43,7 +44,7 @@ def build(mode, outdir):
     os.makedirs(outdir)
     pages = {}
     # Homepage: use the hand-built index.html; in artifact mode strip to body-only and rewrite links.
-    pages["/"] = HOME_SRC
+    pages["/"] = HOME_SRC.replace("</style>", US_MAP_CSS + "</style>", 1)
     for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES: pages[p["path"]] = service_page(b, p)
     for p in CONSUMER_HUBS + CONTRACTOR_HUBS: pages[p["path"]] = hub_page(b, p)
     for p in TOOL_PAGES: pages[p["path"]] = tool_page(b, p)
@@ -54,6 +55,12 @@ def build(mode, outdir):
     for p in TRUST_PAGES: pages[p["path"]] = plain_page(b, p)
     # tools hub alias: /tools/ -> redirect-ish page listing both calculators
     pages["/tools/"] = plain_page(b, dict(path="/tools/", crumbs=[("Home", "/"), ("Tools", "/tools/")], eyebrow="Tools", h1="Financing calculators", title="Financing Calculators | Roof & Equipment Loan Calculators | AL Elite", meta="Free calculators: roof financing payment calculator for homeowners and equipment loan calculator for contractors. Illustrative only.", answer="Two free calculators: the roof financing calculator turns a roof quote into a monthly payment, and the equipment loan calculator does the same for excavators, trucks and tools. Both show total interest and a full amortization schedule. Arithmetic only; lenders set real rates.", prose="<div class='grid-cards'><a class='card' href='/tools/roof-financing-calculator/'><span class='tag'>Homeowners</span><h3>Roof financing calculator</h3><p>Monthly payment, total interest and schedule for a roof loan.</p></a><a class='card' href='/tools/equipment-loan-calculator/'><span class='tag'>Contractors</span><h3>Equipment loan calculator</h3><p>Payments on equipment and trucks after a down payment.</p></a></div>", related=[("Roof financing", "/roof-financing/"), ("Construction equipment financing", "/contractor-business-loans/equipment-financing/")], byline=False))
+
+    # "Where we work" US map band directly above the footer on every page
+    band = us_map_section()
+    for path in pages:
+        assert pages[path].count("<footer>") == 1, path
+        pages[path] = pages[path].replace("<footer>", band + "<footer>", 1)
 
     for path, html_text in pages.items():
         d = depth_of(path)
