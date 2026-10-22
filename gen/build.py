@@ -38,6 +38,10 @@ def link_guides_to_money_pages():
 
 link_guides_to_money_pages()
 
+# October 2026 re-audit: competitor-gap content, sources, internal links (see seo_pass.py)
+import seo_pass
+seo_pass.apply({p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES + TRUST_PAGES + ARTICLES})
+
 def build(mode, outdir):
     b = Build(mode)
     if os.path.exists(outdir): shutil.rmtree(outdir)
@@ -61,6 +65,9 @@ def build(mode, outdir):
     for path in pages:
         assert pages[path].count("<footer>") == 1, path
         pages[path] = pages[path].replace("<footer>", band + "<footer>", 1)
+        src = seo_pass.sources_block(path)
+        if src and pages[path].count("</article>") == 1:
+            pages[path] = pages[path].replace("</article>", src + "</article>", 1)
 
     for path, html_text in pages.items():
         d = depth_of(path)

@@ -6,7 +6,7 @@ REVIEWED = "October 2026"
 BASE_CSS = open(os.path.join(os.path.dirname(__file__), "base.css")).read()
 LOGO_IMG = '<img class="brand-logo" src="/logo.png" alt="AL Elite Financing" width="146" height="106">'
 # Date stamped into schema dateModified and sitemap lastmod. Update on every content release.
-MODIFIED = "2026-10-20"
+MODIFIED = "2026-10-22"
 # Pre-launch notes (gold "verify" boxes and [bracketed] placeholders) are for the team, not visitors.
 # They are stripped from the production build. Set True to see them again while editing.
 SHOW_DRAFT_NOTES = False
