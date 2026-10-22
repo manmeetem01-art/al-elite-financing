@@ -23,6 +23,8 @@ S = {
     "sba_loans": ("U.S. Small Business Administration: loans", "https://www.sba.gov/funding-programs/loans"),
     "noaa_spc": ("NOAA Storm Prediction Center: severe weather reports", "https://www.spc.noaa.gov/"),
     "claims": ("Claims Journal: 2025 hail claim payouts by state", "https://www.claimsjournal.com/news/national/2026/04/23/337102.htm"),
+    "trane_fin": ("Trane: residential financing", "https://www.trane.com/residential/en/pricing/financing/"),
+    "carrier_fin": ("Carrier: HVAC financing", "https://www.carrier.com/us/en/residential/homeowner-resources/financing/"),
     "achr": ("ACHR News: homeowners planning to finance projects", "https://achrnews.com/articles/144272-more-than-25-of-surveyed-homeowners-plan-to-finance-home-improvement-projects-by-borrowing-from-contractor"),
 }
 
@@ -40,7 +42,7 @@ PAGE_SOURCES = {
     "/roof-financing/bad-credit-roof-financing/": ["acr", "hud_title1", "usda_504", "ftc_contractor"],
     "/roof-financing/roof-repair-financing/": ["hud_title1", "usda_504", "ftc_contractor"],
     "/roof-financing/commercial-roof-financing/": ["sba_loans", "irs_946"],
-    "/hvac-financing/": ["doe_wap", "hud_title1", "cfpb_pace_report", "ftc_contractor"],
+    "/hvac-financing/": ["doe_wap", "hud_title1", "cfpb_pace_report", "trane_fin", "carrier_fin", "ftc_contractor"],
     "/hvac-financing/bad-credit-hvac-financing/": ["acr", "doe_wap", "hud_title1", "ftc_contractor"],
     "/solar-financing/": ["cfpb_pace_rule", "cfpb_pace_report", "ftc_contractor"],
     "/home-improvement-financing/": GOV + ["doe_wap", "cfpb_pace_report", "ftc_contractor"],
@@ -133,6 +135,26 @@ GOV_SECTION = ("Government-backed options most homeowners don't hear about", f""
 <p>None of these is fast, and not every lender participates. They suit planned projects better than an emergency.</p>""")
 
 
+MFR_HVAC_OPTION = ("Manufacturer financing programs",
+    f"Major brands run financing programs through their dealers, usually with a bank partner such as Synchrony or Wells Fargo. {a('trane_fin', 'Trane')} and {a('carrier_fin', 'Carrier')} publish theirs; Lennox, Rheem and others have similar programs. Promotional rates are often tied to specific higher-efficiency equipment.",
+    "Pros: promotional APRs on new equipment; applied for at the dealer visit.",
+    "Cons: only through participating dealers and only on that brand's equipment; promotional terms may be deferred interest.")
+
+MFR_ROOF_OPTION = ("Manufacturer and direct-lender programs",
+    "Shingle makers such as GAF and Owens Corning offer financing through their certified contractor networks, and some banks (LightStream, for example) make unsecured roofing loans directly. Both are worth comparing against a marketplace offer on APR, fees and term.",
+    "Pros: brand-backed programs often come with upgraded warranties; direct lenders can fund within days.",
+    "Cons: tied to a certified contractor or a single lender's credit criteria, so there's no comparison built in.")
+
+PLATFORM_SECTION = ("How to compare contractor financing platforms", f"""<p>Searching for contractor financing turns up platforms such as Hearth, Acorn Finance and HFS Financial, bank programs such as Regions, and manufacturer-backed plans. They differ on things that matter to your margins. Compare them on:</p>
+<ul><li><strong>Dealer fees by plan.</strong> The fee on a promotional 0% plan can be several points of the job; standard-rate plans are often free to the contractor.</li>
+<li><strong>Credit coverage.</strong> One prime lender, or a waterfall with second-look lenders for declined customers?</li>
+<li><strong>Funding timing.</strong> On completion only, or with a draw at the start of larger jobs?</li>
+<li><strong>Closed-loop or open.</strong> Some programs restrict funds to your company; marketplaces let the homeowner take the loan anywhere.</li>
+<li><strong>Tools your reps will actually use.</strong> A mobile pre-qualification link with a soft pull beats a PDF application.</li>
+<li><strong>Trade fit.</strong> A program built for roofing or HVAC approves more of the right customers than a generic one.</li></ul>
+<p>We've written up the main providers in <a href="/blog/best-contractor-financing-companies/">best contractor financing companies</a> and the sales side in <a href="/blog/why-contractors-lose-jobs-without-financing/">why contractors lose jobs without financing</a>.</p>""")
+
+
 def apply(pages_by_path):
     """Mutate page dicts in place. pages_by_path: {path: dict} across all generated page types."""
     def P(path):
@@ -140,11 +162,11 @@ def apply(pages_by_path):
 
     roof = P("/roof-financing/")
     if roof:
-        roof["options"] = list(roof["options"]) + [GOV_OPTION, CASHOUT_OPTION]
+        roof["options"] = list(roof["options"]) + [MFR_ROOF_OPTION, GOV_OPTION, CASHOUT_OPTION]
         roof["sections"] = list(roof["sections"]) + [GOV_SECTION, VET_SECTION]
     hvac = P("/hvac-financing/")
     if hvac:
-        hvac["options"] = list(hvac["options"]) + [WAP_OPTION, GOV_OPTION]
+        hvac["options"] = list(hvac["options"]) + [MFR_HVAC_OPTION, WAP_OPTION, GOV_OPTION]
         hvac["sections"] = list(hvac["sections"]) + [PACE_SECTION, VET_SECTION]
     for path in ("/roof-financing/bad-credit-roof-financing/", "/hvac-financing/bad-credit-hvac-financing/"):
         pg = P(path)
@@ -162,6 +184,9 @@ def apply(pages_by_path):
     hub = P("/home-improvement-financing/")
     if hub:
         hub["prose"] = hub.get("prose", "") + f"<h2 id='{'government-backed'}'>{GOV_SECTION[0]}</h2>{GOV_SECTION[1]}<h2 id='pace'>{PACE_SECTION[0]}</h2>{PACE_SECTION[1]}<h2 id='vet-contractor'>{VET_SECTION[0]}</h2>{VET_SECTION[1]}"
+    fc = P("/for-contractors/")
+    if fc:
+        fc["sections"] = list(fc.get("sections", [])) + [PLATFORM_SECTION]
     cbl = P("/contractor-business-loans/")
     if cbl:
         cbl["prose"] = cbl.get("prose", "") + f"""<h2 id='sba'>SBA-backed loans for contractors</h2><p>The {a('sba_loans', 'U.S. Small Business Administration')} guarantees part of loans made by participating lenders, including the 7(a) program for working capital and equipment and microloans for smaller amounts. SBA loans usually carry longer terms than online lenders but take longer to close and need more documentation. They're worth comparing for larger, planned purchases rather than next-week payroll.</p>

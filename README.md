@@ -28,3 +28,7 @@ Gold "verify" boxes and `[bracketed]` placeholders are stripped from the product
 - City pages: verified local cost ranges, state licensing rules, claim deadlines, rebates.
 - Legal pages are outlines for counsel; they are `noindex`.
 - Lead form: posts to FormSubmit (`https://formsubmit.co/ajax/<inbox>`), set in `gen/common.py` (`SCRIPT`) and `gen/home-index.html`. Change the inbox there and rebuild. The first submission to a new inbox triggers a one-time activation email.
+
+## Indexing
+- `.github/workflows/indexnow.yml` submits every sitemap URL to IndexNow (Bing/Yandex/Naver/Seznam) after each push that changes `public/`. The key file lives in `gen/static/` and is served at the site root.
+- Google ignores IndexNow: keep the sitemap submitted in Google Search Console and use URL Inspection > Request indexing for changed money pages.
