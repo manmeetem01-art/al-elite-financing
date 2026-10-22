@@ -1,0 +1,34 @@
+name: IndexNow
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "public/**"
+  workflow_dispatch:
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    env:
+      HOST: www.alelitefinancing.com
+      KEY: 6fe71012f4d1365c4cc46f2de46a2981
+    steps:
+      - uses: actions/checkout@v4
+
+      # Give Vercel time to deploy the push so IndexNow can fetch the key and new pages
+      - name: Wait for deploy
+        run: sleep 90
+
+      - name: Submit sitemap URLs
+        run: |
+          set -euo pipefail
+          urls=$(grep -o '<loc>[^<]*' public/sitemap.xml | sed 's/<loc>//' | jq -R . | jq -s .)
+          echo "Submitting $(echo "$urls" | jq length) URLs"
+          jq -n --arg host "$HOST" --arg key "$KEY" --argjson urls "$urls" \
+            '{host: $host, key: $key, keyLocation: "https://\($host)/\($key).txt", urlList: $urls}' > payload.json
+          status=$(curl -s -o response.txt -w '%{http_code}' -X POST https://api.indexnow.org/indexnow \
+            -H 'Content-Type: application/json; charset=utf-8' --data @payload.json)
+          echo "IndexNow response: $status"
+          cat response.txt
+          case "$status" in 200|202) ;; *) exit 1 ;; esac
