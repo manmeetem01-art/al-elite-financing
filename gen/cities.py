@@ -1,6 +1,7 @@
 """20 city pages + locations hub. Local context comes from the strategy's Target Locations tab and two cited sources.
 Anything that needs local verification (cost ranges, licensing, rebates) is a clearly marked verify block, never invented."""
 from common import *
+from expand_cities import local_section
 
 HOME = ("Home", "/")
 LOC = ("Locations", "/locations/")
@@ -76,8 +77,8 @@ def city_page(b, c):
 <div class="s"><span class="k">Also serving</span><span class="v" style="font-size:1rem">{p['siblings']}</span><small>Other {esc(state)} metros</small></div>
 </div>
 <h2 id="why-roofs-here">Why roofs in {esc(city)} get replaced early</h2>{p['storm_para']}<p>{esc(p['angle'])} {esc(p['demand'])}</p>
-<h2 id="costs">Local costs and rules</h2>
-<div class="verify"><strong>Before publishing this page, add verified local content here</strong> (this is what keeps a city page from being thin doorway content): typical roof replacement and HVAC replacement cost ranges for the {esc(city)} metro with a cited source; {esc(state)} contractor licensing and registration rules; the {esc(state)} statutory deadline for filing a storm claim; any utility rebates for heat pumps or efficient HVAC in {esc(city)}; and a monthly payment example at local prices. Do not publish estimates without a source.</div>
+<h2 id="costs">Financing a roof in {esc(state)}: local costs and rules</h2>
+{local_section(state, city)}
 <h2 id="how-it-works">How roof financing works in {esc(city)}</h2>
 <ol><li><strong>Get itemized quotes</strong> from licensed {esc(city)} roofers. If there's a claim, get the adjuster's estimate too, so you know the gap.</li>
 <li><strong>Tell us about the roof.</strong> Amount, timeline, whether insurance is involved, your state. No credit pull.</li>

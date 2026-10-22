@@ -41,6 +41,10 @@ link_guides_to_money_pages()
 # October 2026 re-audit: competitor-gap content, sources, internal links (see seo_pass.py)
 import seo_pass
 seo_pass.apply({p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES + TRUST_PAGES + ARTICLES})
+import expand_blog, expand_money
+_ALL = {p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES + TRUST_PAGES + ARTICLES}
+expand_blog.apply(_ALL)
+expand_money.apply(_ALL)
 
 def build(mode, outdir):
     b = Build(mode)
