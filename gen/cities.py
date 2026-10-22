@@ -49,7 +49,7 @@ def city_page_dict(c):
     return dict(
         path=path, crumbs=[HOME, LOC, (state, path), (city, path)],
         eyebrow=f"Roof and HVAC financing in {city}, {ab}", h1=f"Roof financing in {city}, {state}",
-        title=f"Roof Financing in {city}, {ab} | HVAC & Home Improvement Financing | AL Elite",
+        title=f"Roof & HVAC Financing in {city}, {ab} | AL Elite Financing",
         meta=f"Roof financing in {city}, {state}: storm-market replacement, insurance deductibles and gaps, HVAC and home improvement financing, and customer financing for {city} roofers and contractors. AL Elite matches you with lenders. Not a lender.",
         answer=answer, why=why, risk_label=risk_label, storm_para=storm_para, demand=demand, angle=angle, city=city, state=state, ab=ab, siblings=sib_html,
     )
@@ -61,7 +61,7 @@ def city_page(b, c):
         (f"Can I get roof financing in {city}?", f"Yes. {city} homeowners finance roofs through unsecured personal loans, contractor-arranged payment plans and home equity products. AL Elite matches you with lenders who fund roofing in {state}. Submitting a request does not pull your credit."),
         (f"Can I finance my insurance deductible for a roof in {city}?", "Yes, through legitimate third-party financing. What a contractor cannot do is waive, absorb or rebate the deductible; that's illegal in many states and prohibited for AL Elite partner contractors. Financing covers the deductible and any upgrades or non-covered work; the claim covers the rest."),
         (f"How much does a new roof cost in {city}?", f"It depends on size, pitch, material, tear-off and local demand, which spikes after storms. Get at least two itemized quotes from licensed {city} roofers. Our <a href='/roof-financing/'>roof financing</a> page explains the cost drivers and the <a href='/tools/roof-financing-calculator/'>calculator</a> turns a quote into a monthly figure."),
-        (f"Does AL Elite have an office in {city}?", f"AL Elite matches {city} homeowners and contractors with lenders online and by phone. <span class='placeholder'>[State whether there is a staffed local office; if not, leave this answer as is and do not create a local Google Business Profile.]</span>"),
+        (f"Does AL Elite have an office in {city}?", f"AL Elite matches {city} homeowners and contractors with lenders online and by phone."),
         (f"I'm a roofer in {city}. Can I offer financing to customers?", f"Yes. Licensed, insured {city} roofers and HVAC contractors can join AL Elite's partner program to offer customer financing and be listed on this page. See <a href='/for-contractors/roofing/'>financing for roofing companies</a>."),
     ]
     body = f"""{crumbs_html(b, d, p['crumbs'])}
@@ -87,7 +87,7 @@ def city_page(b, c):
 <p>The same lenders fund <a href="{L('/hvac-financing/')}">HVAC replacement</a>, <a href="{L('/siding-financing/')}">siding</a> and <a href="{L('/gutter-financing/')}">gutters</a> (often damaged in the same storm as the roof), <a href="{L('/generator-financing/')}">standby generators</a> and <a href="{L('/home-improvement-financing/')}">other home improvements</a>. If a storm took the roof and the AC condenser together, tell us both; one loan is simpler than two.</p>
 <h2 id="contractors">For {esc(city)} roofers and contractors</h2>
 <p>Storm season is when {esc(city)} contractors win or lose the year. Partner contractors offer customer financing at the kitchen table (paid at completion, deductibles handled legally) and get matched with business lenders for <a href="{L('/contractor-business-loans/working-capital/')}">working capital</a>, <a href="{L('/contractor-business-loans/dump-truck-financing/')}">dump trucks</a> and <a href="{L('/contractor-business-loans/equipment-financing/')}">equipment</a>. See <a href="{L('/for-contractors/')}">offering financing to customers</a>.</p>
-<div class="callout"><strong>Partner contractors in {esc(city)}:</strong> <span class="placeholder">[List partner roofers and HVAC companies here with links to their profiles once signed. Leave this block out until there is at least one.]</span></div>
+<!-- Partner contractors in {esc(city)}: add a callout listing signed partner roofers/HVAC companies with profile links once there is at least one. -->
 <h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}
 </article>
 <aside class="side">
@@ -97,7 +97,7 @@ def city_page(b, c):
 </aside></div></section>
 {contact_section(b, d, role='homeowner', project='Roof replacement or repair', state=state, heading=f'Tell us about your {city} roof or project')}"""
     schema = [
-        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
         {"@type": "Service", "@id": url + "#service", "name": f"Roof and HVAC financing matching in {city}, {state}", "serviceType": "Financing matching", "provider": {"@id": ORG_ID}, "areaServed": {"@type": "City", "name": city, "containedInPlace": {"@type": "State", "name": state}}, "description": strip_tags(p["answer"]), "url": url},
         breadcrumb_schema(p["crumbs"]), faq_schema(faqs, url),
     ]
@@ -111,7 +111,7 @@ def locations_hub(b):
     faqs = [
         ("Does AL Elite only work in these cities?", "No. We match nationwide in the United States. These are the metros where we've written local pages because storm exposure makes roof financing a frequent, urgent need. Lender availability varies by state."),
         ("Why these cities?", f"They were chosen from the states with the highest hail claim payouts (per State Farm's 2025 figures reported by <a href='{CLAIMS}' rel='noopener'>Claims Journal</a>) plus hurricane-exposed Florida, then by local roofing demand. Chicago, Atlanta, Phoenix, Charlotte and Louisville are next."),
-        ("Does AL Elite have offices in these cities?", "AL Elite matches homeowners and contractors online and by phone. <span class='placeholder'>[State which, if any, cities have a staffed office.]</span>"),
+        ("Does AL Elite have offices in these cities?", "AL Elite matches homeowners and contractors online and by phone."),
     ]
     body = f"""{crumbs_html(b, d, [HOME, LOC])}
 <section class="page-hero"><div class="wrap" style="grid-template-columns:1fr"><div class="stack article-head"><p class="eyebrow">Locations</p><h1>Roof and HVAC financing by city</h1><p class="answer-first" id="speakable-summary">AL Elite matches homeowners and contractors with lenders across the United States, with local pages for 20 metros where hail, hurricanes and insurer roof-age rules make roof financing a frequent, urgent need: Texas, Oklahoma, Colorado, Missouri, Kansas, Nebraska, Indiana, Minnesota, Florida, Tennessee and Utah.</p></div></div></section>
@@ -120,7 +120,7 @@ def locations_hub(b):
 <aside class="side"><div class="box"><h3>Start here</h3><ul><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/for-contractors/')}">For contractors</a></li></ul></div></aside></div></section>
 {contact_section(b, d, role='homeowner', project='Roof replacement or repair')}"""
     schema = [
-        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": "Roof and HVAC Financing by City | Locations | AL Elite", "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US"},
+        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": "Roof and HVAC Financing by City | Locations | AL Elite", "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US"},
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": f"{c[0]}, {c[2]}", "url": DOMAIN + c[3]} for i, c in enumerate(CITIES)]},
         breadcrumb_schema([HOME, LOC]), faq_schema(faqs, url),
     ]

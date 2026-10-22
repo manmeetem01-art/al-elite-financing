@@ -55,7 +55,7 @@ def tool_page(b, p):
 <div class="cta-box"><h3>{esc(p['cta_h'])}</h3><p>{p['cta_p']}</p><a class="btn btn-light" href="#contact">Get matched</a></div></aside></div></section>
 {contact_section(b, d, role=p['role'], project=p.get('project'), need=p.get('need'))}"""
     schema = [
-        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": p["title"], "description": p["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US", "speakable": {"@type": "SpeakableSpecification", "cssSelector": ["#speakable-summary"]}},
         {"@type": "WebApplication", "@id": url + "#app", "name": strip_tags(p["h1"]), "url": url, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "provider": {"@id": ORG_ID}, "description": strip_tags(p["answer"])},
         breadcrumb_schema(p["crumbs"]), faq_schema(faqs, url),
     ]

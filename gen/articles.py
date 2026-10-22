@@ -1,4 +1,4 @@
-"""Blog articles from the Page Map (8) + blog hub."""
+"""Blog articles from the Page Map + October 2026 batch (articles_new_a/b) + blog hub."""
 from common import *
 
 HOME = ("Home", "/")
@@ -60,7 +60,7 @@ A2 = dict(
 A3 = dict(
     path="/blog/does-insurance-cover-roof-replacement/", crumbs=[HOME, BLOG, ("Does insurance cover roof replacement?", "/blog/does-insurance-cover-roof-replacement/")],
     eyebrow="Homeowner guide", h1="Does insurance cover roof replacement? Storm claims explained",
-    title="Does Insurance Cover Roof Replacement? Storm Claims & the Gap You Finance | AL Elite",
+    title="Does Insurance Cover Roof Replacement? Storm Claims Explained",
     meta="Does homeowners insurance cover roof replacement? When storm damage is covered, how deductibles and depreciation work, the claims process step by step, and how to finance the gap. Not legal or insurance advice.",
     answer="Homeowners insurance usually covers roof replacement when the damage is sudden and caused by a covered peril such as hail, wind or a fallen tree. It does not cover wear, age or neglect. What you receive depends on your deductible (often a percentage of the dwelling value for wind and hail), whether the policy pays replacement cost or depreciated actual cash value, and the adjuster's scope. The deductible, depreciation and non-covered upgrades are the gap homeowners finance.",
     money_page=("roof financing", "/roof-financing/"), project="Roof replacement or repair",
@@ -81,7 +81,7 @@ A3 = dict(
 A4 = dict(
     path="/blog/how-to-offer-financing-to-customers/", crumbs=[HOME, BLOG, ("How to offer financing to customers", "/blog/how-to-offer-financing-to-customers/")],
     eyebrow="Contractor guide", h1="How to offer financing to your customers: a contractor's step-by-step guide",
-    title="How to Offer Financing to Customers: Contractor Guide (Setup, Pitch, Compliance) | AL Elite",
+    title="How to Offer Financing to Customers: A Contractor's Guide",
     meta="How contractors offer financing to customers: choosing a program, setup, presenting a monthly payment, handling declines with second-look lenders, what you can and can't say, and how you get paid.",
     answer="To offer financing to your customers, join a financing program (a lender's dealer program or a marketplace like AL Elite), add the financing option to every quote and your website, train your team to present a monthly payment alongside the total, and let the customer apply directly with the lender. When approved, the lender pays you at completion. The compliance rules are simple: never quote a rate you don't have in writing, never promise approval, and never touch an insurance deductible.",
     money_page=("contractor financing", "/for-contractors/"), role="contractor", need="Offer financing to my customers",
@@ -159,7 +159,7 @@ A7 = dict(
     title="How to Bid Construction Jobs: Pricing, Margin & Financing Costs | AL Elite",
     meta="How to bid construction jobs profitably: takeoffs, labor burden, overhead recovery, margin vs markup, contingency, payment terms, and how to price in the cost of financing the job or offering customer financing.",
     answer="Bidding a construction job well means pricing the true cost of the work (materials, labor with burden, subs, equipment), recovering overhead, adding a real margin, and then pricing the cash-flow cost of the job: how long you'll carry materials and payroll before the draw, and whether you'll offer the customer financing. Contractors who skip that last step win bids that lose money. This guide walks through each step with the financing cost made explicit.",
-    money_page=("contractor business loans", "/contractor-business-loans/"), role="contractor", need="Working capital",
+    money_page=("contractor financing programs", "/for-contractors/"), role="contractor", need="Offer financing to my customers",
     sections=[
         ("1. Do a real takeoff", """<p>Quantify every material from the plans or the site visit. Round up for waste by material type. A bid built on a guess is a bid you'll regret on the last week of the job.</p>"""),
         ("2. Price labor with burden, not wages", """<p>A crew member's cost is wages plus payroll taxes, workers' comp, liability insurance, benefits, paid time off and non-billable time. The burdened rate is often well above the wage. Use the burdened number, and estimate hours by task from your own job history, not from the plans alone.</p>"""),
@@ -176,7 +176,12 @@ A7 = dict(
     related=[("Contractor business loans", "/contractor-business-loans/"), ("Working capital for contractors", "/contractor-business-loans/working-capital/"), ("Construction invoice factoring", "/contractor-business-loans/invoice-factoring/"), ("For contractors: offer customer financing", "/for-contractors/")],
 )
 
-ARTICLES = [A1, A2, A3, A4, A5, A6, A7]
+ARTICLES_ORIG = [A1, A2, A3, A4, A5, A6, A7]
+
+from articles_new_a import ARTICLES_A
+from articles_new_b import ARTICLES_B
+# Newest first on the blog hub
+ARTICLES = ARTICLES_A + ARTICLES_B + ARTICLES_ORIG
 
 def blog_hub(b):
     path = "/blog/"; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path
@@ -186,7 +191,7 @@ def blog_hub(b):
 <section><div class="wrap"><div class="post-list">{posts}</div></div></section>
 {contact_section(b, d)}"""
     schema = [
-        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": "Blog | AL Elite Financing", "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": "2026-10-04", "inLanguage": "en-US"},
+        {"@type": "CollectionPage", "@id": url + "#webpage", "url": url, "name": "Blog | AL Elite Financing", "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US"},
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": strip_tags(a["h1"]), "url": DOMAIN + a["path"]} for i, a in enumerate(ARTICLES)]},
         breadcrumb_schema([HOME, BLOG]),
     ]
