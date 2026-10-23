@@ -13,13 +13,17 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(204).end();
-  const key = process.env.RESEND_API_KEY, from = process.env.FROM_EMAIL;
+  // Accept the canonical names and the variants that were set in Vercel.
+  const env = (...names) => { for (const n of names) { const v = process.env[n]; if (v && String(v).trim()) return String(v).trim(); } return ""; };
+  const key = env("RESEND_API_KEY", "resend_api", "RESEND_API", "resend_api_key");
+  const from = env("FROM_EMAIL", "FromEmail", "from_email", "FROMEMAIL");
+  const leadTo = env("LEAD_EMAIL", "lead_email", "LeadEmail") || "manmeetsingh0177@gmail.com";
 
   // Health check: GET /api/download?check=1 reports configuration without exposing secrets.
   if (req.method === "GET") {
     const url = new URL(req.url, SITE);
     if (url.searchParams.get("check") !== "1") return res.status(405).json({ ok: false, error: "POST only" });
-    const out = { key_set: !!key, from_set: !!from, from_domain: from ? (from.match(/@([^>\s]+)/) || [])[1] || null : null, lead_email_set: !!process.env.LEAD_EMAIL };
+    const out = { key_set: !!key, from_set: !!from, from_domain: from ? (from.match(/@([^>\s]+)/) || [])[1] || null : null, lead_email_set: !!env("LEAD_EMAIL", "lead_email", "LeadEmail") };
     if (key) {
       try {
         const r = await fetch("https://api.resend.com/domains", { headers: { Authorization: `Bearer ${key}` } });
@@ -55,7 +59,7 @@ module.exports = async (req, res) => {
   });
 
   const reader = await send({
-    from, to: [email], reply_to: process.env.LEAD_EMAIL || "manmeetsingh0177@gmail.com",
+    from, to: [email], reply_to: leadTo,
     subject: `Your ${resource} from AL Elite Financing`,
     html: `<div style="font-family:Arial,sans-serif;max-width:560px;margin:auto;color:#121b2b">
 <div style="background:#0b2545;padding:22px 26px;border-bottom:4px solid #b48c2c"><span style="color:#b48c2c;font-weight:700;font-size:13px;letter-spacing:.06em">AL ELITE FINANCING</span></div>
@@ -74,7 +78,7 @@ module.exports = async (req, res) => {
   }
 
   await send({
-    from, to: [process.env.LEAD_EMAIL || "manmeetsingh0177@gmail.com"], reply_to: email,
+    from, to: [leadTo], reply_to: email,
     subject: `Worksheet download: ${resource} - ${name}`,
     text: `New lead magnet download\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nResource: ${resource}\nPage: ${page}\nTime: ${new Date().toISOString()}`,
   }).catch(() => {});
