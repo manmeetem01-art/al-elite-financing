@@ -96,7 +96,11 @@ def build(mode, outdir):
         # static assets (logo, social image) live in gen/static so a rebuild never drops them
         static = os.path.join(os.path.dirname(__file__), "static")
         for fn in os.listdir(static):
-            shutil.copy(os.path.join(static, fn), os.path.join(outdir, fn))
+            src = os.path.join(static, fn)
+            if os.path.isdir(src):
+                shutil.copytree(src, os.path.join(outdir, fn), dirs_exist_ok=True)
+            else:
+                shutil.copy(src, os.path.join(outdir, fn))
     return pages
 
 if __name__ == "__main__":
@@ -123,7 +127,7 @@ if __name__ == "__main__":
                 problems.append((path, "banned word", w, ctx.strip()))
         for m in re.finditer(r'href="(/[^"#]*)', h):
             t = m.group(1)
-            if t not in prod and not re.search(r"\.(png|jpg|svg|ico|xml|txt)$", t): problems.append((path, "broken link", t))
+            if t not in prod and not re.search(r"\.(png|jpg|svg|ico|xml|txt|pdf)$", t): problems.append((path, "broken link", t))
         if h.count("<h1") != 1: problems.append((path, "h1 count", h.count("<h1")))
         if len(re.search(r'<meta name="description" content="([^"]*)"', h).group(1)) > 175: problems.append((path, "meta too long"))
     for p in problems: print(p)

@@ -10,6 +10,8 @@ MODIFIED = "2026-10-22"
 # Pre-launch notes (gold "verify" boxes and [bracketed] placeholders) are for the team, not visitors.
 # They are stripped from the production build. Set True to see them again while editing.
 SHOW_DRAFT_NOTES = False
+# Lead inbox for the contact form and blog downloads (FormSubmit endpoint; must stay activated)
+LEAD_EMAIL = "manmeetsingh0177@gmail.com"
 
 EXTRA_CSS = """
 /* Inner-page additions */

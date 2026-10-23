@@ -32,3 +32,6 @@ Gold "verify" boxes and `[bracketed]` placeholders are stripped from the product
 ## Indexing
 - `.github/workflows/indexnow.yml` submits every sitemap URL to IndexNow (Bing/Yandex/Naver/Seznam) after each push that changes `public/`. The key file lives in `gen/static/` and is served at the site root.
 - Google ignores IndexNow: keep the sitemap submitted in Google Search Console and use URL Inspection > Request indexing for changed money pages.
+
+## Blog lead magnets (downloadable PDFs)
+Each resource is a PDF in `gen/static/resources/` built by a script in `gen/leadmagnets/` (brand colours, fillable fields), plus a banner (`*-cover.jpg`, for social) and a mockup (`*-mockup.jpg`, used in the article block). To attach one to a post, add a `lead_magnet=dict(...)` to the article (see the hail-damage post in `gen/articles_new_a.py`). The renderer inserts two CTA blocks and a popup form (name, email, phone). Submissions go to FormSubmit (`LEAD_EMAIL` in `gen/common.py`): the team gets the lead, the reader gets an automatic thank-you email with the download link, and the page shows the download button immediately.

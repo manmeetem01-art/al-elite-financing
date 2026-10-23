@@ -96,7 +96,15 @@ def plain_page(b, p):
 def article_page(b, p):
     """Blog article with Article schema. p: path, title, h1, meta, answer, sections[(h2, html)], faqs, money_page(name,path), related, date"""
     path = p["path"]; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path
-    secs = "".join(f"<h2 id='{re.sub(r'[^a-z0-9]+','-',h.lower()).strip('-')}'>{esc(h)}</h2>{body}" for h, body in p["sections"])
+    lm = p.get("lead_magnet")
+    sec_html = [f"<h2 id='{re.sub(r'[^a-z0-9]+','-',h.lower()).strip('-')}'>{esc(h)}</h2>{body}" for h, body in p["sections"]]
+    if lm:
+        from leadmagnet import block as lm_block, modal as lm_modal
+        pos = min(2, len(sec_html))
+        sec_html.insert(pos, lm_block(lm))
+        sec_html.append(lm_block(lm, compact=True))
+        sec_html.append(lm_modal(lm, url))
+    secs = "".join(sec_html)
     toc = "<div class='toc'><h2>In this article</h2><ol>" + "".join(f"<li><a href='#{re.sub(r'[^a-z0-9]+','-',h.lower()).strip('-')}'>{esc(h)}</a></li>" for h, _ in p["sections"]) + "</ol></div>"
     mn, mp = p["money_page"]
     body = f"""{crumbs_html(b, d, p['crumbs'])}

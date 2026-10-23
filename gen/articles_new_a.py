@@ -25,6 +25,11 @@ HAIL = dict(
     meta="Hail hit your roof? The order that protects your claim and budget: document, file, get inspected, then finance only the gap insurance leaves.",
     answer="After hail, the order matters: photograph the damage and make temporary repairs, file the insurance claim, get a roofer to meet the adjuster, and only then decide how to finance. Most homeowners don't need to finance the whole roof. They need to cover the deductible, any depreciation held back until the work is done, and items the policy doesn't pay for. That gap is usually a smaller, shorter loan.",
     money_page=("roof financing", "/roof-financing/"), project="Roof replacement or repair",
+    lead_magnet=dict(slug="hail-roof-claim-worksheet", title="Hail Damage Roof Claim & Financing Worksheet", pages=8,
+        headline="Know exactly what to <em>finance</em> after hail damage",
+        pitch="A free fillable worksheet that walks you from the first photos to the exact dollar gap insurance leaves, and how to cover it.",
+        bullets=["48-hour checklist and claim record", "Policy decoder: deductible, RCV vs ACV, deadlines", "Estimate comparison and financing gap calculator", "Contractor vetting checklist and lender questions"],
+        file="/resources/hail-roof-claim-worksheet.pdf", cover="/resources/hail-roof-claim-worksheet-cover.jpg", mockup="/resources/hail-roof-claim-worksheet-mockup.jpg"),
     sections=[
         ("Why hail turns into a financing question", f"""<p>Hail is the most expensive routine weather event for American roofs. State Farm alone paid about $5.6 billion in hail claims in 2025, with Texas accounting for $1.4 billion of it, followed by Missouri and Illinois (<a href="{CLAIMS}" rel="noopener">Claims Journal</a>). Behind those totals are millions of homeowners who woke up to dented gutters and granules in the downspouts and a roof that suddenly needs replacing years ahead of schedule.</p>
 <p>The money problem is rarely "insurance won't pay anything." It's timing and gaps. The deductible is due up front. Many policies hold back part of the payout until the roof is finished. Code upgrades, decking and gutters may or may not be covered. A homeowner who budgeted nothing for a roof this year can easily be looking at several thousand dollars out of pocket, on a deadline set by the next storm.</p>"""),

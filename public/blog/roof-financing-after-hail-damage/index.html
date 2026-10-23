@@ -298,6 +298,35 @@ footer .brand img.brand-logo{height:64px;background:#fff;border-radius:6px;paddi
 .sources p{color:var(--muted);font-size:.92rem;margin:0 0 10px}
 .sources ul{margin:0;padding-left:1.1em;display:grid;gap:6px;font-size:.95rem}
 
+.lm{margin:36px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--surface);display:grid;grid-template-columns:1.1fr .9fr}
+.lm .lm-body{padding:26px 28px}
+.lm .pill{display:inline-block;background:var(--gold-soft);color:#8a6a1c;font-weight:700;font-size:.74rem;letter-spacing:.06em;padding:5px 11px;border-radius:999px;margin-bottom:10px}
+.lm h3{font-family:var(--serif,Georgia,serif);font-size:1.45rem;line-height:1.2;margin:0 0 8px;color:var(--navy)}
+.lm h3 em{font-style:normal;color:var(--gold)}
+.lm p{margin:0 0 12px;color:#3c4756}
+.lm ul{margin:0 0 16px;padding-left:1.1em;font-size:.95rem}
+.lm .lm-cover{background:#e9edf3;min-height:220px}
+.lm .lm-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.btn-lm{display:inline-block;background:var(--navy);color:#fff;font-weight:700;padding:12px 20px;border-radius:8px;border:0;cursor:pointer;font-size:1rem;text-decoration:none}
+.btn-lm:hover{background:var(--navy-deep)}
+.lm.lm-compact{grid-template-columns:1fr;margin:24px 0}
+.lm.lm-compact .lm-cover{display:none}
+@media (max-width:760px){.lm{grid-template-columns:1fr}.lm .lm-cover{order:-1;min-height:0;aspect-ratio:720/400}}
+.lm-modal{position:fixed;inset:0;background:rgba(7,26,51,.62);display:none;align-items:center;justify-content:center;z-index:100000;padding:16px}
+.lm-modal.open{display:flex}
+.lm-dialog{background:#fff;border-radius:14px;max-width:460px;width:100%;padding:26px 26px 22px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.3);max-height:92vh;overflow:auto}
+.lm-dialog h3{font-family:var(--serif,Georgia,serif);color:var(--navy);margin:0 0 6px;font-size:1.3rem}
+.lm-dialog p{color:#3c4756;margin:0 0 14px;font-size:.95rem}
+.lm-dialog label{display:block;font-weight:600;font-size:.88rem;margin:10px 0 4px;color:var(--navy)}
+.lm-dialog input{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font-size:1rem;font-family:inherit}
+.lm-dialog input:focus{outline:2px solid var(--gold);border-color:var(--gold)}
+.lm-dialog .close{position:absolute;top:10px;right:12px;background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--muted)}
+.lm-dialog .btn-lm{width:100%;margin-top:14px;text-align:center}
+.lm-dialog .fine{font-size:.76rem;color:var(--muted);margin:10px 0 0}
+.lm-dialog .err{color:#b3261e;font-size:.88rem;margin:8px 0 0;display:none}
+.lm-done{text-align:center}
+.lm-done .tick{width:54px;height:54px;border-radius:50%;background:var(--gold-soft);color:var(--gold);font-size:30px;line-height:54px;margin:0 auto 10px}
+
 /* Inner-page additions */
 [hidden]{display:none!important}
 .crumbs{font-size:.85rem;color:var(--muted);padding-block:14px}
@@ -414,7 +443,10 @@ td.num,th.num{text-align:right}
 <li><strong>Note the date and time of the storm.</strong> Your insurer will check it against weather reports.</li>
 <li><strong>Stop active leaks.</strong> A tarp or temporary patch is usually reimbursable and most policies expect you to prevent further damage. Keep the receipt.</li>
 <li><strong>Don't climb onto a wet or damaged roof.</strong> Leave the close inspection to a roofer with fall protection.</li></ul>
-<p>If a storm-chasing crew knocks on the door the next morning, take their card and don't sign anything yet. We'll come back to why.</p><h2 id='step-2-file-the-claim-and-understand-your-policy'>Step 2: File the claim and understand your policy</h2><p>Call your insurer or file online and get a claim number. Then find your declarations page and look for three things, because they decide how much you may need to finance.</p>
+<p>If a storm-chasing crew knocks on the door the next morning, take their card and don't sign anything yet. We'll come back to why.</p><aside class="lm" aria-label="Free download">
+<div class="lm-body"><span class="pill">FREE PDF · 8 PAGES</span>
+<h3>Know exactly what to <em>finance</em> after hail damage</h3><p>A free fillable worksheet that walks you from the first photos to the exact dollar gap insurance leaves, and how to cover it.</p><ul><li>48-hour checklist and claim record</li><li>Policy decoder: deductible, RCV vs ACV, deadlines</li><li>Estimate comparison and financing gap calculator</li><li>Contractor vetting checklist and lender questions</li></ul>
+<button type="button" class="btn-lm" data-lm-open>Email me the free worksheet</button></div><div class="lm-cover"><img src="/resources/hail-roof-claim-worksheet-mockup.jpg" alt="Hail Damage Roof Claim &amp; Financing Worksheet preview" loading="lazy" width="720" height="560"></div></aside><h2 id='step-2-file-the-claim-and-understand-your-policy'>Step 2: File the claim and understand your policy</h2><p>Call your insurer or file online and get a claim number. Then find your declarations page and look for three things, because they decide how much you may need to finance.</p>
 <ul><li><strong>Your deductible, and how it's calculated.</strong> In hail-prone states many policies now carry a separate wind and hail deductible set as a percentage of the dwelling coverage, often 1% or 2%. On a home insured for $350,000, a 2% deductible is $7,000, which is a very different number from a flat $1,000.</li>
 <li><strong>Replacement cost (RCV) or actual cash value (ACV).</strong> Replacement-cost policies typically pay in two parts: an initial check for the depreciated value, then the held-back depreciation once the work is complete and invoiced. Actual-cash-value policies only pay the depreciated value, so an older roof can leave a large gap that never comes back.</li>
 <li><strong>Roof age schedules and exclusions.</strong> Some newer policies pay roofs on a schedule by age, or exclude cosmetic damage to metal. Read these before the adjuster visits so nothing surprises you.</li></ul>
@@ -444,7 +476,54 @@ td.num,th.num{text-align:right}
 <li><strong>Week 1 to 3:</strong> roofer inspection, adjuster visit, estimates compared.</li>
 <li><strong>Week 2 to 4:</strong> calculate the gap, compare financing, sign the roofing contract.</li>
 <li><strong>Install:</strong> keep copies of the final invoice, permits and photos.</li>
-<li><strong>After install:</strong> submit for released depreciation, then pay down any bridge financing.</li></ol><h2 id=faq>Frequently asked questions</h2><div class='faq-list'><details><summary>Should I finance the roof before the insurance claim is settled?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Usually not. Wait until you have the adjuster's estimate and a roofer's itemized quote, so you borrow only the deductible and uncovered items. The exception is urgent temporary repairs, which you can pay for and submit as part of the claim.</p></div></details><details><summary>Can I get roof financing to cover my hail deductible?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Yes. Personal loans and contractor financing programs commonly cover deductibles and uncovered items. Lenders treat it like any other roof loan, based on your credit, income and the amount.</p></div></details><details><summary>What if insurance denies my hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Ask for the denial in writing with the policy language it relies on, get your roofer's documentation, and consider requesting a re-inspection or using your policy's appraisal clause. If you still need the work, you'd finance the full cost, so compare options carefully.</p></div></details><details><summary>Is it illegal for a roofer to pay my deductible?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>In several states, including Texas and Colorado, it is illegal for a contractor to waive, rebate or absorb an insurance deductible. Even where it isn't explicitly illegal, it can amount to insurance fraud. Pay your deductible and finance it if needed.</p></div></details><details><summary>Will my insurance premium go up after a hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>It can. Weather claims are generally treated differently from at-fault claims, but insurers in hail-heavy states have been raising premiums and deductibles across the board. Ask your agent how a claim may affect your renewal, and weigh that against the size of the damage.</p></div></details><details><summary>How long do I have to file a hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>It depends on your policy and your state. Some policies and states allow a year or more, others less. Check your policy and file as soon as you can; early claims are easier to document.</p></div></details></div>
+<li><strong>After install:</strong> submit for released depreciation, then pay down any bridge financing.</li></ol><aside class="lm lm-compact" aria-label="Free download">
+<div class="lm-body"><span class="pill">FREE PDF · 8 PAGES</span>
+<h3>Know exactly what to <em>finance</em> after hail damage</h3><p>A free fillable worksheet that walks you from the first photos to the exact dollar gap insurance leaves, and how to cover it.</p><ul><li>48-hour checklist and claim record</li><li>Policy decoder: deductible, RCV vs ACV, deadlines</li><li>Estimate comparison and financing gap calculator</li><li>Contractor vetting checklist and lender questions</li></ul>
+<button type="button" class="btn-lm" data-lm-open>Email me the free worksheet</button></div><div class="lm-cover"><img src="/resources/hail-roof-claim-worksheet-mockup.jpg" alt="Hail Damage Roof Claim &amp; Financing Worksheet preview" loading="lazy" width="720" height="560"></div></aside><div class="lm-modal" id="lmModal" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
+<div class="lm-dialog">
+<button type="button" class="close" aria-label="Close" data-lm-close>&times;</button>
+<form id="lmForm" novalidate>
+<h3 id="lmTitle">Where should we send the worksheet?</h3>
+<p>We'll email you the PDF right away and show the download link here too.</p>
+<label for="lmName">Full name</label><input id="lmName" name="name" type="text" autocomplete="name" required>
+<label for="lmEmail">Email address</label><input id="lmEmail" name="email" type="email" autocomplete="email" required>
+<label for="lmPhone">Phone number</label><input id="lmPhone" name="phone" type="tel" autocomplete="tel" required>
+<input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+<p class="err" id="lmErr">Please check your name, email and phone, then try again.</p>
+<button type="submit" class="btn-lm" id="lmSubmit">Send me the worksheet</button>
+<p class="fine">By submitting, you agree AL Elite Financing may contact you about this resource and financing options by email, phone or text. AL Elite is a matching service, not a lender. <a href="/privacy/">Privacy policy</a>.</p>
+</form>
+<div class="lm-done" id="lmDone" hidden>
+<div class="tick">&#10003;</div><h3>Check your inbox</h3>
+<p>Thank you for visiting AL Elite Financing. We've emailed the worksheet to <strong id="lmSentTo"></strong>. You can also download it now:</p>
+<a class="btn-lm" href="/resources/hail-roof-claim-worksheet.pdf" download>Download the PDF</a>
+<p class="fine">Didn't get the email? Check spam, or use the download button above.</p>
+</div></div></div>
+<script>(function(){
+var modal=document.getElementById('lmModal'),form=document.getElementById('lmForm'),done=document.getElementById('lmDone');
+function open(){modal.classList.add('open');document.body.style.overflow='hidden';setTimeout(function(){var f=document.getElementById('lmName');if(f)f.focus();},50);}
+function close(){modal.classList.remove('open');document.body.style.overflow='';}
+document.querySelectorAll('[data-lm-open]').forEach(function(b){b.addEventListener('click',open);});
+document.querySelectorAll('[data-lm-close]').forEach(function(b){b.addEventListener('click',close);});
+modal.addEventListener('click',function(e){if(e.target===modal)close();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')close();});
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  var name=form.name.value.trim(),email=form.email.value.trim(),phone=form.phone.value.trim(),err=document.getElementById('lmErr');
+  if(name.length<2||!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)||phone.replace(/\D/g,'').length<7){err.style.display='block';return;}
+  if(form.website.value){return;}
+  err.style.display='none';var sb=document.getElementById('lmSubmit');sb.disabled=true;sb.textContent='Sending...';
+  var data={name:name,email:email,phone:phone,resource:'Hail Damage Roof Claim &amp; Financing Worksheet',download_link:'https://www.alelitefinancing.com/resources/hail-roof-claim-worksheet.pdf',page:'https://www.alelitefinancing.com/blog/roof-financing-after-hail-damage/',submitted_at:new Date().toISOString(),
+    _subject:'Worksheet download: Hail Damage Roof Claim &amp; Financing Worksheet - '+name,_template:'table',_captcha:'false',_replyto:email,
+    _autoresponse:'Thank you for visiting AL Elite Financing.\n\nHere is your copy of the Hail Damage Roof Claim & Financing Worksheet:\nhttps://www.alelitefinancing.com/resources/hail-roof-claim-worksheet.pdf\n\nIt is fillable on screen (open it in Adobe Reader, Preview or your browser) or you can print it.\n\nWhen you know the gap you need to finance, one request at https://www.alelitefinancing.com/roof-financing/ reaches lenders who fund roofs in your state, or call (888) 968-0079.\n\nAL Elite Financing\nA matching service, not a lender.'};
+  fetch('https://formsubmit.co/ajax/manmeetsingh0177@gmail.com',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(data)})
+    .then(function(r){return r.json().then(function(j){return r.ok&&String(j.success)!=='false';});})
+    .catch(function(){return false;})
+    .then(function(ok){document.getElementById('lmSentTo').textContent=email;form.hidden=true;done.hidden=false;
+      if(!ok){done.querySelector('p').innerHTML='Thank you for visiting AL Elite Financing. Your download is ready below. (We could not confirm the email send, so please use the button.)';}
+      sb.disabled=false;sb.textContent='Send me the worksheet';});
+});
+})();</script><h2 id=faq>Frequently asked questions</h2><div class='faq-list'><details><summary>Should I finance the roof before the insurance claim is settled?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Usually not. Wait until you have the adjuster's estimate and a roofer's itemized quote, so you borrow only the deductible and uncovered items. The exception is urgent temporary repairs, which you can pay for and submit as part of the claim.</p></div></details><details><summary>Can I get roof financing to cover my hail deductible?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Yes. Personal loans and contractor financing programs commonly cover deductibles and uncovered items. Lenders treat it like any other roof loan, based on your credit, income and the amount.</p></div></details><details><summary>What if insurance denies my hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>Ask for the denial in writing with the policy language it relies on, get your roofer's documentation, and consider requesting a re-inspection or using your policy's appraisal clause. If you still need the work, you'd finance the full cost, so compare options carefully.</p></div></details><details><summary>Is it illegal for a roofer to pay my deductible?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>In several states, including Texas and Colorado, it is illegal for a contractor to waive, rebate or absorb an insurance deductible. Even where it isn't explicitly illegal, it can amount to insurance fraud. Pay your deductible and finance it if needed.</p></div></details><details><summary>Will my insurance premium go up after a hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>It can. Weather claims are generally treated differently from at-fault claims, but insurers in hail-heavy states have been raising premiums and deductibles across the board. Ask your agent how a claim may affect your renewal, and weigh that against the size of the damage.</p></div></details><details><summary>How long do I have to file a hail claim?<svg class='plus' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' aria-hidden='true'><path d='M12 5v14M5 12h14'/></svg></summary><div class='a'><p>It depends on your policy and your state. Some policies and states allow a year or more, others less. Check your policy and file as soon as you can; early claims are easier to document.</p></div></details></div>
 <div class="callout"><strong>Ready to compare options?</strong> Our <a href="/roof-financing/">roof financing</a> page explains what lenders look for and shows example payments. Or <a href="#contact">tell us about your situation</a> and we'll match you.</div><section class='sources' aria-labelledby='sources-h'><h2 id='sources-h'>Sources and further reading</h2><p>Primary sources we rely on for this page. Program rules change, so check the source before you rely on a figure.</p><ul><li><a href="https://www.claimsjournal.com/news/national/2026/04/23/337102.htm" rel="noopener" target="_blank">Claims Journal: 2025 hail claim payouts by state</a></li><li><a href="https://www.spc.noaa.gov/" rel="noopener" target="_blank">NOAA Storm Prediction Center: severe weather reports</a></li><li><a href="https://consumer.ftc.gov/articles/hiring-contractor" rel="noopener" target="_blank">FTC: hiring a contractor</a></li><li><a href="https://www.hud.gov/program_offices/housing/sfh/title/title-i" rel="noopener" target="_blank">HUD: FHA Title I property improvement loans</a></li></ul></section></article>
 <aside class="side"><div class="box"><h3>Related</h3><ul><li><a href='/roof-financing/'>Roof financing</a></li><li><a href='/blog/does-insurance-cover-roof-replacement/'>Does insurance cover roof replacement?</a></li><li><a href='/tools/roof-financing-calculator/'>Roof financing calculator</a></li><li><a href='/siding-financing/'>Siding financing after storm damage</a></li><li><a href='/locations/'>Storm-market city pages</a></li></ul></div></aside></div></section>
 <section class="contact" id="contact" aria-labelledby="contact-h">
