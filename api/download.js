@@ -13,9 +13,24 @@ module.exports = async (req, res) => {
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   if (req.method === "OPTIONS") return res.status(204).end();
-  if (req.method !== "POST") return res.status(405).json({ ok: false, error: "POST only" });
-
   const key = process.env.RESEND_API_KEY, from = process.env.FROM_EMAIL;
+
+  // Health check: GET /api/download?check=1 reports configuration without exposing secrets.
+  if (req.method === "GET") {
+    const url = new URL(req.url, SITE);
+    if (url.searchParams.get("check") !== "1") return res.status(405).json({ ok: false, error: "POST only" });
+    const out = { key_set: !!key, from_set: !!from, from_domain: from ? (from.match(/@([^>\s]+)/) || [])[1] || null : null, lead_email_set: !!process.env.LEAD_EMAIL };
+    if (key) {
+      try {
+        const r = await fetch("https://api.resend.com/domains", { headers: { Authorization: `Bearer ${key}` } });
+        const j = await r.json();
+        out.resend_status = r.status;
+        out.domains = Array.isArray(j.data) ? j.data.map((d) => ({ name: d.name, status: d.status })) : (j.message || j.name || "unexpected");
+      } catch (e) { out.resend_error = String(e.message || e); }
+    }
+    return res.status(200).json(out);
+  }
+  if (req.method !== "POST") return res.status(405).json({ ok: false, error: "POST only" });
   if (!key || !from) return res.status(503).json({ ok: false, error: "email not configured" });
 
   let body = req.body;
