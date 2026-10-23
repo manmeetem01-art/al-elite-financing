@@ -32,6 +32,16 @@ module.exports = async (req, res) => {
         out.domains = Array.isArray(j.data) ? j.data.map((d) => ({ name: d.name, status: d.status })) : (j.message || j.name || "unexpected");
       } catch (e) { out.resend_error = String(e.message || e); }
     }
+    // ?check=1&send=1 sends a real test email (with the worksheet attached) to the lead inbox and reports Resend's answer.
+    if (url.searchParams.get("send") === "1" && key && from) {
+      const r = await fetch("https://api.resend.com/emails", {
+        method: "POST", headers: { Authorization: `Bearer ${key}`, "Content-Type": "application/json" },
+        body: JSON.stringify({ from, to: [leadTo], subject: "AL Elite lead-magnet test (attachment check)",
+          text: "If you can read this and see the PDF attached, the download emails are working.",
+          attachments: [{ path: SITE + "/resources/hail-roof-claim-worksheet.pdf", filename: "hail-roof-claim-worksheet.pdf" }] }),
+      });
+      out.test_send = { status: r.status, body: (await r.text()).slice(0, 300) };
+    }
     return res.status(200).json(out);
   }
   if (req.method !== "POST") return res.status(405).json({ ok: false, error: "POST only" });
