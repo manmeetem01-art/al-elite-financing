@@ -35,3 +35,6 @@ Gold "verify" boxes and `[bracketed]` placeholders are stripped from the product
 
 ## Blog lead magnets (downloadable PDFs)
 Each resource is a PDF in `gen/static/resources/` built by a script in `gen/leadmagnets/` (brand colours, fillable fields), plus a banner (`*-cover.jpg`, for social) and a mockup (`*-mockup.jpg`, used in the article block). To attach one to a post, add a `lead_magnet=dict(...)` to the article (see the hail-damage post in `gen/articles_new_a.py`). The renderer inserts two CTA blocks and a popup form (name, email, phone). Submissions go to FormSubmit (`LEAD_EMAIL` in `gen/common.py`): the team gets the lead, the reader gets an automatic thank-you email with the download link, and the page shows the download button immediately.
+
+### Email delivery for lead magnets
+`api/download.js` (Vercel function) emails the PDF as an attachment via Resend and forwards the lead. Set in Vercel → Settings → Environment Variables: `RESEND_API_KEY`, `FROM_EMAIL` (sender on a domain verified in Resend, e.g. `AL Elite Financing <hello@alelitefinancing.com>`), optional `LEAD_EMAIL`. Until these are set the endpoint returns 503 and the page falls back to FormSubmit (lead captured, auto-reply unreliable).

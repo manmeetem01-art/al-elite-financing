@@ -89,14 +89,20 @@ form.addEventListener('submit',function(e){{
   if(name.length<2||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)||phone.replace(/\\D/g,'').length<7){{err.style.display='block';return;}}
   if(form.website.value){{return;}}
   err.style.display='none';var sb=document.getElementById('lmSubmit');sb.disabled=true;sb.textContent='Sending...';
-  var data={{name:name,email:email,phone:phone,resource:'{esc(lm['title'])}',download_link:'{DOMAIN}{lm['file']}',page:'{page_url}',submitted_at:new Date().toISOString(),
-    _subject:'Worksheet download: {esc(lm['title'])} - '+name,_template:'table',_captcha:'false',_replyto:email,
-    _autoresponse:'{thank_you}'}};
-  fetch('https://formsubmit.co/ajax/{LEAD_EMAIL}',{{method:'POST',headers:{{'Content-Type':'application/json','Accept':'application/json'}},body:JSON.stringify(data)}})
-    .then(function(r){{return r.json().then(function(j){{return r.ok&&String(j.success)!=='false';}});}})
-    .catch(function(){{return false;}})
-    .then(function(ok){{document.getElementById('lmSentTo').textContent=email;form.hidden=true;done.hidden=false;
-      if(!ok){{done.querySelector('p').innerHTML='Thank you for visiting AL Elite Financing. Your download is ready below. (We could not confirm the email send, so please use the button.)';}}
-      sb.disabled=false;sb.textContent='Send me the worksheet';}});
+  var lead={{name:name,email:email,phone:phone,resource:'{esc(lm['title'])}',file:'{lm['file']}',page:'{page_url}'}};
+  function finish(sent){{document.getElementById('lmSentTo').textContent=email;form.hidden=true;done.hidden=false;
+    if(!sent){{done.querySelector('p').innerHTML='Thank you for visiting AL Elite Financing. Your download is ready below. (We could not confirm the email send, so please use the button.)';}}
+    sb.disabled=false;sb.textContent='Send me the worksheet';}}
+  function viaFormSubmit(){{
+    var data={{name:name,email:email,phone:phone,resource:lead.resource,download_link:'{DOMAIN}{lm['file']}',page:lead.page,submitted_at:new Date().toISOString(),
+      _subject:'Worksheet download: {esc(lm['title'])} - '+name,_template:'table',_captcha:'false',_replyto:email,_autoresponse:'{thank_you}'}};
+    return fetch('https://formsubmit.co/ajax/{LEAD_EMAIL}',{{method:'POST',headers:{{'Content-Type':'application/json','Accept':'application/json'}},body:JSON.stringify(data)}})
+      .then(function(r){{return r.json().then(function(j){{return r.ok&&String(j.success)!=='false';}});}}).catch(function(){{return false;}});
+  }}
+  // Preferred: our own endpoint emails the PDF as an attachment (Resend). Falls back to FormSubmit if not configured.
+  fetch('/api/download',{{method:'POST',headers:{{'Content-Type':'application/json'}},body:JSON.stringify(lead)}})
+    .then(function(r){{return r.json().then(function(j){{return {{status:r.status,ok:r.ok&&j.ok}};}});}})
+    .catch(function(){{return {{status:0,ok:false}};}})
+    .then(function(res){{if(res.ok)return finish(true);return viaFormSubmit().then(finish);}});
 }});
 }})();</script>"""
