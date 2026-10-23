@@ -89,7 +89,7 @@ form.addEventListener('submit',function(e){{
   if(name.length<2||!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)||phone.replace(/\\D/g,'').length<7){{err.style.display='block';return;}}
   if(form.website.value){{return;}}
   err.style.display='none';var sb=document.getElementById('lmSubmit');sb.disabled=true;sb.textContent='Sending...';
-  var lead={{name:name,email:email,phone:phone,resource:'{esc(lm['title'])}',file:'{lm['file']}',page:'{page_url}'}};
+  var lead={{name:name,email:email,phone:phone,resource:'{esc(lm['title'])}',file:'{lm['file']}',page:'{page_url}',audience:'{lm.get('audience','homeowner')}'}};
   function finish(sent){{document.getElementById('lmSentTo').textContent=email;form.hidden=true;done.hidden=false;
     if(!sent){{done.querySelector('p').innerHTML='Thank you for visiting AL Elite Financing. Your download is ready below. (We could not confirm the email send, so please use the button.)';}}
     sb.disabled=false;sb.textContent='Send me the worksheet';}}

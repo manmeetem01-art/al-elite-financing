@@ -45,6 +45,8 @@ import expand_blog, expand_money
 _ALL = {p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES + TRUST_PAGES + ARTICLES}
 expand_blog.apply(_ALL)
 expand_money.apply(_ALL)
+import leadmagnets_wire
+leadmagnets_wire.apply(_ALL)
 
 def build(mode, outdir):
     b = Build(mode)

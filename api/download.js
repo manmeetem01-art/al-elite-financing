@@ -55,6 +55,10 @@ module.exports = async (req, res) => {
   const resource = String(body.resource || "Worksheet").trim().slice(0, 160);
   const file = String(body.file || "").trim();
   const page = String(body.page || "").trim().slice(0, 300);
+  const contractor = String(body.audience || "") === "contractor";
+  const ctaHtml = contractor
+    ? `When you're ready, <a href="${SITE}/for-contractors/">${SITE.replace("https://", "")}/for-contractors/</a> matches you with financing programs built for your trade, and <a href="${SITE}/contractor-business-loans/">contractor business loans</a> covers working capital, equipment and trucks. Or call (888) 968-0079.`
+    : `When you know the gap you need to finance, one request at <a href="${SITE}/roof-financing/">${SITE.replace("https://", "")}/roof-financing/</a> reaches lenders who fund home projects in your state, or call (888) 968-0079.`;
   if (body.website) return res.status(200).json({ ok: true }); // honeypot
   if (name.length < 2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || phone.replace(/\D/g, "").length < 7)
     return res.status(400).json({ ok: false, error: "invalid input" });
@@ -77,8 +81,8 @@ module.exports = async (req, res) => {
 <h2 style="font-family:Georgia,serif;color:#0b2545;margin:0 0 10px">Thank you for visiting AL Elite Financing, ${escapeHtml(first)}.</h2>
 <p>Your copy of the <strong>${escapeHtml(resource)}</strong> is attached. It's fillable on screen (Adobe Reader, Preview or most browsers) or you can print it.</p>
 <p><a href="${link}" style="display:inline-block;background:#0b2545;color:#fff;text-decoration:none;padding:12px 20px;border-radius:8px;font-weight:700">Download the PDF</a></p>
-<p>When you know the gap you need to finance, one request at <a href="${SITE}/roof-financing/">${SITE.replace("https://", "")}/roof-financing/</a> reaches lenders who fund roofs in your state, or call (888) 968-0079.</p>
-<p style="color:#6b7585;font-size:12px;margin-top:26px">AL Elite Financing is a matching service, not a lender. Lenders set rates and make decisions. This worksheet is general information, not legal, tax or insurance advice.</p>
+<p>${ctaHtml}</p>
+<p style="color:#6b7585;font-size:12px;margin-top:26px">AL Elite Financing is a matching service, not a lender. Lenders set rates and make decisions. This resource is general information, not legal, tax, insurance or financial advice.</p>
 </div></div>`,
     attachments: [{ path: link, filename: file.split("/").pop() }],
   });
