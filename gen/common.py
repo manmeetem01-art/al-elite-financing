@@ -391,8 +391,10 @@ def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_scr
 <meta name="description" content="{esc(meta)}">
 <meta name="robots" content="{robots}">
 <link rel="canonical" href="{url}">
-<link rel="icon" type="image/png" href="/logo.png">
-<link rel="apple-touch-icon" href="/logo.png">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="AL Elite Financing">
 <meta property="og:title" content="{esc(og_title or title)}">
