@@ -233,6 +233,7 @@ def header(b, d):
 <li><a href="{L('/contractor-business-loans/')}">Business loans</a></li>
 <li><a href="{L('/tools/roof-financing-calculator/')}">Calculators</a></li>
 <li><a href="{L('/locations/')}">Locations</a></li>
+<li><a href="{L('/blog/')}">Blog</a></li>
 <li><a href="{L('/about/')}">About</a></li>
 <li><a class="btn btn-primary" href="#contact">Check your options</a></li>
 </ul></nav></div></header>"""
