@@ -231,7 +231,7 @@ def header(b, d):
 <li><a href="{L('/home-improvement-financing/')}">Homeowners</a></li>
 <li><a href="{L('/for-contractors/')}">Contractors</a></li>
 <li><a href="{L('/contractor-business-loans/')}">Business loans</a></li>
-<li><a href="{L('/tools/roof-financing-calculator/')}">Calculators</a></li>
+<li><a href="{L('/tools/')}">Calculators</a></li>
 <li><a href="{L('/locations/')}">Locations</a></li>
 <li><a href="{L('/blog/')}">Blog</a></li>
 <li><a href="{L('/about/')}">About</a></li>
@@ -245,7 +245,7 @@ def footer(b, d):
 <div><a class="brand" href="{L('/')}" aria-label="AL Elite Financing home">{LOGO_IMG}<span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
 <p class="about">A financing marketplace for home improvement. We match homeowners with consumer lenders and contractors with business lenders across the United States.</p><p class="about" style="margin-top:10px"><a href="tel:+1-888-968-0079">(888) 968-0079</a></p></div>
 <div><h4>Homeowners</h4><ul>
-<li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/plumbing-financing/')}">Plumbing financing</a></li><li><a href="{L('/solar-financing/')}">Solar financing</a></li><li><a href="{L('/home-improvement-financing/')}">All home improvement financing</a></li><li><a href="{L('/tools/roof-financing-calculator/')}">Roof financing calculator</a></li></ul></div>
+<li><a href="{L('/home-improvement-financing/')}">Home improvement financing</a></li><li><a href="{L('/remodel-financing/kitchen/')}">Kitchen remodel financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/fence-financing/')}">Fence financing</a></li><li><a href="{L('/generator-financing/')}">Generator financing</a></li><li><a href="{L('/foundation-repair-financing/')}">Foundation repair financing</a></li><li><a href="{L('/solar-financing/')}">Solar financing</a></li><li><a href="{L('/plumbing-financing/')}">Plumbing financing</a></li><li><a href="{L('/tools/')}">Financing calculators</a></li></ul></div>
 <div><h4>Contractors</h4><ul>
 <li><a href="{L('/for-contractors/')}">Offer customer financing</a></li><li><a href="{L('/contractor-business-loans/')}">Contractor business loans</a></li><li><a href="{L('/contractor-business-loans/equipment-financing/')}">Equipment financing</a></li><li><a href="{L('/contractor-business-loans/invoice-factoring/')}">Invoice factoring</a></li><li><a href="{L('/tools/equipment-loan-calculator/')}">Equipment loan calculator</a></li><li><a href="{L('/blog/')}">Blog</a></li></ul></div>
 <div><h4>Company</h4><ul>

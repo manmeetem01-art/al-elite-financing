@@ -77,7 +77,7 @@ def city_page(b, c):
 <div class="s"><span class="k">Also serving</span><span class="v" style="font-size:1rem">{p['siblings']}</span><small>Other {esc(state)} metros</small></div>
 </div>
 <h2 id="why-roofs-here">Why roofs in {esc(city)} get replaced early</h2>{p['storm_para']}<p>{esc(p['angle'])} {esc(p['demand'])}</p>
-<h2 id="costs">Financing a roof in {esc(state)}: local costs and rules</h2>
+<h2 id="costs">Financing a roof, HVAC or home project in {esc(state)}: local costs and rules</h2>
 {local_section(state, city)}
 <h2 id="how-it-works">How roof financing works in {esc(city)}</h2>
 <ol><li><strong>Get itemized quotes</strong> from licensed {esc(city)} roofers. If there's a claim, get the adjuster's estimate too, so you know the gap.</li>

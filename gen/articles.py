@@ -180,8 +180,9 @@ ARTICLES_ORIG = [A1, A2, A3, A4, A5, A6, A7]
 
 from articles_new_a import ARTICLES_A
 from articles_new_b import ARTICLES_B
+from articles_new_c import ARTICLES_C
 # Newest first on the blog hub
-ARTICLES = ARTICLES_A + ARTICLES_B + ARTICLES_ORIG
+ARTICLES = ARTICLES_C + ARTICLES_A + ARTICLES_B + ARTICLES_ORIG
 
 def blog_hub(b):
     path = "/blog/"; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path

@@ -53,7 +53,7 @@ def block(lm, compact=False):
 def modal(lm, page_url):
     thank_you = (f"Thank you for visiting AL Elite Financing.\\n\\nHere is your copy of the {lm['title']}:\\n{DOMAIN}{lm['file']}\\n\\n"
                  "It is fillable on screen (open it in Adobe Reader, Preview or your browser) or you can print it.\\n\\n"
-                 "When you know the gap you need to finance, one request at " + DOMAIN + "/roof-financing/ reaches lenders who fund roofs in your state, "
+                 "When you are ready, one request at " + DOMAIN + "/home-improvement-financing/ reaches lenders who fund home projects in your state, "
                  "or call (888) 968-0079.\\n\\nAL Elite Financing\\nA matching service, not a lender.")
     return f"""<div class="lm-modal" id="lmModal" role="dialog" aria-modal="true" aria-labelledby="lmTitle">
 <div class="lm-dialog">

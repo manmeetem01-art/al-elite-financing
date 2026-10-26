@@ -3,9 +3,10 @@ import os, sys
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "leadmagnets"))
 from resources_a import RESOURCES as RA
 from resources_b import RESOURCES as RB
+from resources_c import RESOURCES as RC
 
 def apply(pages_by_path):
-    for r in RA + RB:
+    for r in RA + RB + RC:
         p = pages_by_path.get(r["blog"])
         if not p or p.get("lead_magnet"):
             continue

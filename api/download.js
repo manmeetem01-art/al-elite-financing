@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
   const contractor = String(body.audience || "") === "contractor";
   const ctaHtml = contractor
     ? `When you're ready, <a href="${SITE}/for-contractors/">${SITE.replace("https://", "")}/for-contractors/</a> matches you with financing programs built for your trade, and <a href="${SITE}/contractor-business-loans/">contractor business loans</a> covers working capital, equipment and trucks. Or call (888) 968-0079.`
-    : `When you know the gap you need to finance, one request at <a href="${SITE}/roof-financing/">${SITE.replace("https://", "")}/roof-financing/</a> reaches lenders who fund home projects in your state, or call (888) 968-0079.`;
+    : `When you are ready, one request at <a href="${SITE}/home-improvement-financing/">${SITE.replace("https://", "")}/home-improvement-financing/</a> reaches lenders who fund roofs, HVAC, kitchens, fences, generators and other home projects in your state, or call (888) 968-0079.`;
   if (body.website) return res.status(200).json({ ok: true }); // honeypot
   if (name.length < 2 || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email) || phone.replace(/\D/g, "").length < 7)
     return res.status(400).json({ ok: false, error: "invalid input" });

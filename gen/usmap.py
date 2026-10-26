@@ -33,7 +33,7 @@ def us_map_section():
 <div>
 <p class="eyebrow">Where we work</p>
 <h2 id="usmap-h">Financing across the United States</h2>
-<p class="lede">We match homeowners and contractors with lenders nationwide, with local guides for the storm-prone metros where a roof or AC becomes urgent. Lender availability varies by state.</p>
+<p class="lede">We match homeowners and contractors with lenders nationwide, for roofs, HVAC, kitchens, fences, generators and every home project in between, with local guides for the metros we serve most. Lender availability varies by state.</p>
 <ul>{chips}</ul>
 <a class="more" href="/locations/">See all locations</a>
 </div>
