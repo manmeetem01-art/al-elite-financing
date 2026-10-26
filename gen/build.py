@@ -45,6 +45,9 @@ import expand_blog, expand_money
 _ALL = {p["path"]: p for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES + CONSUMER_HUBS + CONTRACTOR_HUBS + TOOL_PAGES + TRUST_PAGES + ARTICLES}
 expand_blog.apply(_ALL)
 expand_money.apply(_ALL)
+import expand_consumer, gsc_pass
+expand_consumer.apply(_ALL)
+gsc_pass.apply(_ALL)
 import leadmagnets_wire
 leadmagnets_wire.apply(_ALL)
 
@@ -121,7 +124,7 @@ if __name__ == "__main__":
             # allow the phrase inside "no 'guaranteed approval'" style warnings only when preceded by quote/negation context
             for mm in re.finditer(re.escape(w), low):
                 ctx = low[max(0, mm.start()-60):mm.end()+30]
-                if w == "guaranteed approval" and ('"guaranteed approval"' in ctx or "&quot;guaranteed approval&quot;" in ctx): continue
+                if w == "guaranteed approval" and ('"guaranteed approval"' in ctx or "&quot;guaranteed approval&quot;" in ctx or '\\"guaranteed approval\\"' in ctx): continue
                 if w == "guaranteed approval" and any(k in ctx for k in ["never", "no '", "no \"", "not", "avoid", "won't", "don't", "promis", "claims", "language", "or '", "prohibit", "offers advertising"]):
                     continue
                 if w == "seamless" and "gutter" in ctx:

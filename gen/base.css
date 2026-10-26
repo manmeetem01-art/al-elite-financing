@@ -300,3 +300,5 @@ footer .brand img.brand-logo{height:64px;background:#fff;border-radius:6px;paddi
 .lm-dialog .err{color:#b3261e;font-size:.88rem;margin:8px 0 0;display:none}
 .lm-done{text-align:center}
 .lm-done .tick{width:54px;height:54px;border-radius:50%;background:var(--gold-soft);color:var(--gold);font-size:30px;line-height:54px;margin:0 auto 10px}
+
+.inline-links{list-style:none;padding:0;margin:8px 0 0;display:flex;flex-wrap:wrap;gap:8px}.inline-links li a{display:inline-block;padding:5px 11px;border:1px solid var(--line);border-radius:999px;background:#fff;font-size:.86rem;text-decoration:none;color:var(--navy)}
