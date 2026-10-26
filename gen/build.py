@@ -53,6 +53,8 @@ expand_consumer.apply(_ALL)
 gsc_pass.apply(_ALL)
 import onpage_pass
 onpage_pass.apply(_ALL)
+import legal_content
+legal_content.apply(_ALL)
 for r in onpage_pass.REPORT: print('onpage:', r)
 import leadmagnets_wire
 leadmagnets_wire.apply(_ALL)
@@ -105,7 +107,7 @@ def build(mode, outdir):
         open(fp, "w").write(html_text)
     # sitemap + robots for prod
     if mode == "prod":
-        urls = "".join(f"<url><loc>{DOMAIN}{p}</loc><lastmod>{MODIFIED}</lastmod></url>" for p in pages if p not in ("/privacy/", "/terms/", "/accessibility/", "/do-not-sell/"))
+        urls = "".join(f"<url><loc>{DOMAIN}{p}</loc><lastmod>{MODIFIED}</lastmod></url>" for p in pages)
         open(os.path.join(outdir, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{urls}</urlset>')
         open(os.path.join(outdir, "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n")
         # static assets (logo, social image) live in gen/static so a rebuild never drops them
