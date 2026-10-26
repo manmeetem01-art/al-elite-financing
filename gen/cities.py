@@ -31,6 +31,13 @@ CITIES = [
     ("Miami", "Florida", "FL", "/locations/florida/miami/", "hurricane", "The highest hurricane exposure in the country, plus Florida's roof-age insurance pressure.", "Miami has high-value local search demand for roof financing.", "High-velocity hurricane zone code requirements raise roofing costs and make wind-rated installation non-negotiable."),
     ("Nashville", "Tennessee", "TN", "/locations/tennessee/nashville/", "hail", "Severe storms, tornadoes and hail in a fast-growing metro.", "Nashville's growth has produced a large stock of similar-age roofs.", "Spring severe-weather season and summer storms drive both repair and replacement."),
     ("Salt Lake City", "Utah", "UT", "/locations/utah/salt-lake-city/", "hail", "Wind, hail and heavy snow loads along the Wasatch Front.", "Salt Lake City and Utah more broadly show existing local search demand for roof financing.", "Snow load and ice damage are the common winter causes of roof replacement here."),
+    ("Phoenix", "Arizona", "AZ", "/locations/arizona/phoenix/", "heat", "Extreme heat and monsoon storms; AC failures in July are same-day emergencies.", "Phoenix homeowners search for AC and HVAC financing in summer more than any other project.", "Intense sun and heat shorten the life of AC systems, roofs and exterior finishes."),
+    ("Atlanta", "Georgia", "GA", "/locations/georgia/atlanta/", "mixed", "Humid summers, severe spring storms, tornadoes and ice storms.", "Atlanta homeowners search for HVAC and roof financing year-round.", "Red clay and heavy rain make drainage and crawlspace moisture recurring issues."),
+    ("Charlotte", "North Carolina", "NC", "/locations/north-carolina/charlotte/", "mixed", "Severe spring storms, occasional hail and tornadoes, hurricane remnants and ice.", "Charlotte homeowners search for HVAC and roof financing as 1990s-era homes reach first replacements.", "Rapid growth means a large wave of first roof and HVAC replacements."),
+    ("Raleigh", "North Carolina", "NC", "/locations/north-carolina/raleigh/", "mixed", "Summer storms, hurricane remnants and winter ice across the Triangle.", "Triangle homeowners finance HVAC, roofing and crawlspace work steadily.", "Newer suburban housing is reaching its first replacements."),
+    ("Chicago", "Illinois", "IL", "/locations/illinois/chicago/", "hail", "Illinois ranked among the top three states for hail claim payouts in 2025; winters add freeze-thaw damage.", "Chicago homeowners search for roof, furnace and home improvement financing across a century-old housing stock.", "Flat roofs, old masonry and basements make repair a constant."),
+    ("Columbus", "Ohio", "OH", "/locations/ohio/columbus/", "hail", "Spring hail and wind, with hot summers and cold winters.", "Columbus homeowners finance roofs, furnaces and basement work.", "Mid-century housing plus fast suburban growth."),
+    ("Philadelphia", "Pennsylvania", "PA", "/locations/pennsylvania/philadelphia/", "mixed", "Nor'easters, summer storms and tropical remnants on one of the oldest housing stocks in the country.", "Philadelphia homeowners finance flat roofs, boiler conversions and renovations.", "Rowhouse roofs, old plumbing and basements drive the work."),
 ]
 
 def by_state():
@@ -43,11 +50,16 @@ def city_page_dict(c):
     city, state, ab, path, risk, why, demand, angle = c
     siblings = [s for s in by_state()[state] if s[0] != city]
     sib_html = ", ".join(f"<a href='{s[3]}'>{s[0]}</a>" for s in siblings) if siblings else "none yet"
-    risk_label = "Hurricane and wind" if risk == "hurricane" else "Hail and severe storms"
+    risk_label = {"hurricane": "Hurricane and wind", "hail": "Hail and severe storms", "heat": "Heat, sun and monsoon", "mixed": "Storms, heat and age"}[risk]
+    storm_para_extra = {
+        "heat": f"<p>Roofs and AC systems in {city} wear out from heat and sun rather than storms. {why} Tile roofs need underlayment replacement on a cycle, foam roofs need recoating, and an air conditioner that fails in July is replaced within days, which is why most {city} HVAC replacements are financed at the quote.</p>",
+        "mixed": f"<p>{city} roofs and HVAC systems face a mix of exposures rather than one dominant storm type. {why} Insurance claims follow severe storms, but most financed projects here are age-driven replacements and renovations, so homeowners usually have time to compare quotes and financing rather than deciding under storm pressure.</p>",
+    }
     storm_para = {
         "hurricane": f"<p>Roofs in {city} are replaced for two reasons that don't apply in most of the country: hurricane and wind damage, and insurer pressure. Florida carriers increasingly decline to renew policies on roofs past a certain age, which means many {city} homeowners replace a roof that hasn't failed yet, on a deadline, to keep coverage. That's a financing event. Wind-rated installation, secondary water barriers and in some zones high-velocity hurricane code compliance raise the cost beyond what a shingle roof costs elsewhere.</p>",
         "hail": f"<p>Roofs in {city} are replaced early because of hail and wind. {why} In 2025 State Farm alone paid out $5.6 billion in hail claims nationally, with Texas the largest state at $1.4 billion, followed by Missouri and Illinois (<a href='{CLAIMS}' rel='noopener'>Claims Journal</a>, April 2026). After a major event, every roofer in the metro is booked for months, prices rise and insurers slow down. The homeowners who get their roof done first are the ones who can fund the deductible and the gap without waiting on the check.</p>",
-    }[risk]
+    } | storm_para_extra
+    storm_para = storm_para[risk]
     answer = f"Roof financing in {city}, {state} lets homeowners pay for a replacement or repair monthly rather than up front, which matters in a {risk_label.lower()} market where roofs are replaced early and on short notice. AL Elite matches {city} homeowners with lenders who fund roofing and HVAC projects, matches local contractors with business lenders, and sets {city} roofers and HVAC companies up to offer customer financing. We are a matching service, not a lender."
     return dict(
         path=path, crumbs=[HOME, LOC, (state, f"/locations/{STATE_SLUG[state]}/"), (city, path)],
@@ -107,7 +119,7 @@ def city_page(b, c):
 <aside class="side">
 <div class="box"><h3>Financing in {esc(city)}</h3><ul><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/roof-financing/bad-credit-roof-financing/')}">Roof financing with bad credit</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/tools/roof-financing-calculator/')}">Roof financing calculator</a></li><li><a href="{L('/blog/does-insurance-cover-roof-replacement/')}">Does insurance cover roof replacement?</a></li></ul></div>
 <div class="box"><h3>For contractors</h3><ul><li><a href="{L('/for-contractors/roofing/')}">Financing for roofing companies</a></li><li><a href="{L('/for-contractors/hvac/')}">HVAC financing for contractors</a></li><li><a href="{L('/contractor-business-loans/roofing/')}">Roofing business loans</a></li></ul></div>
-<div class="box"><h3>All locations</h3><ul><li><a href="{L('/locations/')}">See all 20 metros</a></li></ul></div>
+<div class="box"><h3>All locations</h3><ul><li><a href="{L('/locations/')}">See all states and metros</a></li></ul></div>
 </aside></div></section>
 {contact_section(b, d, role='homeowner', project='Roof replacement or repair', state=state, heading=f'Tell us about your {city} roof or project')}"""
     schema = [
@@ -138,7 +150,7 @@ def locations_hub(b):
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": f"{c[0]}, {c[2]}", "url": DOMAIN + c[3]} for i, c in enumerate(CITIES)]},
         breadcrumb_schema([HOME, LOC]), faq_schema(faqs, url),
     ]
-    return page(b, path, "Home Improvement Financing by State & City | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Houston, Dallas, Denver, Kansas City, Tampa, Orlando, Miami, Indianapolis and 12 more storm-prone metros. AL Elite matches you with lenders nationwide.", body, schema)
+    return page(b, path, "Home Improvement Financing by State & City | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Local guides for 27 metros in 17 states, from Houston, Dallas and Phoenix to Chicago, Atlanta, Charlotte and Miami. AL Elite matches you with lenders nationwide.", body, schema)
 
 
 # ------------------------------------------------------------------ state hub pages (Oct 2026 local pass)
