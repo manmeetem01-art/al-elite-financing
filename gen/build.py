@@ -62,6 +62,9 @@ def build(mode, outdir):
     for p in CONSUMER_HUBS + CONTRACTOR_HUBS: pages[p["path"]] = hub_page(b, p)
     for p in TOOL_PAGES: pages[p["path"]] = tool_page(b, p)
     for c in CITIES: pages[c[3]] = city_page(b, c)
+    from cities import state_page, STATE_PATHS
+    from local_content import STATE as _ST, STATE_SLUG as _SS
+    for st in _ST: pages[f"/locations/{_SS[st]}/"] = state_page(b, st)
     pages["/locations/"] = locations_hub(b)
     for a in ARTICLES: pages[a["path"]] = article_page(b, a)
     pages["/blog/"] = blog_hub(b)

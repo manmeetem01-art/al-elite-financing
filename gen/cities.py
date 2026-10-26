@@ -2,6 +2,8 @@
 Anything that needs local verification (cost ranges, licensing, rebates) is a clearly marked verify block, never invented."""
 from common import *
 from expand_cities import local_section
+from local_content import CITY, STATE as STATE_HUB, STATE_SLUG
+from expand_cities import STATE as STATE_RULES
 
 HOME = ("Home", "/")
 LOC = ("Locations", "/locations/")
@@ -48,20 +50,27 @@ def city_page_dict(c):
     }[risk]
     answer = f"Roof financing in {city}, {state} lets homeowners pay for a replacement or repair monthly rather than up front, which matters in a {risk_label.lower()} market where roofs are replaced early and on short notice. AL Elite matches {city} homeowners with lenders who fund roofing and HVAC projects, matches local contractors with business lenders, and sets {city} roofers and HVAC companies up to offer customer financing. We are a matching service, not a lender."
     return dict(
-        path=path, crumbs=[HOME, LOC, (state, path), (city, path)],
-        eyebrow=f"Roof and HVAC financing in {city}, {ab}", h1=f"Roof financing in {city}, {state}",
-        title=f"Roof & HVAC Financing in {city}, {ab} | AL Elite Financing",
-        meta=f"Roof financing in {city}, {state}: storm-market replacement, insurance deductibles and gaps, HVAC and home improvement financing, and customer financing for {city} roofers and contractors. AL Elite matches you with lenders. Not a lender.",
+        path=path, crumbs=[HOME, LOC, (state, f"/locations/{STATE_SLUG[state]}/"), (city, path)],
+        eyebrow=f"Home improvement financing in {city}, {ab}", h1=f"Roof, HVAC and home improvement financing in {city}, {state}",
+        title=f"Roof Financing in {city}, {ab} | HVAC & Home Improvement Loans",
+        meta=f"Roof financing, HVAC financing and home improvement loans in {city}, {state}: local costs and rules, suburbs we serve, every project type, and customer financing for {city} contractors.",
         answer=answer, why=why, risk_label=risk_label, storm_para=storm_para, demand=demand, angle=angle, city=city, state=state, ab=ab, siblings=sib_html,
     )
 
 def city_page(b, c):
     p = city_page_dict(c); path = p["path"]; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path
     city, state, ab = p["city"], p["state"], p["ab"]
+    lc = CITY[city]
+    subs = lc["suburbs"]
+    sub_text = ", ".join(subs[:-1]) + " and " + subs[-1]
+    svc = [("Kitchen remodel financing", "/remodel-financing/kitchen/"), ("Bathroom remodel financing", "/remodel-financing/bathroom/"), ("Fence financing", "/fence-financing/"), ("Generator financing", "/generator-financing/"), ("Foundation repair financing", "/foundation-repair-financing/"), ("Siding financing", "/siding-financing/"), ("Window replacement financing", "/window-financing/"), ("Water heater financing", "/water-heater-financing/"), ("Plumbing financing", "/plumbing-financing/"), ("Solar financing", "/solar-financing/"), ("Deck financing", "/deck-financing/"), ("Pool financing", "/pool-financing/")]
+    svc_grid = "".join(f"<a href='{L(u)}'>{esc(n)}</a>" for n, u in svc)
     faqs = [
         (f"Can I get roof financing in {city}?", f"Yes. {city} homeowners finance roofs through unsecured personal loans, contractor-arranged payment plans and home equity products. AL Elite matches you with lenders who fund roofing in {state}. Submitting a request does not pull your credit."),
         (f"Can I finance my insurance deductible for a roof in {city}?", "Yes, through legitimate third-party financing. What a contractor cannot do is waive, absorb or rebate the deductible; that's illegal in many states and prohibited for AL Elite partner contractors. Financing covers the deductible and any upgrades or non-covered work; the claim covers the rest."),
         (f"How much does a new roof cost in {city}?", f"It depends on size, pitch, material, tear-off and local demand, which spikes after storms. Get at least two itemized quotes from licensed {city} roofers. Our <a href='/roof-financing/'>roof financing</a> page explains the cost drivers and the <a href='/tools/roof-financing-calculator/'>calculator</a> turns a quote into a monthly figure."),
+        (f"Can I get home improvement financing in {city} for a kitchen, fence or generator?", f"Yes. The same lenders that fund roofs in {state} fund kitchens, bathrooms, fences, generators, foundation repair, siding, windows, water heaters, solar and pools. Tell us the project and the amount and we match you with lenders who fund that type of work in {state}."),
+        (f"Do you serve the suburbs around {city}?", f"Yes. {sub_text} and the rest of the {city} metro are covered; lender availability is set by state, not by city limits."),
         (f"Does AL Elite have an office in {city}?", f"AL Elite matches {city} homeowners and contractors with lenders online and by phone."),
         (f"I'm a roofer in {city}. Can I offer financing to customers?", f"Yes. Licensed, insured {city} roofers and HVAC contractors can join AL Elite's partner program to offer customer financing and be listed on this page. See <a href='/for-contractors/roofing/'>financing for roofing companies</a>."),
     ]
@@ -76,6 +85,9 @@ def city_page(b, c):
 <div class="s"><span class="k">Primary roof risk</span><span class="v">{esc(p['risk_label'])}</span><small>{esc(p['why'] if 'why' in p else '')}</small></div>
 <div class="s"><span class="k">Also serving</span><span class="v" style="font-size:1rem">{p['siblings']}</span><small>Other {esc(state)} metros</small></div>
 </div>
+<figure class="local-card"><img src="{L('/locations/cards/' + path.strip('/').split('/')[-1] + '.png')}" alt="{esc(city)}, {ab} home financing snapshot: primary risk, deductible rules and projects financed" width="1200" height="675" loading="lazy"></figure>
+<h2 id="about">Financing home projects in {esc(city)}</h2><p>{esc(lc['intro'])}</p><p>{esc(lc['housing'])}</p>
+<h2 id="suburbs">Suburbs and communities we serve around {esc(city)}</h2><p>Lenders in our network fund projects across the {esc(city)} metro, not only inside the city limits. Homeowners and contractors in {sub_text} get the same matching, the same disclosures and the same {esc(state)} lender coverage. If your community isn't listed, it's still covered; the list is the places we hear from most.</p>
 <h2 id="why-roofs-here">Why roofs in {esc(city)} get replaced early</h2>{p['storm_para']}<p>{esc(p['angle'])} {esc(p['demand'])}</p>
 <h2 id="costs">Financing a roof, HVAC or home project in {esc(state)}: local costs and rules</h2>
 {local_section(state, city)}
@@ -84,9 +96,10 @@ def city_page(b, c):
 <li><strong>Tell us about the roof.</strong> Amount, timeline, whether insurance is involved, your state. No credit pull.</li>
 <li><strong>We match you</strong> with lenders in our network who fund roofing in {esc(state)}, and show you which start with a soft inquiry.</li>
 <li><strong>You choose and apply with the lender.</strong> Rates, terms and the decision are theirs. Compare the offers and keep your roofer on schedule.</li></ol>
-<h2 id="hvac">HVAC and other projects in {esc(city)}</h2>
+<h2 id="hvac">Every project type in {esc(city)}, not only roofs</h2><p>{esc(lc['services'])}</p>
+<div class="svc-grid">{svc_grid}</div>
 <p>The same lenders fund <a href="{L('/hvac-financing/')}">HVAC replacement</a>, <a href="{L('/siding-financing/')}">siding</a> and <a href="{L('/gutter-financing/')}">gutters</a> (often damaged in the same storm as the roof), <a href="{L('/generator-financing/')}">standby generators</a> and <a href="{L('/home-improvement-financing/')}">other home improvements</a>. If a storm took the roof and the AC condenser together, tell us both; one loan is simpler than two.</p>
-<h2 id="contractors">For {esc(city)} roofers and contractors</h2>
+<h2 id="contractors">For {esc(city)} roofers and contractors</h2><p>{esc(lc['contractors'])}</p>
 <p>Storm season is when {esc(city)} contractors win or lose the year. Partner contractors offer customer financing at the kitchen table (paid at completion, deductibles handled legally) and get matched with business lenders for <a href="{L('/contractor-business-loans/working-capital/')}">working capital</a>, <a href="{L('/contractor-business-loans/dump-truck-financing/')}">dump trucks</a> and <a href="{L('/contractor-business-loans/equipment-financing/')}">equipment</a>. See <a href="{L('/for-contractors/')}">offering financing to customers</a>.</p>
 <!-- Partner contractors in {esc(city)}: add a callout listing signed partner roofers/HVAC companies with profile links once there is at least one. -->
 <h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}
@@ -108,14 +121,14 @@ def locations_hub(b):
     path = "/locations/"; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path
     groups = ""
     for state, cs in by_state().items():
-        groups += f"<div><h3>{esc(state)}</h3><ul>" + "".join(f"<li><a href='{L(c[3])}'>{esc(c[0])}</a></li>" for c in cs) + "</ul></div>"
+        groups += f"<div><h3><a href='{L('/locations/' + STATE_SLUG[state] + '/')}'>{esc(state)}</a></h3><ul>" + "".join(f"<li><a href='{L(c[3])}'>{esc(c[0])}</a></li>" for c in cs) + "</ul></div>"
     faqs = [
         ("Does AL Elite only work in these cities?", "No. We match nationwide in the United States. These are the metros where we've written local pages because storm exposure makes roof financing a frequent, urgent need. Lender availability varies by state."),
         ("Why these cities?", f"They were chosen from the states with the highest hail claim payouts (per State Farm's 2025 figures reported by <a href='{CLAIMS}' rel='noopener'>Claims Journal</a>) plus hurricane-exposed Florida, then by local roofing demand. Chicago, Atlanta, Phoenix, Charlotte and Louisville are next."),
         ("Does AL Elite have offices in these cities?", "AL Elite matches homeowners and contractors online and by phone."),
     ]
     body = f"""{crumbs_html(b, d, [HOME, LOC])}
-<section class="page-hero"><div class="wrap" style="grid-template-columns:1fr"><div class="stack article-head"><p class="eyebrow">Locations</p><h1>Roof and HVAC financing by city</h1><p class="answer-first" id="speakable-summary">AL Elite matches homeowners and contractors with lenders across the United States, with local pages for 20 metros where hail, hurricanes and insurer roof-age rules make roof financing a frequent, urgent need: Texas, Oklahoma, Colorado, Missouri, Kansas, Nebraska, Indiana, Minnesota, Florida, Tennessee and Utah.</p></div></div></section>
+<section class="page-hero"><div class="wrap" style="grid-template-columns:1fr"><div class="stack article-head"><p class="eyebrow">Locations</p><h1>Home improvement, roof and HVAC financing by state and city</h1><p class="answer-first" id="speakable-summary">AL Elite matches homeowners and contractors with lenders across the United States, with local pages for 20 metros where hail, hurricanes and insurer roof-age rules make roof financing a frequent, urgent need: Texas, Oklahoma, Colorado, Missouri, Kansas, Nebraska, Indiana, Minnesota, Florida, Tennessee and Utah.</p></div></div></section>
 <section><div class="wrap"><div class="sitemap-cols">{groups}</div></div></section>
 <section><div class="wrap layout"><article class="prose"><h2>What a city page gives you</h2><p>Each local page covers why roofs in that market are replaced early, how insurance deductibles and gaps are financed legally, local cost and rule notes, and which partner contractors in that metro offer financing through AL Elite. Every page links to the same lender-matching request; the difference is the local context.</p><h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}</article>
 <aside class="side"><div class="box"><h3>Start here</h3><ul><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/for-contractors/')}">For contractors</a></li></ul></div></aside></div></section>
@@ -125,4 +138,61 @@ def locations_hub(b):
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": f"{c[0]}, {c[2]}", "url": DOMAIN + c[3]} for i, c in enumerate(CITIES)]},
         breadcrumb_schema([HOME, LOC]), faq_schema(faqs, url),
     ]
-    return page(b, path, "Roof & HVAC Financing by City | 20 Storm-Market Metros | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Houston, Dallas, Denver, Kansas City, Tampa, Orlando, Miami, Indianapolis and 12 more storm-prone metros. AL Elite matches you with lenders nationwide.", body, schema)
+    return page(b, path, "Home Improvement Financing by State & City | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Houston, Dallas, Denver, Kansas City, Tampa, Orlando, Miami, Indianapolis and 12 more storm-prone metros. AL Elite matches you with lenders nationwide.", body, schema)
+
+
+# ------------------------------------------------------------------ state hub pages (Oct 2026 local pass)
+def state_page(b, state):
+    sh = STATE_HUB[state]; slug = STATE_SLUG[state]
+    path = f"/locations/{slug}/"; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path
+    metros = by_state()[state]
+    metro_cards = "".join(f"<a class='card' href='{L(c[3])}'><h3>{esc(c[0])}, {esc(c[2])}</h3><p>{esc(CITY[c[0]]['intro'].split('. ')[0])}.</p></a>" for c in metros)
+    metro_names = ", ".join(c[0] for c in metros)
+    svc = [("Roof financing", "/roof-financing/"), ("HVAC financing", "/hvac-financing/"), ("Kitchen remodel financing", "/remodel-financing/kitchen/"), ("Bathroom remodel financing", "/remodel-financing/bathroom/"), ("Fence financing", "/fence-financing/"), ("Generator financing", "/generator-financing/"), ("Foundation repair financing", "/foundation-repair-financing/"), ("Siding financing", "/siding-financing/"), ("Window replacement financing", "/window-financing/"), ("Water heater financing", "/water-heater-financing/"), ("Plumbing financing", "/plumbing-financing/"), ("Solar financing", "/solar-financing/")]
+    svc_grid = "".join(f"<a href='{L(u)}'>{esc(n)}</a>" for n, u in svc)
+    faqs = [
+        (f"Can I get roof financing anywhere in {state}?", f"Yes. Lender availability is set by state, so homeowners anywhere in {state} get the same matching, whether they're in {metro_names} or a smaller town. Our local pages cover the metros we hear from most."),
+        (f"Which home projects can be financed in {state}?", f"Roofs, HVAC, kitchens, bathrooms, fences, generators, foundation repair, siding, windows, water heaters, plumbing, solar, decks and pools. Tell us the project and amount and we match you with lenders who fund that work in {state}."),
+        (f"Can {state} contractors offer financing to customers?", f"Yes. Licensed, insured {state} roofers, HVAC companies, remodelers and other trades can join our partner program to offer customer financing and get matched with business lenders. See <a href='/for-contractors/'>for contractors</a>."),
+        (f"Does AL Elite have offices in {state}?", "AL Elite matches homeowners and contractors online and by phone across the United States."),
+    ]
+    body = f"""{crumbs_html(b, d, [HOME, LOC, (state, path)])}
+<section class="page-hero"><div class="wrap">
+<div class="stack"><p class="eyebrow">Home improvement financing in {esc(state)}</p><h1>{esc(sh['h1'])}</h1><p class="answer-first" id="speakable-summary">AL Elite matches {esc(state)} homeowners with lenders for roofs, HVAC, kitchens, fences, generators and every other home project, and {esc(state)} contractors with customer financing programs and business lenders. We're a matching service, not a lender; lenders set rates and make decisions.</p>{byline()}</div>
+<div class="cta-box"><h2>Check your options in {esc(state)}</h2><p>Free to compare. Not a loan application. Nothing is shared with a lender until you say so.</p><ul><li>Every home project type</li><li>Lenders who serve {esc(state)}</li><li>Soft-inquiry options shown first</li></ul><a class="btn-primary" href="{L('/#contact')}">Check your options</a></div>
+</div></section>
+<section><div class="wrap layout"><article class="prose">
+<figure class="local-card"><img src="{L('/locations/cards/' + slug + '.png')}" alt="{esc(state)} home financing snapshot: storm exposure, deductible rules and programs" width="1200" height="675" loading="lazy"></figure>
+<h2 id="overview">Home projects in {esc(state)}: what gets financed and why</h2><p>{esc(sh['intro'])}</p>
+<h2 id="metros">Local guides for {esc(state)}</h2><div class="grid-cards">{metro_cards}</div>
+<h2 id="rules">{esc(state)} rules that affect your project and your financing</h2><p>{esc(sh['rules'])}</p>
+<h2 id="programs">Rebates, assistance and government-backed programs in {esc(state)}</h2><p>{esc(sh['programs'])} Links to the federal programs are in the sources at the end of this page.</p>
+<h2 id="claims">Insurance claims in {esc(state)}: how the gap gets financed</h2>{STATE_RULES.get(state, "")}<p>When a claim pays most of a roof, siding or fence, the financing question is the gap: the deductible, depreciation held back until completion, and items the adjuster didn't allow. That is usually a smaller, shorter loan than the whole project. Our guide to <a href="{L('/blog/roof-financing-after-hail-damage/')}">roof financing after hail damage</a> walks through the arithmetic, and the <a href="{L('/blog/does-insurance-cover-roof-replacement/')}">insurance and roof replacement</a> guide covers policy language.</p>
+<h2 id="options">Financing options {esc(state)} homeowners use</h2>
+<ul><li><strong>Unsecured personal loans.</strong> Days to fund, no lien, fixed rate. The most common route for roofs, HVAC, fences and generators.</li>
+<li><strong>Contractor financing plans.</strong> A monthly figure next to the quote through the contractor's lender partner; ask whether promotional rates are deferred interest and whether the price is the same for cash.</li>
+<li><strong>Home equity loans and HELOCs.</strong> Lower rates for large planned projects such as kitchens or whole-house siding, with weeks to close and a lien on the home.</li>
+<li><strong>Government-backed programs.</strong> FHA Title I property improvement loans through HUD-approved lenders, FHA 203(k) for remodels folded into a mortgage, and USDA Section 504 repair loans and grants in eligible rural parts of {esc(state)}.</li>
+<li><strong>Rebates and assistance.</strong> Utility rebates reduce what you finance on HVAC and insulation; weatherization assistance covers eligible households.</li></ul>
+<h2 id="services">Financing by project type in {esc(state)}</h2><div class="svc-grid">{svc_grid}</div>
+<h2 id="timing">Timing projects in {esc(state)}</h2><p>Storm-driven work (roofs, siding, fences, gutters) peaks right after severe weather, when the best local contractors are booked for weeks and out-of-town crews arrive. Planned work (kitchens, bathrooms, windows, generators, water heater upgrades) is easiest to schedule in the shoulder seasons when crews have capacity and quotes are more competitive. Either way, arranging financing before you sign keeps the project on schedule: a pre-qualification that uses a soft credit inquiry costs nothing and tells you what you're likely to be offered before the deposit is due.</p>
+<h2 id="qualify">What lenders look at for {esc(state)} homeowners</h2><p>Unsecured home improvement loans are approved on five things: your credit score and recent payment history, your income and how much of it already goes to debt, the amount requested, how long you've had credit, and a complete application. Reducing the amount (rebates, a smaller scope, a down payment), paying a card balance down before applying, having pay stubs or bank statements ready, and checking options with a soft pull before any hard inquiry improve offers at every lender. Home equity products add an appraisal and a required equity cushion, commonly 15% to 20% of the home's value.</p>
+<h2 id="how-it-works">How it works</h2>
+<ol><li><strong>Get itemized quotes</strong> from licensed {esc(state)} contractors. If insurance is involved, get the adjuster's estimate so you know the gap.</li><li><strong>Tell us about the project.</strong> Amount, timeline, whether insurance is involved, your state. No credit pull.</li><li><strong>We match you</strong> with lenders who fund that type of work in {esc(state)}, and show which start with a soft inquiry.</li><li><strong>You choose and apply with the lender.</strong> Rates, terms and the decision are theirs.</li></ol>
+<h2 id="contractors">For {esc(state)} contractors</h2><p>Roofers, HVAC companies, remodelers, fence and foundation contractors across {esc(state)} can offer customer financing at the estimate (paid at completion, deductibles handled legally where claims are involved) and get matched with business lenders for <a href="{L('/contractor-business-loans/equipment-financing/')}">equipment</a>, <a href="{L('/contractor-business-loans/working-capital/')}">working capital</a> and <a href="{L('/contractor-business-loans/invoice-factoring/')}">factoring</a>. See <a href="{L('/for-contractors/')}">for contractors</a>.</p>
+<h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}
+</article>
+<aside class="side">
+<div class="box"><h3>{esc(state)} metros</h3><ul>{''.join(f"<li><a href='{L(c[3])}'>{esc(c[0])}</a></li>" for c in metros)}</ul></div>
+<div class="box"><h3>Start here</h3><ul><li><a href="{L('/home-improvement-financing/')}">Home improvement financing</a></li><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/for-contractors/')}">For contractors</a></li></ul></div>
+<div class="box"><h3>All locations</h3><ul><li><a href="{L('/locations/')}">See all states and metros</a></li></ul></div>
+</aside></div></section>
+{contact_section(b, d, role='homeowner', project='Home improvement', state=state, heading=f'Tell us about your {state} project')}"""
+    schema = [
+        {"@type": "WebPage", "@id": url + "#webpage", "url": url, "name": sh["title"], "description": sh["meta"], "isPartOf": {"@id": DOMAIN + "/#website"}, "dateModified": MODIFIED, "inLanguage": "en-US"},
+        {"@type": "Service", "@id": url + "#service", "name": f"Home improvement and contractor financing matching in {state}", "serviceType": "Financing matching", "provider": {"@id": ORG_ID}, "areaServed": {"@type": "State", "name": state}},
+        breadcrumb_schema([HOME, LOC, (state, path)]), faq_schema(faqs, url),
+    ]
+    return page(b, path, sh["title"], sh["meta"], body, schema)
+
+STATE_PATHS = [f"/locations/{STATE_SLUG[s]}/" for s in STATE_HUB]
