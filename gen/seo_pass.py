@@ -51,6 +51,15 @@ PAGE_SOURCES = {
     "/contractor-business-loans/*": ["sba_loans", "irs_946"],
     "/locations/*": ["claims", "noaa_spc", "hud_title1", "ftc_contractor"],
     "/tools/equipment-loan-calculator/": ["irs_946", "sba_loans"],
+    "/tools/factoring-calculator/": ["sba_loans"],
+    "/tools/markup-calculator/": ["sba_loans", "irs_946"],
+    "/tools/equipment-lease-vs-buy-calculator/": ["irs_946", "sba_loans"],
+    "/tools/roof-replacement-cost-calculator/": ["claims", "hud_title1", "ftc_contractor"],
+    "/tools/generator-sizing-calculator/": ["doe_wap", "ftc_contractor"],
+    "/tools/solar-loan-calculator/": ["cfpb_pace_rule", "cfpb_pace_report", "ftc_contractor"],
+    "/tools/hvac-financing-calculator/": ["doe_wap", "trane_fin", "carrier_fin", "acr"],
+    "/tools/pool-loan-calculator/": ["ftc_contractor", "acr"],
+    "/tools/fence-cost-calculator/": ["ftc_contractor", "acr"],
     "/tools/*": ["hud_title1", "acr"],
     "/blog/roof-financing-after-hail-damage/": ["claims", "noaa_spc", "ftc_contractor", "hud_title1"],
     "/blog/does-insurance-cover-roof-replacement/": ["claims", "noaa_spc", "ftc_contractor"],
@@ -206,7 +215,23 @@ def apply(pages_by_path):
     tools_hub = ("All financing calculators", "/tools/")
     add_related("/tools/roof-financing-calculator/", tools_hub, ("Equipment loan calculator", "/tools/equipment-loan-calculator/"))
     add_related("/tools/equipment-loan-calculator/", tools_hub, ("Roof financing calculator", "/tools/roof-financing-calculator/"))
-    add_related("/roof-financing/", ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"))
+    add_related("/roof-financing/", ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"), ("Roof replacement cost calculator", "/tools/roof-replacement-cost-calculator/"))
+    add_related("/hvac-financing/", ("HVAC financing calculator", "/tools/hvac-financing-calculator/"))
+    add_related("/hvac-financing/bad-credit-hvac-financing/", ("HVAC financing calculator", "/tools/hvac-financing-calculator/"))
+    add_related("/pool-financing/", ("Pool loan calculator", "/tools/pool-loan-calculator/"))
+    add_related("/fence-financing/", ("Fence cost calculator", "/tools/fence-cost-calculator/"))
+    add_related("/generator-financing/", ("Generator sizing calculator", "/tools/generator-sizing-calculator/"))
+    add_related("/solar-financing/", ("Solar loan calculator", "/tools/solar-loan-calculator/"))
+    add_related("/contractor-business-loans/invoice-factoring/", ("Factoring calculator", "/tools/factoring-calculator/"))
+    add_related("/contractor-business-loans/working-capital/", ("Factoring calculator", "/tools/factoring-calculator/"), ("Markup calculator", "/tools/markup-calculator/"))
+    add_related("/contractor-business-loans/equipment-financing/", ("Equipment lease vs buy calculator", "/tools/equipment-lease-vs-buy-calculator/"))
+    add_related("/for-contractors/", ("Markup calculator", "/tools/markup-calculator/"))
+    add_related("/blog/how-to-bid-construction-jobs/", ("Markup calculator", "/tools/markup-calculator/"))
+    add_related("/blog/how-construction-invoice-factoring-works/", ("Factoring calculator", "/tools/factoring-calculator/"))
+    add_related("/blog/equipment-financing-vs-leasing/", ("Equipment lease vs buy calculator", "/tools/equipment-lease-vs-buy-calculator/"))
+    add_related("/blog/whole-house-generator-cost/", ("Generator sizing calculator", "/tools/generator-sizing-calculator/"))
+    add_related("/blog/how-much-does-a-fence-cost/", ("Fence cost calculator", "/tools/fence-cost-calculator/"))
+    add_related("/blog/how-much-does-a-new-roof-cost-per-month/", ("Roof replacement cost calculator", "/tools/roof-replacement-cost-calculator/"))
     add_related("/roof-financing/metal-roof-financing/", ("Roof repair financing", "/roof-financing/roof-repair-financing/"), ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"))
     add_related("/roof-financing/bad-credit-roof-financing/", ("Roof repair financing", "/roof-financing/roof-repair-financing/"))
     add_related("/contractor-business-loans/", ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"))

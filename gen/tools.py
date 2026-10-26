@@ -59,7 +59,7 @@ def tool_page(b, p):
         {"@type": "WebApplication", "@id": url + "#app", "name": strip_tags(p["h1"]), "url": url, "applicationCategory": "FinanceApplication", "operatingSystem": "Any", "browserRequirements": "Requires JavaScript", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "provider": {"@id": ORG_ID}, "description": strip_tags(p["answer"])},
         breadcrumb_schema(p["crumbs"]), faq_schema(faqs, url),
     ]
-    return page(b, path, p["title"], p["meta"], body, schema, extra_script=CALC_JS)
+    return page(b, path, p["title"], p["meta"], body, schema, extra_script=p.get("js", CALC_JS))
 
 ROOF_CALC = dict(
     path="/tools/roof-financing-calculator/", crumbs=[HOME, ("Tools", "/tools/roof-financing-calculator/"), ("Roof financing calculator", "/tools/roof-financing-calculator/")],
