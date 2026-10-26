@@ -29,7 +29,11 @@ html{scroll-behavior:smooth}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto} *,*::before,*::after{animation:none!important;transition:none!important}}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
 img,svg{max-width:100%;display:block}
-a{color:var(--navy);text-decoration-thickness:1px;text-underline-offset:3px}
+a{color:#1a56c9;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px}
+a:hover{color:#0b3d99}
+.prose a,.faq-list a,.sources a,.callout a,.city-stats a,.lm a{color:#1a56c9;text-decoration:underline}
+.prose .see-also{margin-top:10px;font-size:.95rem}
+.card,.grid-cards a,.svc-grid a,.inline-links li a,.lm li a,.usmap li a,.btn,.btn-lm,.brand,nav.primary a,.topbar a,footer a,.post,.crumbs a{text-decoration:none}
 a:hover{color:var(--navy-2)}
 :focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:2px}
 h1,h2,h3,h4{font-family:var(--display);font-weight:600;line-height:1.15;margin:0;color:var(--navy);text-wrap:balance;letter-spacing:-.005em}

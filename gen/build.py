@@ -48,6 +48,9 @@ expand_money.apply(_ALL)
 import expand_consumer, gsc_pass
 expand_consumer.apply(_ALL)
 gsc_pass.apply(_ALL)
+import onpage_pass
+onpage_pass.apply(_ALL)
+for r in onpage_pass.REPORT: print('onpage:', r)
 import leadmagnets_wire
 leadmagnets_wire.apply(_ALL)
 
