@@ -14,6 +14,7 @@ from trust import TRUST_PAGES
 
 ROOT = os.path.dirname(os.path.dirname(__file__))
 from usmap import us_map_section, US_MAP_CSS
+from nav_css import DD_CSS
 HOME_SRC = open(os.path.join(os.path.dirname(__file__), "home-index.html")).read()
 
 def rewrite_links(html_text, depth):
@@ -62,7 +63,7 @@ def build(mode, outdir):
     os.makedirs(outdir)
     pages = {}
     # Homepage: use the hand-built index.html; in artifact mode strip to body-only and rewrite links.
-    pages["/"] = HOME_SRC.replace("</style>", US_MAP_CSS + "</style>", 1)
+    pages["/"] = HOME_SRC.replace("</style>", US_MAP_CSS + DD_CSS + "</style>", 1)
     for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES: pages[p["path"]] = service_page(b, p)
     for p in CONSUMER_HUBS + CONTRACTOR_HUBS: pages[p["path"]] = hub_page(b, p)
     for p in TOOL_PAGES: pages[p["path"]] = tool_page(b, p)

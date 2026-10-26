@@ -340,6 +340,22 @@ footer .brand img.brand-logo{height:64px;background:#fff;border-radius:6px;paddi
 
 .calc-out .big{color:var(--on-navy,#fff)}
 
+nav.primary li.has-dd{position:relative}
+nav.primary .dd{display:none;position:absolute;top:100%;left:50%;transform:translateX(-50%);background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 18px 40px rgba(11,37,69,.14);padding:14px 10px;z-index:50;gap:18px;margin-top:8px;text-align:left}
+nav.primary li.has-dd:hover .dd,nav.primary li.has-dd:focus-within .dd{display:flex}
+nav.primary li.has-dd::after{content:"";position:absolute;left:0;right:0;top:100%;height:12px}
+nav.primary .dd-col{min-width:240px}
+nav.primary .dd ul{display:block;padding:0;margin:0}
+nav.primary .dd li{list-style:none;margin:0}
+nav.primary .dd .dd-h{font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);padding:4px 10px 6px;margin:0}
+nav.primary .dd a{display:block;padding:7px 10px;border-radius:8px;font-size:.92rem;color:var(--ink);white-space:nowrap}
+nav.primary .dd a:hover{background:var(--surface);color:var(--navy)}
+nav.primary .dd .dd-all{border-top:1px solid var(--line);margin:8px 0 0;padding-top:6px}
+nav.primary .dd .dd-all a{font-weight:600;color:var(--navy)}
+@media (max-width:900px){nav.primary .dd{display:block;position:static;transform:none;box-shadow:none;border:0;padding:0 0 0 14px;margin:0}nav.primary .dd-col{min-width:0}nav.primary .dd a{padding:6px 4px;font-size:.98rem;white-space:normal}nav.primary li.has-dd::after{display:none}}
+footer .cols{grid-template-columns:1.4fr repeat(4,1fr)}
+@media (max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+
 /* Inner-page additions */
 [hidden]{display:none!important}
 .crumbs{font-size:.85rem;color:var(--muted);padding-block:14px}
@@ -442,7 +458,7 @@ td.num,th.num{text-align:right}
 <li><a href="/home-improvement-financing/">Homeowners</a></li>
 <li><a href="/for-contractors/">Contractors</a></li>
 <li><a href="/contractor-business-loans/">Business loans</a></li>
-<li><a href="/tools/">Calculators</a></li>
+<li class="has-dd"><a href="/tools/">Calculators</a><div class="dd"><div class="dd-col"><p class="dd-h">Homeowners</p><ul><li><a href="/tools/roof-financing-calculator/">Roof financing calculator</a></li><li><a href="/tools/roof-replacement-cost-calculator/">Roof replacement cost calculator</a></li><li><a href="/tools/hvac-financing-calculator/">HVAC financing calculator</a></li><li><a href="/tools/pool-loan-calculator/">Pool loan calculator</a></li><li><a href="/tools/fence-cost-calculator/">Fence cost calculator</a></li><li><a href="/tools/generator-sizing-calculator/">Generator sizing calculator</a></li><li><a href="/tools/solar-loan-calculator/">Solar loan calculator</a></li></ul></div><div class="dd-col"><p class="dd-h">Contractors</p><ul><li><a href="/tools/equipment-loan-calculator/">Equipment loan calculator</a></li><li><a href="/tools/equipment-lease-vs-buy-calculator/">Equipment lease vs buy calculator</a></li><li><a href="/tools/factoring-calculator/">Factoring calculator</a></li><li><a href="/tools/markup-calculator/">Markup calculator</a></li></ul><p class="dd-all"><a href="/tools/">All calculators</a></p></div></div></li>
 <li><a href="/locations/">Locations</a></li>
 <li><a href="/blog/">Blog</a></li>
 <li><a href="/about/">About</a></li>
@@ -477,9 +493,10 @@ td.num,th.num{text-align:right}
 <div><a class="brand" href="/" aria-label="AL Elite Financing home"><img class="brand-logo" src="/logo.png" alt="AL Elite Financing" width="146" height="106"><span><span class="brand-name">AL Elite</span><span class="brand-sub">Financing</span></span></a>
 <p class="about">A financing marketplace for home improvement. We match homeowners with consumer lenders and contractors with business lenders across the United States.</p><p class="about" style="margin-top:10px"><a href="tel:+1-888-968-0079">(888) 968-0079</a></p></div>
 <div><h4>Homeowners</h4><ul>
-<li><a href="/home-improvement-financing/">Home improvement financing</a></li><li><a href="/remodel-financing/kitchen/">Kitchen remodel financing</a></li><li><a href="/hvac-financing/">HVAC financing</a></li><li><a href="/roof-financing/">Roof financing</a></li><li><a href="/fence-financing/">Fence financing</a></li><li><a href="/generator-financing/">Generator financing</a></li><li><a href="/foundation-repair-financing/">Foundation repair financing</a></li><li><a href="/solar-financing/">Solar financing</a></li><li><a href="/plumbing-financing/">Plumbing financing</a></li><li><a href="/tools/">Financing calculators</a></li></ul></div>
+<li><a href="/home-improvement-financing/">Home improvement financing</a></li><li><a href="/remodel-financing/kitchen/">Kitchen remodel financing</a></li><li><a href="/hvac-financing/">HVAC financing</a></li><li><a href="/roof-financing/">Roof financing</a></li><li><a href="/fence-financing/">Fence financing</a></li><li><a href="/generator-financing/">Generator financing</a></li><li><a href="/foundation-repair-financing/">Foundation repair financing</a></li><li><a href="/solar-financing/">Solar financing</a></li><li><a href="/plumbing-financing/">Plumbing financing</a></li></ul></div>
+<div><h4>Calculators</h4><ul><li><a href="/tools/roof-financing-calculator/">Roof financing calculator</a></li><li><a href="/tools/roof-replacement-cost-calculator/">Roof replacement cost calculator</a></li><li><a href="/tools/hvac-financing-calculator/">HVAC financing calculator</a></li><li><a href="/tools/pool-loan-calculator/">Pool loan calculator</a></li><li><a href="/tools/fence-cost-calculator/">Fence cost calculator</a></li><li><a href="/tools/generator-sizing-calculator/">Generator sizing calculator</a></li><li><a href="/tools/solar-loan-calculator/">Solar loan calculator</a></li><li><a href="/tools/equipment-loan-calculator/">Equipment loan calculator</a></li><li><a href="/tools/equipment-lease-vs-buy-calculator/">Equipment lease vs buy calculator</a></li><li><a href="/tools/factoring-calculator/">Factoring calculator</a></li><li><a href="/tools/markup-calculator/">Markup calculator</a></li><li><a href="/tools/">All calculators</a></li></ul></div>
 <div><h4>Contractors</h4><ul>
-<li><a href="/for-contractors/">Offer customer financing</a></li><li><a href="/contractor-business-loans/">Contractor business loans</a></li><li><a href="/contractor-business-loans/equipment-financing/">Equipment financing</a></li><li><a href="/contractor-business-loans/invoice-factoring/">Invoice factoring</a></li><li><a href="/tools/equipment-loan-calculator/">Equipment loan calculator</a></li><li><a href="/blog/">Blog</a></li></ul></div>
+<li><a href="/for-contractors/">Offer customer financing</a></li><li><a href="/contractor-business-loans/">Contractor business loans</a></li><li><a href="/contractor-business-loans/equipment-financing/">Equipment financing</a></li><li><a href="/contractor-business-loans/invoice-factoring/">Invoice factoring</a></li><li><a href="/contractor-business-loans/working-capital/">Working capital</a></li><li><a href="/blog/">Blog</a></li></ul></div>
 <div><h4>Company</h4><ul>
 <li><a href="/about/">About AL Elite</a></li><li><a href="/how-we-make-money/">How we make money</a></li><li><a href="/locations/">Locations</a></li><li><a href="#contact">Contact</a></li><li><a href="/privacy/">Privacy policy</a></li></ul></div>
 </div>
