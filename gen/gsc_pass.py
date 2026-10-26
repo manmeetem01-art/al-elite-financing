@@ -55,6 +55,13 @@ def apply(P):
             ("Is \"guaranteed approval\" HVAC financing real?", "No lender can guarantee approval. Ads using those words usually point to rent-to-own or very high-cost products. Compare the total of payments with the system's price before signing anything."),
         ]
 
+    p = page("/roof-financing/bad-credit-roof-financing/")
+    if p:
+        p["sections"] = list(p.get("sections", [])) + [
+            ("Roof financing with no credit check: what those offers really are", """<p>No legitimate lender offers roof financing with no credit check; every real loan involves some review of your credit or ability to repay. Offers using that phrase are usually rent-to-own arrangements or very high-cost loans. The useful alternative is a soft-pull pre-qualification, which shows what you're likely to be offered without touching your score. Many roofers and lenders in our network start there, and we tell you which ones do before you proceed. If the first lender declines, ask about a second-look lender, add a co-applicant, or finance only the gap after an insurance claim rather than the whole roof.</p>"""),
+        ]
+        p["faqs"] = list(p.get("faqs", [])) + [("Is there roof financing with no credit check?", "Not from legitimate lenders. A soft-pull pre-qualification is the real option: it shows likely offers without affecting your score, and only a formal application triggers a hard inquiry.")]
+
     # ------------------------------------------------------------------ 3. for-contractors -> "contractor financing for customers"
     p = page("/for-contractors/")
     if p:

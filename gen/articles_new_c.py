@@ -144,6 +144,7 @@ FENCE = dict(
 <li><strong>Check HOA and setback rules first</strong> so you don't pay for a fence you have to move.</li></ul>"""),
         ("Fence cost per month", f"""<p>Fences are a mid-size purchase, so short terms keep interest small.</p>{ptable((4000, 7000, 12000, 20000), terms=(24, 36, 60, 84))}
 <p>A $7,000 fence over 36 months costs about {ti(7000, 10.99, 36)} in interest at 10.99%; stretched to 84 months it costs about {ti(7000, 10.99, 84)}. Unless cash is very tight, a two- or three-year term is the sensible range.</p>"""),
+        ("Can you finance a fence?", """<p>Yes. Fences are financed every day through three routes, and the amounts are small enough that approval is easier than for a roof or a kitchen. The question isn't whether you can finance a fence but which route costs least for the size of yours.</p>"""),
         ("How to pay for a new fence", """<p>Three common routes. Many fence companies offer financing through a lender partner, presented at the quote; ask whether a promotional rate carries a dealer fee in the price. An unsecured personal loan funds in days and pays any installer like cash, which often gets you the cash price. A 0% APR credit card can work for a small fence you'll pay off inside the promotional window. Home equity products rarely make sense for a fence-sized purchase because of closing costs and timing. Our <a href="/fence-financing/">fence financing</a> page compares these with example payments.</p>"""),
         ("Questions to ask every lender", LENDER_QS),
         vet("fence installers"),

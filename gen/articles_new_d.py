@@ -1,0 +1,150 @@
+"""October 2026 batch D: long-tail, low-difficulty terms a new domain can win.
+'no credit check hvac financing near me' 800/mo KD0 + 'hvac financing no credit check' 150 KD4;
+'hvac companies that offer financing' 150 KD3; 'window companies that offer financing' 150 KD2;
+'plumbers that offer financing' 100 KD1. Honest angle on 'no credit check': it doesn't exist from
+legitimate lenders; soft-pull pre-qualification is the real answer."""
+from common import *
+
+HOME = ("Home", "/")
+BLOG = ("Blog", "/blog/")
+DATE = "2026-10-26"
+
+def pm(P, apr, n):
+    return money(payment(P, apr, n), False)
+
+def ti(P, apr, n):
+    return money(payment(P, apr, n) * n - P, False)
+
+LENDER_QS = """<ol><li>What is the APR including fees, and is the rate fixed?</li><li>Is there an origination fee, and is it deducted from the loan amount?</li><li>Is any promotional period deferred interest or waived interest?</li><li>Is there a prepayment penalty?</li><li>When is the contractor paid, and when does my first payment start?</li><li>Does checking my options use a soft or hard credit inquiry?</li></ol>"""
+CITY_LINKS = "".join(f'<li><a href="{u}">{n}</a></li>' for n, u in [("Houston", "/locations/texas/houston/"), ("Dallas", "/locations/texas/dallas/"), ("Phoenix", "/locations/arizona/phoenix/"), ("Atlanta", "/locations/georgia/atlanta/"), ("Tampa", "/locations/florida/tampa/"), ("Orlando", "/locations/florida/orlando/"), ("Miami", "/locations/florida/miami/"), ("Charlotte", "/locations/north-carolina/charlotte/"), ("Chicago", "/locations/illinois/chicago/"), ("Denver", "/locations/colorado/denver/"), ("Nashville", "/locations/tennessee/nashville/"), ("Salt Lake City", "/locations/utah/salt-lake-city/")])
+
+# ------------------------------------------------------------------ 1. no credit check HVAC
+NOCHECK = dict(
+    path="/blog/no-credit-check-hvac-financing/", date=DATE,
+    crumbs=[HOME, BLOG, ("No credit check HVAC financing", "/blog/no-credit-check-hvac-financing/")],
+    eyebrow="Homeowner guide", h1="No credit check HVAC financing near me: what actually exists, and what to do instead",
+    title="No Credit Check HVAC Financing Near Me: What Exists & What to Do",
+    meta="Searching for no credit check HVAC financing near you? What those offers really are, the soft-pull options that don't hurt your score, and how to get an AC or furnace financed with lower credit.",
+    answer="There is no such thing as HVAC financing with no credit check from a legitimate lender; every real loan involves some review of your credit or ability to repay. What you'll find under that search are rent-to-own plans and very high-cost products, or lenders using it as a hook. The useful version of what you're looking for is a soft-pull pre-qualification: it shows what you're likely to be offered without touching your score, and it's available from many HVAC contractors and lenders that work with lower credit.",
+    money_page=("HVAC financing with bad credit", "/hvac-financing/bad-credit-hvac-financing/"), project="HVAC (AC, furnace, heat pump)",
+    sections=[
+        ("Why 'no credit check' HVAC financing isn't real", """<p>Lenders are required to assess ability to repay, and they price risk with your credit history. A company that says it never checks credit is doing one of three things: offering rent-to-own or lease-to-own on the equipment (you don't own the system until the final payment, and the total of payments can run far above the system's price), charging an APR high enough that defaults don't matter to them, or using the phrase to get you to call and then running a credit check anyway. None of those is a good deal for a $6,000 to $12,000 purchase that you'll live with for 15 years.</p>
+<p>The search is understandable. Your AC died, your score isn't great, and you don't want ten hard inquiries. But the fix for that isn't skipping the check; it's doing the check the right way.</p>"""),
+        ("The real answer: soft-pull pre-qualification", """<p>A soft credit inquiry lets a lender see your file and tell you whether you're likely to qualify, and roughly at what rate, without it showing on your report or affecting your score. A hard inquiry happens only when you formally apply with the lender you choose. Most HVAC contractor financing programs and most home improvement lenders now offer soft-pull pre-qualification; it's the standard first step, not a special favour.</p>
+<p>That means you can check with two or three sources on the same day with zero impact, compare the likely offers, and then make one hard application. When you submit a request through AL Elite, we route it to lenders that fund HVAC work in your state and consider a wider range of credit profiles, and we tell you before you proceed whether each starts with a soft or hard inquiry.</p>"""),
+        ("HVAC financing with lower credit: what helps most", f"""<p>If your score is in the 500s or low 600s, a few moves change what lenders say yes to.</p>
+<ul><li><strong>Make the number smaller.</strong> Two or three quotes on a correctly sized standard-efficiency system, utility rebates applied, a few hundred dollars down. A $7,000 request is approved far more often than an $11,000 one. At an illustrative 19.99% APR over 60 months the payment difference is about {money(payment(11000, 19.99, 60) - payment(7000, 19.99, 60), False)} a month.</li>
+<li><strong>Add a co-applicant.</strong> A spouse or relative with stronger credit on the application opens better offers. They share full responsibility for the loan.</li>
+<li><strong>Show all income.</strong> Lenders serving lower scores weight income and recent payment history more heavily than the score alone.</li>
+<li><strong>Fix report errors first.</strong> Pull your free reports at AnnualCreditReport.com and dispute anything that's wrong.</li>
+<li><strong>Use the decline path.</strong> Many contractor programs have a second-look lender. If the first says no, ask whether there's a second.</li></ul>
+<p>Our full guide to <a href="/blog/how-to-get-hvac-financing-with-bad-credit/">getting HVAC financing with bad credit</a> works through a complete example, and the <a href="/hvac-financing/bad-credit-hvac-financing/">HVAC financing with bad credit</a> page covers the lender side.</p>"""),
+        ("'Near me': finding HVAC companies that offer financing in your area", f"""<p>Almost every established HVAC company offers financing through a lender partner, and most will show you a soft-pull pre-qualification on a tablet at the first visit. Ask three things when you call: do you offer financing, which lender or lenders, and does the pre-qualification use a soft pull. If a company only offers one lender and that lender declines you, bringing your own financing (an unsecured loan arranged independently) pays any contractor like cash.</p>
+<p>If you're in one of the metros we cover, our local guides include the state rules, utility rebates and contractor licensing checks for each market:</p><ul class="inline-links">{CITY_LINKS}</ul>"""),
+        ("What a lower-credit HVAC loan really costs", f"""<p>Compare the total, not the monthly figure. Here's an $8,000 AC replacement over 60 months at three illustrative rates.</p>
+<div class='tbl'><table><thead><tr><th>Example APR</th><th class='num'>Monthly</th><th class='num'>Total interest</th><th class='num'>Total repaid</th></tr></thead><tbody>
+{''.join(f"<tr><td>{a:.2f}%</td><td class='num'>{pm(8000, a, 60)}</td><td class='num'>{ti(8000, a, 60)}</td><td class='num'>{money(payment(8000, a, 60) * 60, False)}</td></tr>" for a in (14.99, 24.99, 35.99))}
+</tbody></table></div><p class='cap'>Illustrative only, standard amortization, no fees. Many states cap consumer loan APRs; lenders must disclose the APR before you sign.</p>
+<p>Now compare that with a typical rent-to-own offer, where the total of payments on an $8,000 system can exceed $14,000 to $16,000 over a similar period and you don't own the equipment until the end. The "no credit check" route is usually the most expensive way to get cool air.</p>"""),
+        ("Offers to walk away from", """<ul><li>"Guaranteed approval" or "everyone qualifies" on a four- or five-figure amount.</li><li>No clear APR, fees or total repaid in writing before signing.</li><li>Rent-to-own where the total of payments far exceeds the system price.</li><li>Any upfront fee to "secure" or "process" a loan.</li><li>Pressure to sign today. A good HVAC company will hold a quote while you check options.</li></ul>"""),
+        ("If financing doesn't come together", """<p>Ask the technician whether a repair is safe and reasonable; it can buy a season while you improve your profile. Check the Weatherization Assistance Program (energy.gov) and your utility's assistance programs if you're income-eligible; both can cover heating and cooling equipment for qualifying households. Check whether the failed part is still under manufacturer warranty. And ask the HVAC company about an in-house payment plan on a smaller repair.</p>"""),
+        ("Questions to ask every lender", LENDER_QS),
+    ],
+    faqs=[
+        ("Is there really no HVAC financing without a credit check?", "Not from legitimate lenders. Offers using that phrase are usually rent-to-own or very high-cost products. A soft-pull pre-qualification is the real alternative: it shows likely offers without affecting your score."),
+        ("Does a soft credit pull hurt my score?", "No. Soft inquiries aren't visible to other lenders and don't affect your score. Only a formal application (hard inquiry) does, and usually by a few points for a short time."),
+        ("Can I get AC financing with a 550 credit score?", "Possibly, with a smaller amount, a higher APR and sometimes a co-applicant. Lenders that serve lower scores weigh income and recent payment history, so steady income and no recent missed payments help."),
+        ("What is rent-to-own HVAC?", "A lease where you pay monthly for the equipment and own it only after the final payment. Totals often run far above the system's price. Compare the total of payments with a loan before signing."),
+        ("Do HVAC companies near me offer financing?", "Most established ones do, through lender partners, with soft-pull pre-qualification at the first visit. Ask which lender and whether a second-look option exists if the first declines."),
+    ],
+    related=[("HVAC financing with bad credit", "/hvac-financing/bad-credit-hvac-financing/"), ("How to get HVAC financing with bad credit", "/blog/how-to-get-hvac-financing-with-bad-credit/"), ("HVAC companies that offer financing", "/blog/hvac-companies-that-offer-financing/"), ("HVAC financing", "/hvac-financing/")],
+)
+
+# ------------------------------------------------------------------ 2/3/4: companies that offer financing (HVAC, window, plumbing)
+def companies_post(slug, trade, trade_plural, money, money_label, typical, examples, specific_section, related_posts, project, vol_note):
+    return dict(
+        path=f"/blog/{slug}/", date=DATE,
+        crumbs=[HOME, BLOG, (f"{trade_plural.capitalize()} that offer financing", f"/blog/{slug}/")],
+        eyebrow="Homeowner guide", h1=f"{trade_plural.capitalize()} that offer financing: how their plans work and what to check",
+        title=f"{trade_plural.capitalize()} That Offer Financing: How It Works & What to Ask",
+        meta=f"Most {trade_plural} that offer financing use a lender partner. How the plans work, what they cost, how to find {trade_plural} near you that finance, and the questions to ask before you sign.",
+        answer=f"Most established {trade_plural} offer financing, usually through one or more consumer lenders rather than their own money. You apply at the quote (typically with a soft credit pull first), the lender approves and sets the rate, the {trade} does the work, and the lender pays them on completion. Plans range from standard fixed-rate loans to promotional 0% offers that can carry a dealer fee in the price. Knowing which plan you're being offered, and what the price would be for cash, is the whole game.",
+        money_page=(money_label, money), project=project,
+        sections=[
+            (f"How {trade_plural} that offer financing set it up", f"""<p>A {trade} company enrolls with a lender that specializes in home improvement loans; large companies sometimes have two or three. The company's reps present the plan on a tablet, the homeowner checks eligibility with a soft pull, chooses a plan and completes the application with the lender. The {trade} schedules the job as usual. When it's done and you sign off, the lender pays the company, usually within a few business days, and you repay the lender monthly. The {trade} never carries the loan.</p>
+<p>What differs between companies is which plans they offer. <strong>Standard installment plans</strong> carry a fixed APR over three to twelve years and usually cost the {trade} nothing, so there's no reason for the price to change. <strong>Promotional plans</strong> ("0% for 18 months", "no payments for 12 months") cost the {trade} a dealer fee, often 5% to 15% of the job, which has to come from somewhere; that's why a cash price can be lower. <strong>Reduced-rate long-term plans</strong> spread the job over 10 to 15 years at a below-market rate with a fee attached: lower payment, more total interest.</p>"""),
+            ("What it costs: a worked comparison", f"""<p>Here's a typical {trade} job of {money_(typical)} financed three ways.</p>
+<div class='tbl'><table><thead><tr><th>Route</th><th class='num'>Price</th><th>Terms</th><th class='num'>Monthly</th><th class='num'>Total paid</th></tr></thead><tbody>
+<tr><td>Company's standard plan</td><td class='num'>{money_(typical)}</td><td>10.99%, 60 mo</td><td class='num'>{pm(typical, 10.99, 60)}</td><td class='num'>{money_(payment(typical, 10.99, 60) * 60)}</td></tr>
+<tr><td>Company's "0% for 18 mo", 8% fee in price, paid in time</td><td class='num'>{money_(typical * 1.08)}</td><td>0%, 18 mo</td><td class='num'>{money_(typical * 1.08 / 18)}</td><td class='num'>{money_(typical * 1.08)}</td></tr>
+<tr><td>Your own loan at a cash price</td><td class='num'>{money_(typical * 0.965)}</td><td>11.99%, 48 mo</td><td class='num'>{pm(typical * 0.965, 11.99, 48)}</td><td class='num'>{money_(payment(typical * 0.965, 11.99, 48) * 48)}</td></tr>
+</tbody></table></div><p class='cap'>Hypothetical. Assumes a 3.5% cash discount and an 8% dealer fee built into the promotional price. Your quotes will differ.</p>
+<p>The promotional plan is cheapest only if you can clear the balance inside the window; miss it and deferred interest on the full amount is charged at once. For most households the standard plan or an independent loan at the cash price wins.</p>"""),
+            specific_section,
+            (f"How to find {trade_plural} near you that finance", f"""<p>Ask three things when you call for quotes: do you offer financing, through which lender, and does the pre-qualification use a soft pull. Get the full price in writing before financing is discussed so you can see whether it changes. If a good local company doesn't offer a plan, bring your own: an unsecured loan arranged through a marketplace such as AL Elite pays any {trade} like cash, and often gets you the cash price. Our local guides cover licensing rules, rebates and contractor checks for the metros we serve:</p><ul class="inline-links">{CITY_LINKS}</ul>"""),
+            ("Eight questions before you sign the company's plan", """<ol><li>Who is the lender, and is this a loan or a credit line?</li><li>What is the APR after any promotional period ends?</li><li>Is the promotional interest deferred or waived?</li><li>Is there a dealer fee, and would the price be lower if I paid cash or used my own lender?</li><li>When does the lender pay you, and when does my first payment start?</li><li>Is there a prepayment penalty?</li><li>Does the pre-qualification use a soft inquiry?</li><li>Can I see the loan documents before I sign the work contract?</li></ol>"""),
+            ("If the company's plan declines you", f"""<p>Ask whether their program has a second-look lender; many do. If not, check options independently with a soft-pull pre-qualification, consider a co-applicant, or reduce the amount. For an urgent {trade} job, an independent unsecured loan can fund within days. Our <a href="{money}">{money_label}</a> page compares the options with example payments.</p>"""),
+            (f"Vetting the {trade} company", f"""<p>The financing plan is only as good as the company presenting it. Check the state license where one is required and the local address, confirm insurance, read reviews that mention financing specifically, and avoid anyone who pushes you to sign the loan application before the work contract or asks you to sign a partly blank form. The FTC's guide to hiring a contractor, linked in the sources below, lists the warning signs.</p>"""),
+            ("Questions to ask every lender", LENDER_QS),
+        ],
+        faqs=[
+            (f"Do {trade_plural} offer financing?", f"Most established {trade_plural} do, through lender partners. You apply at the quote, the lender approves and pays the company on completion, and you repay monthly."),
+            (f"Do {trade_plural} charge more if you finance?", "Some build the lender's dealer fee into the price, especially on promotional 0% plans. Ask for the cash price and the financed price and compare the total cost."),
+            (f"Can I use my own loan to pay a {trade} company?", f"Yes. An unsecured personal loan pays the company like cash, and many {trade_plural} offer a discount for it."),
+            (f"Do {trade_plural} finance customers with bad credit?", "Some programs include second-look lenders for lower scores at higher APRs. If declined, you can arrange financing independently, add a co-applicant or reduce the scope."),
+            (f"Is 0% financing from a {trade} company really free?", "Only if the interest is waived rather than deferred and you pay the full balance within the promotional period. The company usually pays a dealer fee, which can be built into your price."),
+        ],
+        related=[(money_label, money)] + related_posts,
+    )
+
+def money_(x):
+    return money(x, False)
+
+HVAC_CO = companies_post("hvac-companies-that-offer-financing", "HVAC", "HVAC companies", "/hvac-financing/", "HVAC financing", 9000, None,
+    ("Manufacturer programs: Trane, Carrier, Lennox and the rest", """<p>The big HVAC brands run financing programs through their dealers, usually with a bank partner such as Synchrony or Wells Fargo, and the promotional rates are often tied to specific higher-efficiency equipment. That can be a good deal if you wanted that equipment anyway; it's a poor one if the promo pushes you into a system two sizes up. Ask the company to quote the standard-efficiency system on the standard plan as well, so you can see both prices side by side. Utility rebates on efficient equipment apply whichever plan you choose and reduce the amount financed.</p>"""),
+    [("No credit check HVAC financing: what exists", "/blog/no-credit-check-hvac-financing/"), ("Furnace and AC replacement financing", "/blog/furnace-and-ac-replacement-financing/"), ("HVAC financing with bad credit", "/hvac-financing/bad-credit-hvac-financing/")], "HVAC (AC, furnace, heat pump)", "")
+
+WINDOW_CO = companies_post("window-companies-that-offer-financing", "window", "window companies", "/window-financing/", "window financing", 14000, None,
+    ("Why window companies lean so hard on promotional financing", """<p>Whole-house window replacement is a five-figure, planned purchase with a long sales cycle, which is exactly where "0% for 18 months" and "no payments for a year" offers work best for the seller. Big national window brands and franchise dealers build these plans into their in-home presentation, and the price quoted at the kitchen table often already includes the dealer fee. Two habits protect you: ask what the price is for cash or with your own lender before the financing is discussed, and get a second quote from a local installer who sells the same window class. Replacing the worst four or five windows first, rather than all twenty, keeps the amount manageable and the loan short.</p>"""),
+    [("Siding replacement cost", "/blog/siding-replacement-cost/"), ("Roofing companies that finance", "/blog/roofing-companies-that-offer-financing/"), ("Home improvement financing", "/home-improvement-financing/")], "Siding, gutters or windows", "")
+
+PLUMB_CO = companies_post("plumbers-that-offer-financing", "plumbing", "plumbers", "/plumbing-financing/", "plumbing financing", 4500, None,
+    ("Emergency plumbing and financing on the same visit", """<p>Plumbing financing is different from windows or kitchens because the job is usually urgent: a failed water heater, a sewer line backing up, a repipe after a slab leak. Larger plumbing companies offer financing on the truck, with a soft-pull pre-qualification on a tablet, because a $2,500 water heater or a $9,000 sewer line isn't in most households' checking account on a Tuesday. Amounts are often modest, so short terms make sense; a $2,500 water heater over 24 months costs far less in interest than over 60. For sewer lines and repipes, ask whether the company's plan has the limit you need, and compare an independent loan if it doesn't. Our guide to <a href="/blog/water-heater-replacement-cost/">water heater replacement cost</a> covers the most common emergency.</p>"""),
+    [("Water heater replacement cost", "/blog/water-heater-replacement-cost/"), ("Water heater financing", "/water-heater-financing/"), ("Bathroom remodel cost", "/blog/how-much-does-a-bathroom-remodel-cost/")], "Plumbing or water heater", "")
+
+ARTICLES_D = [NOCHECK, HVAC_CO, WINDOW_CO, PLUMB_CO]
+
+
+# ------------------------------------------------------------------ depth pass
+METAS = {
+ "/blog/no-credit-check-hvac-financing/": "No credit check HVAC financing near you: what those offers really are, soft-pull options that protect your score, and how to finance an AC with lower credit.",
+ "/blog/hvac-companies-that-offer-financing/": "How HVAC companies that offer financing set up their plans, what they cost, manufacturer programs, how to find one near you, and eight questions to ask.",
+ "/blog/window-companies-that-offer-financing/": "How window companies that offer financing price their plans, why 0% offers carry fees, how to find one near you, and the questions to ask first.",
+ "/blog/plumbers-that-offer-financing/": "How plumbers that offer financing handle emergency jobs, what plans cost, how to find one near you, and the questions to ask before signing.",
+}
+LENDERS = ("What lenders look at", """<p>Unsecured home improvement loans are approved on five things: your credit score and recent payment history, your income and how much of it already goes to debt, the amount requested, how long you've had credit, and a complete application. You can't change history overnight, but you can reduce the amount (rebates, a smaller scope, a down payment), pay a card balance below about 30% of its limit before the next statement, have pay stubs or bank statements ready, and check options with a soft pull before any hard inquiry. A co-applicant with stronger credit can open better terms; they share full responsibility for the loan.</p>""")
+DEFERRED = ("Deferred interest vs waived interest: the detail that decides the cost", """<p>Promotional plans come in two kinds that look identical on the flyer. With <strong>waived interest</strong>, nothing accrues during the promotion; pay it off in time and you paid zero. With <strong>deferred interest</strong>, interest accrues from day one at the plan's regular rate, often above 20%, and is charged in full if any balance remains at the end of the promotion, even a few dollars. On a $10,000 job that can mean more than $2,000 added at once. Ask which kind you're being offered, in writing, and only choose a promotional plan if you can clearly pay the balance inside the window. If you can't, a standard fixed-rate plan or your own loan at the cash price is cheaper.</p>""")
+TIMING = {
+ "/blog/no-credit-check-hvac-financing/": ("How the first visit should go", """<p>When the technician arrives, ask for the diagnosis in writing and to see the failed part. If it's a replacement, ask for two system options (standard and high-efficiency, both sized from a load calculation) with the price of each and the monthly figure on the company's standard plan, not only the promotional one. Then ask for a soft-pull pre-qualification before anything is signed. A good company will hold the quote for a day while you check one independent option. That single day usually saves more than any discount on the equipment.</p>"""),
+ "/blog/hvac-companies-that-offer-financing/": ("Timing and rebates", """<p>Emergency replacements happen in the worst weather, when HVAC companies are busiest and least flexible on price. If your system is old and you can plan ahead, spring and fall quotes are often easier to get and compare, and the financing conversation happens calmly. Whichever season, check utility rebates for high-efficiency equipment before you finance: they reduce the amount financed, and some utilities run their own on-bill financing programs that compete well with contractor plans.</p>"""),
+ "/blog/window-companies-that-offer-financing/": ("Timing, rebates and phasing", """<p>Window companies run promotions constantly, so a "limited-time" offer is rarely limited. Get the in-home quote, then get a second from a local installer, then decide. Energy-efficient windows may qualify for utility rebates that reduce the amount financed. And phasing (the worst windows this year, the rest next year) keeps the loan small and short, which matters more than any promotion.</p>"""),
+ "/blog/plumbers-that-offer-financing/": ("Repair, replace or wait a day", """<p>Not every plumbing emergency has to be solved at the first price. Ask whether a repair is safe and reasonable, whether a weekday install would be cheaper than the weekend call-out, and whether code items (expansion tank, pan, valves) are in the quote. For sewer lines, ask about trenchless options and get a camera inspection report you can show a second company. Then compare the plumber's plan with an independent loan at the cash price.</p>"""),
+}
+FAQ2 = {
+ "/blog/no-credit-check-hvac-financing/": [("Will checking HVAC financing options affect my mortgage?", "A soft-pull pre-qualification doesn't affect your credit or your mortgage. A hard application lowers your score slightly for a short time; if you're about to apply for a mortgage, time the HVAC application carefully."), ("Can I finance just a repair instead of a new system?", "Yes. Many HVAC companies offer in-house plans or small loans on repairs, and a repair that buys a season can be the better choice while you improve your credit for a replacement later.")],
+ "/blog/hvac-companies-that-offer-financing/": [("Which HVAC brands have financing programs?", "Trane, Carrier, Lennox, Rheem, Goodman and others run dealer financing through bank partners such as Synchrony or Wells Fargo, usually with promotional rates tied to specific equipment."), ("How long does HVAC financing approval take?", "Soft-pull pre-qualification is immediate; a formal application is usually decided within minutes to a day, and the company schedules the job once approved.")],
+ "/blog/window-companies-that-offer-financing/": [("Why are window company quotes so different?", "National brands price a sales process and a dealer fee into the quote; local installers selling similar window classes often come in lower. Always get two quotes on the same window specification."), ("Can I finance only a few windows?", "Yes. Lenders finance any amount within their limits, and phasing a whole-house replacement keeps the loan small and short.")],
+ "/blog/plumbers-that-offer-financing/": [("Can I finance a sewer line replacement?", "Yes. Sewer line and repipe jobs are commonly financed through the plumber's plan or an unsecured loan; check that the plan's limit covers the quote."), ("Is it cheaper to replace a water heater on a weekday?", "Often. Weekend and after-hours call-outs carry premiums. If you can safely wait a day, ask whether the price changes.")],
+}
+for _a in ARTICLES_D:
+    _a["meta"] = METAS[_a["path"]]
+    _secs = list(_a["sections"]); _i = next(i for i, s in enumerate(_secs) if s[0] == "Questions to ask every lender")
+    _extra = [TIMING[_a["path"]], LENDERS] if _a["path"].startswith("/blog/no-credit") else [TIMING[_a["path"]], DEFERRED, LENDERS]
+    _a["sections"] = _secs[:_i] + _extra + _secs[_i:]
+    _a["faqs"] = list(_a["faqs"]) + FAQ2[_a["path"]]
+
+NEAR = ("Near me: what 'local' actually changes", """<p>Lender availability is set by state, not by city, so a lender that funds this kind of work in your state funds it in every suburb too. What local changes is the contractor side: licensing rules, permit requirements, rebate programs and which companies have a real address and a track record in your area. That's why the contractor check matters as much as the loan comparison, and why our city guides focus on rules and rebates rather than on lenders.</p>""")
+for _a in ARTICLES_D:
+    _secs = list(_a["sections"]); _i = next(i for i, s in enumerate(_secs) if s[0] == "Questions to ask every lender")
+    _a["sections"] = _secs[:_i] + [NEAR] + _secs[_i:]
+    _a["meta"] = _a["meta"][:155]
