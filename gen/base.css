@@ -343,4 +343,16 @@ footer .cols{grid-template-columns:1.4fr repeat(4,1fr)}
 .sticky-cta a{flex:1;text-align:center;text-decoration:none;font-weight:700;padding:12px 10px;border-radius:10px;font-size:.95rem}
 .sticky-cta .go{background:var(--navy);color:#fff}.sticky-cta .call{border:1.5px solid var(--line);color:var(--navy);flex:0 0 auto;padding:12px 14px}
 @media (max-width:760px){.sticky-cta{display:block}.sticky-cta.hide{display:none}body{padding-bottom:70px}}
+.qm{position:fixed;inset:0;background:rgba(7,26,51,.62);display:none;align-items:center;justify-content:center;z-index:100000;padding:16px}.qm.open{display:flex}
+.qm .qm-box{background:#fff;border-radius:14px;max-width:440px;width:100%;padding:26px 24px 20px;position:relative;box-shadow:0 24px 60px rgba(0,0,0,.3)}
+.qm .qm-close{position:absolute;top:10px;right:12px;background:none;border:0;font-size:26px;line-height:1;cursor:pointer;color:var(--muted)}
+.qm .eyebrow{color:var(--gold);font-size:.74rem;font-weight:700;letter-spacing:.08em;margin:0 0 6px}
+.qm h3{font-family:var(--serif,Georgia,serif);color:var(--navy);margin:0 0 6px;font-size:1.3rem}
+.qm p{color:#3c4756;margin:0 0 14px;font-size:.95rem}
+.qm .qm-roles{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.qm .qm-roles label{border:1.5px solid var(--line);border-radius:10px;padding:10px;display:flex;gap:8px;align-items:center;cursor:pointer;font-weight:600;color:var(--navy)}
+.qm .qm-roles input:checked+span{color:var(--navy)}.qm .qm-roles label.on{border-color:var(--navy);background:var(--surface)}
+.qm select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:1rem;margin-bottom:10px}
+.qm .btn-next{width:100%;background:var(--navy);color:#fff;border:0;border-radius:8px;padding:13px;font:inherit;font-weight:700;cursor:pointer;font-size:1rem}
+.qm .fine{font-size:.78rem;color:var(--muted);margin:10px 0 0;text-align:center}
 .calc-handoff{margin-top:14px}.calc-handoff a{display:inline-block;background:var(--gold);color:#071a33;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none}
