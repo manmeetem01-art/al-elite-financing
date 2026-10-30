@@ -13,7 +13,7 @@ SHOW_DRAFT_NOTES = False
 # Lead inbox for the contact form and blog downloads (FormSubmit endpoint; must stay activated)
 LEAD_EMAIL = "manmeetsingh0177@gmail.com"
 # Google Analytics 4 measurement ID (G-XXXXXXXXXX). Empty = no analytics tag.
-GA_ID = ""
+GA_ID = "G-DSYQ2B76FM"
 
 EXTRA_CSS = """
 /* Inner-page additions */
