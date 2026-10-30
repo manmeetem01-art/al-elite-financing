@@ -70,7 +70,7 @@ CITY = {
     contractors="Colorado's deductible law applies: contractors cannot waive or rebate deductibles, and homeowners can cancel if the claim is denied. Local contractors who explain this clearly build trust.",
 ),
 "Kansas City": dict(
-    suburbs=["Overland Park", "Olathe", "Independence", "Lee's Summit", "Shawnee", "Blue Springs", "Lenexa", "Leawood", "Liberty", "Raytown", "Gladstone", "Grandview", "Prairie Village"],
+    suburbs=["Overland Park", "Olathe", "Independence", "Lee's Summit", "Shawnee", "Blue Springs", "Lenexa", "Leawood", "Liberty", "Raytown", "Gladstone", "Grandview", "Grain Valley", "Prairie Village"],
     intro="Kansas City straddles the Missouri-Kansas line, which matters for financing: lender licensing, insurance rules and permit regimes differ between Johnson County and Jackson County even when the storm that damaged both roofs was the same. Spring hail and wind drive roofing; cold winters and hot summers push furnaces and AC systems; and a large stock of mid-century and older housing keeps foundation, basement waterproofing and window work steady.",
     housing="Historic housing in Brookside, Waldo and the Northeast, post-war suburbs in Raytown and Independence, and 1980s-onward construction across Johnson County (Overland Park, Olathe, Lenexa, Leawood) and Lee's Summit. Basements are the norm, so waterproofing is a common financed project.",
     services="Roofing and HVAC lead, with basement waterproofing, windows, siding and fences following. Kitchen remodels are common in the Johnson County resale market.",
@@ -140,7 +140,7 @@ CITY = {
     contractors="A booming contractor market with strong demand and long waits in peak season. Tennessee requires licensing for larger residential projects; homeowners should verify it.",
 ),
 "Salt Lake City": dict(
-    suburbs=["West Valley City", "Sandy", "West Jordan", "Murray", "Draper", "South Jordan", "Taylorsville", "Herriman", "Riverton", "Lehi", "Millcreek", "Holladay", "Cottonwood Heights", "Bountiful"],
+    suburbs=["West Valley City", "Sandy", "West Jordan", "Murray", "Draper", "South Jordan", "Taylorsville", "Herriman", "Riverton", "Lehi", "Ogden", "Layton", "Bountiful", "Provo", "Orem"],
     intro="Salt Lake City's projects are driven by age, sun and snow rather than storms: the Wasatch Front gets intense high-altitude sun, heavy winter snow loads and hot dry summers, and the valley's housing ranges from early-1900s homes in the Avenues and Sugar House to the fast-growing south valley from Draper to Herriman and Lehi. Roof financing searches from Salt Lake City are among the highest of any metro we serve, and most are for planned replacements rather than claims.",
     housing="Brick bungalows and Victorians in the central neighborhoods, 1950s to 1970s ranches in Murray, Taylorsville and Holladay, and 1990s-onward construction across the south and west valley. Many homes have evaporative coolers being replaced with central AC.",
     services="Roofing (planned, age-driven), HVAC including evaporative-to-refrigerated AC conversions and high-efficiency furnaces, windows and insulation for the winter, water heaters, fences and kitchen remodels. Solar is popular along the Wasatch Front.",

@@ -64,8 +64,8 @@ def city_page_dict(c):
     return dict(
         path=path, crumbs=[HOME, LOC, (state, f"/locations/{STATE_SLUG[state]}/"), (city, path)],
         eyebrow=f"Home improvement financing in {city}, {ab}", h1=f"Roof, HVAC and home improvement financing in {city}, {state}",
-        title=f"Roof Financing in {city}, {ab} | HVAC & Home Improvement Loans",
-        meta=f"Roof financing, HVAC financing and home improvement loans in {city}, {state}: local costs and rules, suburbs we serve, every project type, and customer financing for {city} contractors.",
+        title=f"Roof Financing in {city}, {ab}: Roofers That Finance, HVAC & Home Loans",
+        meta=f"Roof financing in {city}, {state}: how to find roofing companies that finance, monthly payment options, HVAC and home improvement loans, local rules, suburbs we serve, and contractor programs.",
         answer=answer, why=why, risk_label=risk_label, storm_para=storm_para, demand=demand, angle=angle, city=city, state=state, ab=ab, siblings=sib_html,
     )
 
@@ -98,8 +98,10 @@ def city_page(b, c):
 <div class="s"><span class="k">Also serving</span><span class="v" style="font-size:1rem">{p['siblings']}</span><small>Other {esc(state)} metros</small></div>
 </div>
 <figure class="local-card"><img src="{L('/locations/cards/' + path.strip('/').split('/')[-1] + '.png')}" alt="{esc(city)}, {ab} home financing snapshot: primary risk, deductible rules and projects financed" width="1200" height="675" loading="lazy"></figure>
-<h2 id="about">Financing home projects in {esc(city)}</h2><p>{esc(lc['intro'])}</p><p>{esc(lc['housing'])}</p>
+<h2 id="about">Financing home projects in {esc(city)}</h2><p>{esc(lc['intro'])}</p><p>This guide covers the {esc(city)} metro. For statewide rules, rebates and the other metros we serve, see <a href="{L('/locations/' + STATE_SLUG[state] + '/')}">roof, HVAC and home improvement financing in {esc(state)}</a>.</p><p>{esc(lc['housing'])}</p>
 <h2 id="suburbs">Suburbs and communities we serve around {esc(city)}</h2><p>Lenders in our network fund projects across the {esc(city)} metro, not only inside the city limits. Homeowners and contractors in {sub_text} get the same matching, the same disclosures and the same {esc(state)} lender coverage. If your community isn't listed, it's still covered; the list is the places we hear from most.</p>
+<h2 id="roofers-that-finance">Roofing companies in {esc(city)} that finance: how to find one and what to ask</h2>
+<p>Most established {esc(city)} roofers offer financing or monthly payment plans, almost always through a lender partner rather than their own money. Ask three things when you call for quotes: do you offer financing, through which lender, and does the pre-qualification use a soft credit pull. Get the full price in writing before the plan is discussed so you can see whether it changes, and ask what the price is for cash. If a good local roofer doesn't offer a plan, an unsecured loan arranged through AL Elite pays any roofer like cash. In {esc(state)}, never accept an offer to waive or absorb your insurance deductible; finance it instead. Our guide to <a href="{L('/blog/roofing-companies-that-offer-financing/')}">roofing companies that finance</a> has the eight questions to ask, and <a href="{L('/blog/hvac-companies-that-offer-financing/')}">HVAC companies that offer financing</a> covers the same for AC and furnace work in {esc(city)}.</p>
 <h2 id="why-roofs-here">Why roofs in {esc(city)} get replaced early</h2>{p['storm_para']}<p>{esc(p['angle'])} {esc(p['demand'])}</p>
 <h2 id="costs">Financing a roof, HVAC or home project in {esc(state)}: local costs and rules</h2>
 {local_section(state, city)}
@@ -140,7 +142,10 @@ def locations_hub(b):
         ("Does AL Elite have offices in these cities?", "AL Elite matches homeowners and contractors online and by phone."),
     ]
     body = f"""{crumbs_html(b, d, [HOME, LOC])}
-<section class="page-hero"><div class="wrap" style="grid-template-columns:1fr"><div class="stack article-head"><p class="eyebrow">Locations</p><h1>Home improvement, roof and HVAC financing by state and city</h1><p class="answer-first" id="speakable-summary">AL Elite matches homeowners and contractors with lenders across the United States, with local pages for 20 metros where hail, hurricanes and insurer roof-age rules make roof financing a frequent, urgent need: Texas, Oklahoma, Colorado, Missouri, Kansas, Nebraska, Indiana, Minnesota, Florida, Tennessee and Utah.</p></div></div></section>
+<section class="page-hero"><div class="wrap" style="grid-template-columns:1fr"><div class="stack article-head"><p class="eyebrow">Locations</p><h1>Roof, HVAC and home improvement financing near me: find your state and city</h1><p class="answer-first" id="speakable-summary">Searching for roof financing near me, roofing companies near me that finance, or HVAC financing near me? Lender availability is set by state, so start with your state below, then your metro for local rules, rebates and contractor checks. AL Elite matches homeowners and contractors with lenders across the United States, with local guides for 27 metros in 17 states.</p></div></div></section>
+<section><div class="wrap"><article class="prose">
+<h2 id="near-me">"Near me" financing: what local actually changes</h2><p>The lenders are national or state-licensed, so a lender that funds roofs in your state funds them in every suburb. What "near me" really decides is the contractor side: licensing rules, permit requirements, insurance deductible laws, utility rebates and which roofing and HVAC companies have a real address and a track record in your area. Each metro guide below covers those, plus how to find roofing companies that finance and HVAC companies that offer financing locally. If your town isn't listed, your state hub applies; the matching is the same.</p>
+</article></div></section>
 <section><div class="wrap"><div class="sitemap-cols">{groups}</div></div></section>
 <section><div class="wrap layout"><article class="prose"><h2>What a city page gives you</h2><p>Each local page covers why roofs in that market are replaced early, how insurance deductibles and gaps are financed legally, local cost and rule notes, and which partner contractors in that metro offer financing through AL Elite. Every page links to the same lender-matching request; the difference is the local context.</p><h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}</article>
 <aside class="side"><div class="box"><h3>Start here</h3><ul><li><a href="{L('/roof-financing/')}">Roof financing</a></li><li><a href="{L('/hvac-financing/')}">HVAC financing</a></li><li><a href="{L('/for-contractors/')}">For contractors</a></li></ul></div></aside></div></section>
@@ -150,7 +155,7 @@ def locations_hub(b):
         {"@type": "ItemList", "itemListElement": [{"@type": "ListItem", "position": i + 1, "name": f"{c[0]}, {c[2]}", "url": DOMAIN + c[3]} for i, c in enumerate(CITIES)]},
         breadcrumb_schema([HOME, LOC]), faq_schema(faqs, url),
     ]
-    return page(b, path, "Home Improvement Financing by State & City | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Local guides for 27 metros in 17 states, from Houston, Dallas and Phoenix to Chicago, Atlanta, Charlotte and Miami. AL Elite matches you with lenders nationwide.", body, schema)
+    return page(b, path, "Roof & Home Improvement Financing Near Me | Find Your City | AL Elite", "Roof financing, HVAC financing and contractor financing by city: Local guides for 27 metros in 17 states, from Houston, Dallas and Phoenix to Chicago, Atlanta, Charlotte and Miami. AL Elite matches you with lenders nationwide.", body, schema)
 
 
 # ------------------------------------------------------------------ state hub pages (Oct 2026 local pass)
@@ -176,6 +181,7 @@ def state_page(b, state):
 <section><div class="wrap layout"><article class="prose">
 <figure class="local-card"><img src="{L('/locations/cards/' + slug + '.png')}" alt="{esc(state)} home financing snapshot: storm exposure, deductible rules and programs" width="1200" height="675" loading="lazy"></figure>
 <h2 id="overview">Home projects in {esc(state)}: what gets financed and why</h2><p>{esc(sh['intro'])}</p>
+<h2 id="roof">Roof financing, roof replacement financing and roof repair financing in {esc(state)}</h2><p>Whether the search is for roof financing, roof replacement financing or roof repair financing in {esc(state)}, the loan products are the same: unsecured roof loans, contractor plans and home equity products. What changes is the amount: a repair is a short loan, a replacement after a claim is usually the deductible and uncovered items, and an age-driven replacement without a claim is the full job. The same lenders also fund HVAC, kitchens, fences, generators and the rest of the house across {esc(state)}; lender availability is set at the state level, so every town in {esc(state)} gets the same matching as the metros below.</p>
 <h2 id="metros">Local guides for {esc(state)}</h2><div class="grid-cards">{metro_cards}</div>
 <h2 id="rules">{esc(state)} rules that affect your project and your financing</h2><p>{esc(sh['rules'])}</p>
 <h2 id="programs">Rebates, assistance and government-backed programs in {esc(state)}</h2><p>{esc(sh['programs'])} Links to the federal programs are in the sources at the end of this page.</p>
