@@ -6,6 +6,7 @@ from builder import build
 from resources_a import RESOURCES as RA
 from resources_b import RESOURCES as RB
 from resources_c import RESOURCES as RC
+from resources_d import RESOURCES as RD
 from PIL import Image, ImageDraw, ImageFont, ImageFilter
 
 OUT = os.path.join(os.path.dirname(__file__), "..", "static", "resources")
@@ -74,7 +75,7 @@ def wrap(d, text, font, width):
 
 if __name__ == "__main__":
     done = set()
-    for r in RA + RB + RC:
+    for r in RA + RB + RC + RD:
         if r['slug'] in done: continue
         done.add(r['slug'])
         pdf = os.path.join(OUT, r["slug"] + ".pdf")
