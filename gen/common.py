@@ -12,6 +12,8 @@ MODIFIED = "2026-10-22"
 SHOW_DRAFT_NOTES = False
 # Lead inbox for the contact form and blog downloads (FormSubmit endpoint; must stay activated)
 LEAD_EMAIL = "manmeetsingh0177@gmail.com"
+# Google Analytics 4 measurement ID (G-XXXXXXXXXX). Empty = no analytics tag.
+GA_ID = ""
 
 EXTRA_CSS = """
 /* Inner-page additions */
@@ -358,6 +360,8 @@ def trim_meta(meta, limit=160):
     j = cut.rfind(", ")
     return (meta[:j] if j > 80 else cut.rstrip()) + "."
 
+from growth import ga_snippet
+
 def strip_draft(h):
     """Remove team-only notes from visitor-facing HTML."""
     if SHOW_DRAFT_NOTES:
@@ -394,6 +398,7 @@ def page(b, path, title, meta, body_html, schema_nodes, og_title=None, extra_scr
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(meta)}">
 <meta name="robots" content="{robots}">
+{ga_snippet(GA_ID)}
 <link rel="canonical" href="{url}">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96.png">

@@ -2,6 +2,7 @@
 import os, re, sys, json, shutil
 sys.path.insert(0, os.path.dirname(__file__))
 from common import *
+from common import GA_ID
 from render import service_page, hub_page, plain_page, article_page
 from consumer import CONSUMER_SERVICE_PAGES, CONSUMER_HUBS
 from contractors import CONTRACTOR_SERVICE_PAGES, CONTRACTOR_HUBS
@@ -15,6 +16,7 @@ from trust import TRUST_PAGES
 ROOT = os.path.dirname(os.path.dirname(__file__))
 from usmap import us_map_section, US_MAP_CSS
 from nav_css import DD_CSS
+from growth import GROWTH_CSS, GROWTH_JS, sticky_cta, ga_snippet
 HOME_SRC = open(os.path.join(os.path.dirname(__file__), "home-index.html")).read()
 
 def rewrite_links(html_text, depth):
@@ -65,7 +67,7 @@ def build(mode, outdir):
     os.makedirs(outdir)
     pages = {}
     # Homepage: use the hand-built index.html; in artifact mode strip to body-only and rewrite links.
-    pages["/"] = HOME_SRC.replace("</style>", US_MAP_CSS + DD_CSS + "</style>", 1)
+    pages["/"] = HOME_SRC.replace("</style>", US_MAP_CSS + DD_CSS + GROWTH_CSS + "</style>", 1).replace('<link rel="canonical"', ga_snippet(GA_ID) + '\n<link rel="canonical"', 1)
     for p in CONSUMER_SERVICE_PAGES + CONTRACTOR_SERVICE_PAGES: pages[p["path"]] = service_page(b, p)
     for p in CONSUMER_HUBS + CONTRACTOR_HUBS: pages[p["path"]] = hub_page(b, p)
     for p in TOOL_PAGES: pages[p["path"]] = tool_page(b, p)
@@ -86,6 +88,8 @@ def build(mode, outdir):
     for path in pages:
         assert pages[path].count("<footer>") == 1, path
         pages[path] = pages[path].replace("<footer>", band + "<footer>", 1)
+        _d = depth_of(path)
+        pages[path] = pages[path].replace("<footer>", sticky_cta(lambda x: x) + "<footer>", 1).replace("</body>", "<script>" + GROWTH_JS + "</script></body>", 1)
         src = seo_pass.sources_block(path)
         if src and pages[path].count("</article>") == 1:
             pages[path] = pages[path].replace("</article>", src + "</article>", 1)

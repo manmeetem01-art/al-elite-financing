@@ -329,3 +329,18 @@ nav.primary .dd .dd-all a{font-weight:600;color:var(--navy)}
 @media (max-width:900px){nav.primary .dd{display:block;position:static;transform:none;box-shadow:none;border:0;padding:0 0 0 14px;margin:0}nav.primary .dd-col{min-width:0}nav.primary .dd a{padding:6px 4px;font-size:.98rem;white-space:normal}nav.primary li.has-dd::after{display:none}}
 footer .cols{grid-template-columns:1.4fr repeat(4,1fr)}
 @media (max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+
+.lead .step{display:none;border:0;padding:0;background:none}.lead .step.on{display:block}.lead .step::before{content:none}
+.lead .progress{display:flex;gap:6px;margin:0 0 16px}.lead .progress span{flex:1;height:4px;border-radius:2px;background:var(--line)}.lead .progress span.done{background:var(--gold)}
+.lead .step-title{font-family:var(--serif,Georgia,serif);color:var(--navy);font-size:1.15rem;margin:0 0 12px}
+.lead .step-nav{display:flex;gap:10px;align-items:center;margin-top:14px;flex-wrap:wrap}
+.lead .btn-back{background:none;border:1.5px solid var(--line);border-radius:var(--radius,8px);padding:10px 14px;color:var(--navy);font:inherit;font-weight:600;cursor:pointer}
+.lead .btn-next{background:var(--navy);color:#fff;border:0;border-radius:var(--radius,8px);padding:12px 20px;font:inherit;font-weight:700;cursor:pointer}
+.lead .btn-next:hover{background:var(--navy-deep)}
+.lead .step-note{font-size:.82rem;color:var(--muted);margin:8px 0 0}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:900;display:none;background:#fff;border-top:1px solid var(--line);box-shadow:0 -8px 24px rgba(11,37,69,.12);padding:10px 12px calc(10px + env(safe-area-inset-bottom,0px))}
+.sticky-cta .in{display:flex;gap:10px;align-items:center;max-width:720px;margin:auto}
+.sticky-cta a{flex:1;text-align:center;text-decoration:none;font-weight:700;padding:12px 10px;border-radius:10px;font-size:.95rem}
+.sticky-cta .go{background:var(--navy);color:#fff}.sticky-cta .call{border:1.5px solid var(--line);color:var(--navy);flex:0 0 auto;padding:12px 14px}
+@media (max-width:760px){.sticky-cta{display:block}.sticky-cta.hide{display:none}body{padding-bottom:70px}}
+.calc-handoff{margin-top:14px}.calc-handoff a{display:inline-block;background:var(--gold);color:#071a33;font-weight:700;padding:11px 18px;border-radius:8px;text-decoration:none}
