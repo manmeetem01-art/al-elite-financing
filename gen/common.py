@@ -257,7 +257,7 @@ def footer(b, d):
 <div class="disclosures">
 <p><strong>Important disclosures.</strong> AL Elite Financing is not a lender, bank or credit union and does not make credit decisions, set rates or fund loans. We operate a lead-matching marketplace that connects consumers and businesses with third-party lenders. Lenders may compensate us for introductions. Any loan offer, APR, fee, term or approval is determined solely by the lender and is subject to their credit approval and underwriting. Not all applicants will qualify. Loan products and lender availability vary by state.</p>
 <p>Payment figures shown on this site are illustrations based on standard amortization and are not offers of credit. Your actual terms may differ. Nothing on this site is legal, tax or financial advice.</p>
-<p>Last reviewed: {REVIEWED}.</p>
+<p>Last reviewed: {REVIEWED}. <a href="#privacy-choices">Cookie and privacy choices</a></p>
 </div>
 <div class="legal-row"><span>&copy; 2026 AL Elite Financing. All rights reserved.</span>
 <ul><li><a href="{L('/privacy/')}">Privacy</a></li><li><a href="{L('/terms/')}">Terms</a></li><li><a href="{L('/accessibility/')}">Accessibility</a></li><li><a href="{L('/do-not-sell/')}">Do not sell or share my information</a></li></ul></div>

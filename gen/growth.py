@@ -118,4 +118,4 @@ def ga_snippet(ga_id):
     if not ga_id:
         return ""
     return f"""<script async src="https://www.googletagmanager.com/gtag/js?id={ga_id}"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('js',new Date());gtag('config','{ga_id}',{{anonymize_ip:true}});</script>"""
+<script>window.dataLayer=window.dataLayer||[];function gtag(){{dataLayer.push(arguments);}}gtag('consent','default',{{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied',wait_for_update:1500}});gtag('js',new Date());gtag('config','{ga_id}',{{anonymize_ip:true}});</script>"""
