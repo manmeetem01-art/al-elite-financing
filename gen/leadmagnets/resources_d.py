@@ -75,3 +75,42 @@ RESOURCES.append(dict(
     pitch="A free fillable checklist: 2025-install credit claim steps, a rebate finder for utility, state and HEAR/HOMES programs, quote comparison, amount-to-finance calculator and lender questions.",
     bullets=["Still-eligible 2025 install: Form 5695 steps", "Rebate finder: utility, state, HEAR and HOMES", "Heat pump vs furnace quote comparison", "Amount-to-finance and monthly payment worksheet"],
 ))
+
+
+def body_pipes(d):
+    d.section("First hour: thaw or shut off", "Step 1 of 5")
+    d.h2("If frozen (no water, no leak)")
+    d.check(["Faucet opened (hot and cold)", "Frozen section located (exterior wall, crawlspace, garage, under sink)", "Warmed gently from the faucet end: hair dryer, heating pad, warm towels; no flame", "Cabinet doors opened; other cold faucets dripping", "Heat turned up and kept on", "Plumber called if the section is in a wall or can't be found"])
+    d.h2("If burst (water where it shouldn't be)")
+    d.check(["Main water valve shut off (location: ____________________)", "Water heater turned off", "Electricity off near water", "Faucets opened to drain lines", "Photos taken before moving anything", "Water removal and drying started; receipts kept", "Plumber called, then insurer notified"])
+
+    d.section("Damage and claim log", "Step 2 of 5")
+    d.fields([("Date and time discovered", None), ("Outdoor temperature / thermostat setting", "Insurers ask whether heat was maintained"), ("Location of the pipe", None), ("Cause stated by plumber", "Ask for it on the invoice"), ("Insurer and policy number", None), ("Claim number and date filed", None), ("Deductible ($)", None), ("Adjuster name and phone", None)])
+    d.table(["Damaged item / area", "Photos taken? (Y/N)", "Estimated cost", "Covered? (per adjuster)"], ["", "", "", "", "", ""])
+    d.callout("Keep", "Plumber's invoice with cause, remediation invoices, receipts for fans/dehumidifiers, photos of the pipe before repair and of every damaged area.")
+
+    d.section("Plumber quote comparison", "Step 3 of 5")
+    d.table(["Line", "Plumber 1", "Plumber 2", "Plumber 3"], ["Company and licence #", "Call-out / emergency fee", "Thaw or repair price", "Opening and closing walls", "Other sections to insulate / reroute", "Pipe material (copper, PEX, galvanized, PB)", "Repipe recommended? Price", "Permit and warranty", "Weekday vs after-hours price", "Cash price", "Financed price (if different)", "TOTAL"])
+
+    d.section("What insurance pays, what you finance", "Step 4 of 5")
+    d.calc([("A", "Plumber + remediation + repairs total", None, False), ("B", "Insurer's approved payment", "After the deductible", False), ("C", "Savings you'll put in", None, False), ("D", "Amount to finance  =  A − B − C", None, True)])
+    d.table(["Offer", "APR incl. fees", "Term", "Monthly", "Total repaid", "Soft pull?"], ["Plumber's plan", "Independent lender 1", "Independent lender 2", "0% card (if clearable in time)"])
+    d.callout("Rule of thumb", "Small amounts, short terms. A $3,000 repair over 24 months costs far less in interest than over 60.")
+
+    d.section("Prevent the next one, and decide", "Step 5 of 5")
+    d.check(["Exposed pipes insulated (foam sleeves / heat tape)", "Exterior hoses disconnected; spigots drained", "Thermostat minimum 55°F, low-temperature alert set", "Gaps near pipes sealed", "Leak sensor or smart shut-off installed", "Shut-off valve labelled and the household knows where it is"])
+    d.h2("Questions for every lender")
+    d.check(["What is the APR including fees, and is the rate fixed?", "Is there an origination fee, and is it deducted from the loan?", "Is any promotional period deferred interest or waived interest?", "Is there a prepayment penalty?", "Does checking my options use a soft or hard credit inquiry?"])
+    d.multi("Decision, dates and notes", 60)
+    d.cta("Ready to compare plumbing financing?", "alelitefinancing.com/plumbing-financing/ reaches lenders who fund plumbing repairs and repipes in your state, soft-inquiry options first. Or call (888) 968-0079.")
+
+RESOURCES.append(dict(
+    slug="frozen-pipe-emergency-checklist", blog="/blog/what-to-do-if-pipes-freeze/", pages=6,
+    spec=dict(title="Frozen Pipe Emergency, Claim & Repair Checklist", tag="Frozen pipe checklist", kicker="Free checklist · frozen and burst pipes",
+              title_lines=["Frozen Pipe Emergency,", "Claim & Repair Checklist"],
+              subtitle="Thaw safely or shut off fast, log the damage for the insurer, compare plumber quotes on the same lines and finance only what insurance doesn't pay.",
+              inside=["First-hour thaw and shut-off steps", "Damage and claim log", "Plumber quote comparison", "Insurance vs financing worksheet", "Prevention checklist", "Lender questions"], body=body_pipes),
+    headline="Thaw it, stop the damage, and <em>get the claim and the repair right</em>",
+    pitch="A free fillable checklist for frozen and burst pipes: the first-hour steps, shut-off and damage log, insurance claim record, plumber quote comparison and a financing worksheet for what insurance doesn't pay.",
+    bullets=["First-hour thaw and shut-off checklist", "Damage photo and claim log", "Plumber quote comparison", "Amount-to-finance and lender questions"],
+))
