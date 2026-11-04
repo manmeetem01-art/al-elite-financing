@@ -60,6 +60,7 @@ PAGE_SOURCES = {
     "/tools/solar-loan-calculator/": ["cfpb_pace_rule", "cfpb_pace_report", "ftc_contractor"],
     "/tools/hvac-financing-calculator/": ["doe_wap", "trane_fin", "carrier_fin", "acr"],
     "/blog/heat-pump-tax-credit-2026/": ["irs_obbb", "doe_wap", "acr"],
+    "/blog/ice-dams-removal-cost-insurance-prevention/": ["irs_obbb", "doe_wap", "ftc_contractor"],
     "/tools/pool-loan-calculator/": ["ftc_contractor", "acr"],
     "/tools/fence-cost-calculator/": ["ftc_contractor", "acr"],
     "/tools/*": ["hud_title1", "acr"],
@@ -219,6 +220,9 @@ def apply(pages_by_path):
     add_related("/tools/equipment-loan-calculator/", tools_hub, ("Roof financing calculator", "/tools/roof-financing-calculator/"))
     add_related("/roof-financing/", ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"), ("Roof replacement cost calculator", "/tools/roof-replacement-cost-calculator/"))
     add_related("/hvac-financing/", ("HVAC financing calculator", "/tools/hvac-financing-calculator/"))
+    add_related("/roof-financing/roof-repair-financing/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
+    add_related("/blog/what-to-do-if-pipes-freeze/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
+    add_related("/blog/heat-pump-tax-credit-2026/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
     add_related("/hvac-financing/bad-credit-hvac-financing/", ("HVAC financing calculator", "/tools/hvac-financing-calculator/"))
     add_related("/pool-financing/", ("Pool loan calculator", "/tools/pool-loan-calculator/"))
     add_related("/fence-financing/", ("Fence cost calculator", "/tools/fence-cost-calculator/"))

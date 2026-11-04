@@ -114,3 +114,41 @@ RESOURCES.append(dict(
     pitch="A free fillable checklist for frozen and burst pipes: the first-hour steps, shut-off and damage log, insurance claim record, plumber quote comparison and a financing worksheet for what insurance doesn't pay.",
     bullets=["First-hour thaw and shut-off checklist", "Damage photo and claim log", "Plumber quote comparison", "Amount-to-finance and lender questions"],
 ))
+
+
+def body_icedam(d):
+    d.section("First hour: safe steps", "Step 1 of 5")
+    d.check(["Snow raked from the bottom 3 to 4 feet of the roof from the ground (roof rake, no ladder)", "Fan pointed at the underside of the roof in the attic; bath fans and lights venting into the attic closed off", "Calcium chloride tube (not rock salt) laid across the dam to melt a channel", "Buckets under drips; belongings moved; ceiling bulge drained into a bucket", "Photos taken of the ice, the roof edge, the ceilings and every damaged item", "Steam removal booked with a professional"])
+    d.callout("Never do this", "Do not chip or pry ice with a hammer, pick or shovel. Do not use a torch, heat gun or boiling water. Do not climb an icy roof or ladder. Do not pour rock salt on shingles.")
+    d.fields([("Date and time first noticed", None), ("Outdoor temperature / snowfall", None), ("Where water is entering inside", None), ("Roof age (years) and type", None)])
+
+    d.section("Damage and claim log", "Step 2 of 5")
+    d.fields([("Insurer and policy number", None), ("Deductible ($)", None), ("Claim number and date filed", None), ("Adjuster name and phone", None)])
+    d.table(["Damaged item / area", "Photos taken? (Y/N)", "Estimated cost", "Covered? (per adjuster)"], ["Ceiling / drywall", "Insulation", "Flooring", "Belongings", "Gutters / fascia", "Roof / decking / flashing"])
+    d.callout("Keep", "Receipts for steam removal, fans and drying; the contractor's written cause of damage; photos before cleanup. Ask the adjuster in writing what is covered and whether emergency measures are reimbursed.")
+
+    d.section("Quote comparison", "Step 3 of 5")
+    d.table(["Line", "Quote 1", "Quote 2", "Quote 3"], ["Company and licence #", "Ice removal price (per hour / minimum)", "Roof repair: shingles / flashing / valley", "Decking replacement (per sheet)", "Ice-and-water shield at eaves", "Attic air sealing", "Insulation R-value and price", "Soffit / ridge ventilation, baffles", "Rebates applied", "Warranty", "Cash price", "TOTAL"])
+
+    d.section("Insurance vs financing", "Step 4 of 5")
+    d.calc([("A", "Removal + repairs + insulation total", None, False), ("B", "Insurer's approved payment", "After the deductible", False), ("C", "Utility or state rebates", None, False), ("D", "Savings you'll put in", None, False), ("E", "Amount to finance  =  A − B − C − D", None, True)])
+    d.table(["Offer", "APR incl. fees", "Term", "Monthly", "Total repaid", "Soft pull?"], ["Contractor plan", "Independent lender 1", "Independent lender 2", "Home equity (if re-roofing too)"])
+    d.callout("Order of work", "Air seal first, then insulate, then ventilate. Insulating over unsealed gaps does not stop the heat leak that melts the snow.")
+
+    d.section("Prevention and decision", "Step 5 of 5")
+    d.check(["Attic floor air sealed (lights, hatch, chimney, plumbing)", "Insulation at the recommended level for the climate zone", "Soffit intake and ridge exhaust clear; baffles keep insulation off soffit vents", "Bath fans and dryer vented outdoors", "Gutters cleared in autumn", "Roof rake stored where it can be reached", "Heat cables considered only as a backup, not the fix"])
+    d.h2("Questions for every lender")
+    d.check(["What is the APR including fees, and is the rate fixed?", "Is there an origination fee, and is it deducted from the loan?", "Is any promotional period deferred interest or waived interest?", "Is there a prepayment penalty?", "Does checking my options use a soft or hard credit inquiry?"])
+    d.multi("Decision, dates and notes", 56)
+    d.cta("Ready to compare financing?", "alelitefinancing.com/roof-financing/roof-repair-financing/ reaches lenders who fund roof repairs, insulation and re-roofing in your state, soft-inquiry options first. Or call (888) 968-0079.")
+
+RESOURCES.append(dict(
+    slug="ice-dam-winter-leak-checklist", blog="/blog/ice-dams-removal-cost-insurance-prevention/", pages=6,
+    spec=dict(title="Ice Dam & Winter Roof Leak Checklist and Claim Log", tag="Ice dam checklist", kicker="Free checklist · ice dams and winter roof leaks",
+              title_lines=["Ice Dam & Winter Roof", "Leak Checklist and Claim Log"],
+              subtitle="Remove an ice dam safely, log the damage for your insurer, compare removal, repair and insulation quotes on the same lines, and finance only what isn't covered.",
+              inside=["Safe first-hour steps", "Damage and claim log", "Quote comparison table", "Insurance vs financing worksheet", "Prevention checklist", "Lender questions and decision"], body=body_icedam),
+    headline="Remove it safely, log the damage for the claim, and <em>fix the cause once</em>",
+    pitch="A free fillable checklist for ice dams and winter roof leaks: safe first steps, damage and claim log, removal and insulation quote comparison, what insurance pays versus what to finance, and a prevention list.",
+    bullets=["Safe first-hour steps and what never to do", "Damage photo and claim log", "Removal, insulation and roof repair quote comparison", "Insurance vs financing worksheet"],
+))
