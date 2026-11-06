@@ -28,7 +28,7 @@ def apply(P):
         p["sections"] = [
             ("Do roofers offer financing?", """<p>Most do. Roofing is a five-figure purchase that often arrives unplanned, so the majority of established roofing companies have at least one financing program, and many advertise "financing available" on their trucks and estimates. What differs is how it's set up. A few large companies carry their own paper; nearly everyone else enrolls with consumer lenders that specialize in home improvement. The roofer presents the plan, the lender makes the credit decision and pays the roofer on completion.</p>
 <p>So the useful question isn't "do roofers offer financing" but "which plan is this roofer offering, who is the lender, and what does it cost compared with a loan I arrange myself?"</p>"""),
-            ("How to find roofing companies near you that finance", f"""<p>Three reliable ways:</p>
+            ("Roofing companies near me that finance: how to find them", f"""<p>Three reliable ways:</p>
 <ul><li><strong>Ask at the estimate.</strong> Any roofer with a program will say so. Ask which lender, which plans and whether a cash discount exists.</li>
 <li><strong>Check manufacturer networks.</strong> GAF and Owens Corning certified contractors often have access to manufacturer-backed financing with extended warranties.</li>
 <li><strong>Bring your own financing.</strong> If a good local roofer doesn't offer a plan, that's not a reason to pick a worse roofer. An unsecured loan arranged through a marketplace such as AL Elite pays any roofer like cash, and often gets you the cash price.</li></ul>

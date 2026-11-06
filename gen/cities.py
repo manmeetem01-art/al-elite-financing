@@ -64,7 +64,7 @@ def city_page_dict(c):
     return dict(
         path=path, crumbs=[HOME, LOC, (state, f"/locations/{STATE_SLUG[state]}/"), (city, path)],
         eyebrow=f"Home improvement financing in {city}, {ab}", h1=f"Home improvement financing in {city}, {state}: roofs, HVAC, kitchens, generators and contractor programs",
-        title=f"{city} Home Improvement Financing: Roof, HVAC, Kitchen & More",
+        title=f"{city} Home Improvement Financing: Roof, HVAC & More",
         meta=f"Home improvement financing in {city}, {state}: roof and HVAC financing, kitchen and bathroom remodel loans, fence, generator and foundation financing, local rules and rebates, and customer financing for {city} contractors.",
         answer=answer, why=why, risk_label=risk_label, storm_para=storm_para, demand=demand, angle=angle, city=city, state=state, ab=ab, siblings=sib_html,
     )
@@ -202,6 +202,7 @@ def state_page(b, state):
 <h2 id="how-it-works">How it works</h2>
 <ol><li><strong>Get itemized quotes</strong> from licensed {esc(state)} contractors. If insurance is involved, get the adjuster's estimate so you know the gap.</li><li><strong>Tell us about the project.</strong> Amount, timeline, whether insurance is involved, your state. No credit pull.</li><li><strong>We match you</strong> with lenders who fund that type of work in {esc(state)}, and show which start with a soft inquiry.</li><li><strong>You choose and apply with the lender.</strong> Rates, terms and the decision are theirs.</li></ol>
 <h2 id="contractors">For {esc(state)} contractors</h2><p>Roofers, HVAC companies, remodelers, fence and foundation contractors across {esc(state)} can offer customer financing at the estimate (paid at completion, deductibles handled legally where claims are involved) and get matched with business lenders for <a href="{L('/contractor-business-loans/equipment-financing/')}">equipment</a>, <a href="{L('/contractor-business-loans/working-capital/')}">working capital</a> and <a href="{L('/contractor-business-loans/invoice-factoring/')}">factoring</a>. See <a href="{L('/for-contractors/')}">for contractors</a>.</p>
+<h2 id="other-states">Home improvement financing in other states</h2><ul class="inline-links">{"".join(f"<li><a href='{L('/locations/' + STATE_SLUG[s] + '/')}'>{esc(s)}</a></li>" for s in STATE_HUB if s != state)}</ul>
 <h2 id="faq">Frequently asked questions</h2>{faq_html(faqs)}
 </article>
 <aside class="side">

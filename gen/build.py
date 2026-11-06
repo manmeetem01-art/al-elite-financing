@@ -58,6 +58,8 @@ import onpage_pass
 onpage_pass.apply(_ALL)
 import legal_content
 legal_content.apply(_ALL)
+import polish_pass
+polish_pass.apply(_ALL)
 for r in onpage_pass.REPORT: print('onpage:', r)
 import leadmagnets_wire
 leadmagnets_wire.apply(_ALL)
@@ -82,7 +84,7 @@ def build(mode, outdir):
     for p in TRUST_PAGES: pages[p["path"]] = plain_page(b, p)
     # tools hub alias: /tools/ -> redirect-ish page listing both calculators
     _cards = "".join(f"<a class='card' href='{t['path']}'><span class='tag'>{'Contractors' if t['role']=='contractor' else 'Homeowners'}</span><h3>{esc(t['eyebrow'])}</h3><p>{esc(strip_tags(t['h1']).split(':',1)[-1].strip().capitalize())}</p></a>" for t in sorted(TOOL_PAGES, key=lambda t: t['role']))
-    pages["/tools/"] = plain_page(b, dict(path="/tools/", crumbs=[("Home", "/"), ("Tools", "/tools/")], eyebrow="Tools", h1="Free financing and cost calculators for homeowners and contractors", title="Financing Calculators | Roof, HVAC, Pool, Fence, Factoring & Markup Tools", meta="Eleven free calculators: roof replacement cost, roof and HVAC financing, pool loan, fence cost, generator sizing, solar loan, equipment loan, lease vs buy, factoring cost and contractor markup.", answer="Eleven free calculators built around real financing decisions: cost estimators for roofs, fences and generators; payment calculators for roofs, HVAC, pools, solar and equipment; and contractor tools for factoring cost, markup vs margin and lease vs buy. All arithmetic only; lenders and contractors set real prices and rates.", prose="<div class='grid-cards'>" + _cards + "</div>", related=[("Home improvement financing", "/home-improvement-financing/"), ("Contractor business loans", "/contractor-business-loans/"), ("Financing guides", "/blog/")], byline=False))
+    pages["/tools/"] = plain_page(b, dict(path="/tools/", crumbs=[("Home", "/"), ("Tools", "/tools/")], eyebrow="Tools", h1="Free financing and cost calculators for homeowners and contractors", title="Financing Calculators | Roof, HVAC, Pool, Fence & Factoring", meta="Eleven free calculators: roof replacement cost, roof and HVAC financing, pool loan, fence cost, generator sizing, solar loan, equipment loan, lease vs buy, factoring cost and contractor markup.", answer="Eleven free calculators built around real financing decisions: cost estimators for roofs, fences and generators; payment calculators for roofs, HVAC, pools, solar and equipment; and contractor tools for factoring cost, markup vs margin and lease vs buy. All arithmetic only; lenders and contractors set real prices and rates.", prose="<div class='grid-cards'>" + _cards + "</div>", related=[("Home improvement financing", "/home-improvement-financing/"), ("Contractor business loans", "/contractor-business-loans/"), ("Financing guides", "/blog/")], byline=False))
 
     # "Where we work" US map band directly above the footer on every page
     band = us_map_section()

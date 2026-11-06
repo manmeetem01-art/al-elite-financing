@@ -64,9 +64,9 @@ NOCHECK = dict(
 def companies_post(slug, trade, trade_plural, money, money_label, typical, examples, specific_section, related_posts, project, vol_note):
     return dict(
         path=f"/blog/{slug}/", date=DATE,
-        crumbs=[HOME, BLOG, (f"{trade_plural.capitalize()} that offer financing", f"/blog/{slug}/")],
-        eyebrow="Homeowner guide", h1=f"{trade_plural.capitalize()} that offer financing: how their plans work and what to check",
-        title=f"{trade_plural.capitalize()} That Offer Financing: How It Works & What to Ask",
+        crumbs=[HOME, BLOG, (f"{trade_plural[0].upper() + trade_plural[1:]} that offer financing", f"/blog/{slug}/")],
+        eyebrow="Homeowner guide", h1=f"{trade_plural[0].upper() + trade_plural[1:]} that offer financing: how their plans work and what to check",
+        title=f"{' '.join(w if w.isupper() else w.capitalize() for w in trade_plural.split())} That Offer Financing: How It Works & What to Ask",
         meta=f"Most {trade_plural} that offer financing use a lender partner. How the plans work, what they cost, how to find {trade_plural} near you that finance, and the questions to ask before you sign.",
         answer=f"Most established {trade_plural} offer financing, usually through one or more consumer lenders rather than their own money. You apply at the quote (typically with a soft credit pull first), the lender approves and sets the rate, the {trade} does the work, and the lender pays them on completion. Plans range from standard fixed-rate loans to promotional 0% offers that can carry a dealer fee in the price. Knowing which plan you're being offered, and what the price would be for cash, is the whole game.",
         money_page=(money_label, money), project=project,
