@@ -2,7 +2,7 @@
 import json, re, html, math, os
 
 DOMAIN = "https://www.alelitefinancing.com"
-REVIEWED = "October 2026"
+REVIEWED = "November 2026"
 BASE_CSS = open(os.path.join(os.path.dirname(__file__), "base.css")).read()
 LOGO_IMG = '<img class="brand-logo" src="/logo.png" alt="AL Elite Financing" width="146" height="106">'
 # Date stamped into schema dateModified and sitemap lastmod. Update on every content release.

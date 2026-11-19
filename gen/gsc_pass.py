@@ -11,7 +11,7 @@ from common import money, payment, esc
 def pm(P, apr, n):
     return money(payment(P, apr, n), False)
 
-CITY_LINKS = "".join(f'<li><a href="{u}">{n}</a></li>' for n, u in [("Houston", "/locations/texas/houston/"), ("Dallas", "/locations/texas/dallas/"), ("San Antonio", "/locations/texas/san-antonio/"), ("Oklahoma City", "/locations/oklahoma/oklahoma-city/"), ("Denver", "/locations/colorado/denver/"), ("Kansas City", "/locations/missouri/kansas-city/"), ("Minneapolis", "/locations/minnesota/minneapolis/"), ("Salt Lake City", "/locations/utah/salt-lake-city/"), ("Tampa", "/locations/florida/tampa/"), ("Nashville", "/locations/tennessee/nashville/")])
+CITY_LINKS = "".join(f'<li><a href="{u}">{n}</a></li>' for n, u in [("Houston", "/locations/texas/houston/"), ("Dallas", "/locations/texas/dallas/"), ("San Antonio", "/locations/texas/san-antonio/"), ("Oklahoma City", "/locations/oklahoma/oklahoma-city/"), ("Wichita", "/locations/kansas/wichita/"), ("Denver", "/locations/colorado/denver/"), ("Kansas City", "/locations/missouri/kansas-city/"), ("Minneapolis", "/locations/minnesota/minneapolis/"), ("Salt Lake City", "/locations/utah/salt-lake-city/"), ("Tampa", "/locations/florida/tampa/"), ("Nashville", "/locations/tennessee/nashville/")])
 
 
 def apply(P):
