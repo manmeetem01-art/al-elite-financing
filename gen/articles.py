@@ -186,8 +186,9 @@ from articles_new_e import ARTICLES_E
 from articles_new_f import ARTICLES_F
 from articles_new_g import ARTICLES_G
 from articles_new_h import ARTICLES_H
+from articles_new_i import ARTICLES_I
 # Newest first on the blog hub
-ARTICLES = ARTICLES_H + ARTICLES_G + ARTICLES_F + ARTICLES_E + ARTICLES_D + ARTICLES_C + ARTICLES_A + ARTICLES_B + ARTICLES_ORIG
+ARTICLES = ARTICLES_I + ARTICLES_H + ARTICLES_G + ARTICLES_F + ARTICLES_E + ARTICLES_D + ARTICLES_C + ARTICLES_A + ARTICLES_B + ARTICLES_ORIG
 
 def blog_hub(b):
     path = "/blog/"; d = depth_of(path); L = lambda x: link(b, x, d); url = DOMAIN + path

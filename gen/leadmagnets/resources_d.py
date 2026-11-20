@@ -152,3 +152,42 @@ RESOURCES.append(dict(
     pitch="A free fillable checklist for ice dams and winter roof leaks: safe first steps, damage and claim log, removal and insulation quote comparison, what insurance pays versus what to finance, and a prevention list.",
     bullets=["Safe first-hour steps and what never to do", "Damage photo and claim log", "Removal, insulation and roof repair quote comparison", "Insurance vs financing worksheet"],
 ))
+
+
+def body_cabinets(d):
+    d.section("Measure and count", "Step 1 of 5")
+    d.fields([("Doors (count)", None), ("Drawer fronts (count)", None), ("Lower cabinet run (linear ft)", None), ("Upper cabinet run (linear ft)", None)])
+    d.table(["Wall / area", "Doors", "Drawer fronts", "Linear ft"], ["Wall 1", "Wall 2", "Wall 3", "Island / peninsula", "Pantry / tall units", "Bathroom vanity"])
+    d.callout("Tip", "Measure runs along the front of the cabinets, uppers and lowers separately. Quotes are often per door or per linear foot, so keep both numbers.")
+
+    d.section("Reface or replace? Test the boxes", "Step 2 of 5")
+    d.tick_grid(["Boxes square and solid (no sagging or crooked frames)", "No mold, mildew or water damage under the sink", "Drawers open and close smoothly", "Layout works for how I cook", "Cabinets under about 20 years old", "Refacing quote is under half the replacement quote", "Want a new layout or more storage (replace)", "Boxes damaged or swollen (replace)"])
+    d.fields([("Cabinet age (years)", None), ("Box material (solid wood / plywood / particleboard)", None), ("Problems noticed", None), ("My leaning: reface / doors only / replace", None)])
+    d.callout("Rule of thumb", "If refacing would cost more than about half the price of replacing, replacement is usually the better value. Never reface over water-damaged or swollen boxes.")
+
+    d.section("Quote comparison", "Step 3 of 5")
+    d.table(["Line", "Quote 1", "Quote 2", "Quote 3"], ["Company and licence #", "Reface, doors only, or replace?", "Material and finish (sample seen?)", "Price per door / per linear ft", "Doors and drawer fronts included", "Frame veneer, end panels, moulding", "Hardware (hinges, pulls)", "Time kitchen is out of use", "Warranty (finish / hinges, years)", "Cash price", "Financed price (if different)", "TOTAL"])
+    d.callout("Ask", "Is the price the same for cash or with my own lender? What happens if the doors arrive the wrong size?")
+
+    d.section("Amount to finance", "Step 4 of 5")
+    d.calc([("A", "Chosen quote", None, False), ("B", "Savings you will put in", None, False), ("C", "Other (rebates, trade-in, gift)", None, False), ("D", "Amount to finance  =  A - B - C", None, True)])
+    d.table(["Offer", "APR incl. fees", "Term", "Monthly", "Total repaid", "Soft pull?"], ["Contractor plan", "Independent lender 1", "Independent lender 2", "Home equity (larger jobs)"])
+    d.h2("If your credit is on the lower side")
+    d.check(["Reduced scope (laminate, doors only, bathroom first)", "Checked options with a soft-pull pre-qualification first", "Co-applicant with stronger credit (if available)", "Income documents ready", "Avoided 'no credit check' / 'guaranteed approval' offers"])
+
+    d.section("Questions and decision", "Step 5 of 5")
+    d.check(["What is the APR including fees, and is the rate fixed?", "Is there an origination fee, and is it deducted from the loan?", "Is any promotional period deferred interest or waived interest?", "Is there a prepayment penalty?", "When is the contractor paid, and when does my first payment start?", "Does checking my options use a soft or hard credit inquiry?"])
+    d.tick_grid(["Door replacement only", "Full refacing", "Replace cabinets", "Wait and save"])
+    d.multi("Decision, dates and notes", 56)
+    d.cta("Ready to compare financing?", "alelitefinancing.com/remodel-financing/kitchen/ reaches lenders who fund kitchen and bath projects in your state, soft-inquiry options first. Or call (888) 968-0079.")
+
+RESOURCES.append(dict(
+    slug="cabinet-refacing-vs-replacing-worksheet", blog="/blog/cabinet-refacing-cost-vs-replacing/", pages=6,
+    spec=dict(title="Cabinet Refacing vs Replacing Cost Worksheet", tag="Cabinet cost worksheet", kicker="Free worksheet · cabinet refacing and replacement",
+              title_lines=["Cabinet Refacing vs", "Replacing Cost Worksheet"],
+              subtitle="Count your doors and cabinet runs, test whether the boxes are worth keeping, compare reface and replace quotes on the same lines and work out what to finance.",
+              inside=["Door and linear-foot counter", "Reface-or-replace test", "Quote comparison table", "Amount-to-finance calculator", "Lower-credit steps", "Lender questions and decision"], body=body_cabinets),
+    headline="Count the doors, test the boxes and <em>price refacing against replacing</em>",
+    pitch="A free fillable worksheet for cabinet projects: measure and count, test whether the boxes are worth keeping, compare reface and replace quotes on the same lines, and work out what to finance.",
+    bullets=["Door, drawer and linear-foot counter", "Reface-or-replace test", "Quote comparison on 11 lines", "Amount-to-finance and lender questions"],
+))

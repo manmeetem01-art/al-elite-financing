@@ -26,6 +26,8 @@ S = {
     "claims": ("Claims Journal: 2025 hail claim payouts by state", "https://www.claimsjournal.com/news/national/2026/04/23/337102.htm"),
     "trane_fin": ("Trane: residential financing", "https://www.trane.com/residential/en/pricing/financing/"),
     "carrier_fin": ("Carrier: HVAC financing", "https://www.carrier.com/us/en/residential/homeowner-resources/financing/"),
+    "angi_reface": ("Angi: refacing vs replacing kitchen cabinets, cost guide vs replacing kitchen cabinets", "https://www.angi.com/articles/reface-cabinets-or-replace-them.htm"),
+    "homeguide_reface": ("HomeGuide: cabinet refacing cost", "https://www.homeguide.com/costs/cabinet-refacing-cost"),
     "achr": ("ACHR News: homeowners planning to finance projects", "https://achrnews.com/articles/144272-more-than-25-of-surveyed-homeowners-plan-to-finance-home-improvement-projects-by-borrowing-from-contractor"),
 }
 
@@ -61,6 +63,7 @@ PAGE_SOURCES = {
     "/tools/hvac-financing-calculator/": ["doe_wap", "trane_fin", "carrier_fin", "acr"],
     "/blog/heat-pump-tax-credit-2026/": ["irs_obbb", "doe_wap", "acr"],
     "/blog/ice-dams-removal-cost-insurance-prevention/": ["irs_obbb", "doe_wap", "ftc_contractor"],
+    "/blog/cabinet-refacing-cost-vs-replacing/": ["angi_reface", "homeguide_reface", "ftc_contractor"],
     "/tools/pool-loan-calculator/": ["ftc_contractor", "acr"],
     "/tools/fence-cost-calculator/": ["ftc_contractor", "acr"],
     "/tools/*": ["hud_title1", "acr"],
@@ -220,6 +223,11 @@ def apply(pages_by_path):
     add_related("/tools/equipment-loan-calculator/", tools_hub, ("Roof financing calculator", "/tools/roof-financing-calculator/"))
     add_related("/roof-financing/", ("Commercial roof financing", "/roof-financing/commercial-roof-financing/"), ("Roof replacement cost calculator", "/tools/roof-replacement-cost-calculator/"))
     add_related("/hvac-financing/", ("HVAC financing calculator", "/tools/hvac-financing-calculator/"))
+    add_related("/remodel-financing/kitchen/", ('Cabinet refacing cost: per door, per kitchen and vs replacing', '/blog/cabinet-refacing-cost-vs-replacing/'))
+    add_related("/remodel-financing/bathroom/", ('Cabinet refacing cost: per door, per kitchen and vs replacing', '/blog/cabinet-refacing-cost-vs-replacing/'))
+    add_related("/blog/how-much-does-a-kitchen-remodel-cost/", ('Cabinet refacing cost: per door, per kitchen and vs replacing', '/blog/cabinet-refacing-cost-vs-replacing/'))
+    add_related("/blog/how-much-does-a-bathroom-remodel-cost/", ('Cabinet refacing cost: per door, per kitchen and vs replacing', '/blog/cabinet-refacing-cost-vs-replacing/'))
+    add_related("/remodel-financing/", ('Cabinet refacing cost: per door, per kitchen and vs replacing', '/blog/cabinet-refacing-cost-vs-replacing/'))
     add_related("/roof-financing/roof-repair-financing/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
     add_related("/blog/what-to-do-if-pipes-freeze/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
     add_related("/blog/heat-pump-tax-credit-2026/", ("Ice dams: removal cost, insurance and prevention", "/blog/ice-dams-removal-cost-insurance-prevention/"))
